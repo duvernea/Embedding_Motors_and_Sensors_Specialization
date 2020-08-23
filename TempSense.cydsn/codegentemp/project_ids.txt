@@ -1,0 +1,6 @@
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Design01.cydsn\Design01.cyprj|f108b336-fd25-4766-98de-d76567890783
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|792ba0a2-7792-406c-a2cb-37c870e917cd
+C:\Users\duver\OneDrive\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|605f6504-9e98-4e04-bc28-ea95eeb77c2a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|95f36d4c-c444-4f71-b1af-fc3bac42660f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|dad2eb36-9fe9-4037-8a80-d87cb2e3bf89
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3171c348-e1b9-4b22-87ce-541eb0661198

@@ -1,0 +1,1917 @@
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.printToLCD,"ax",%progbits
+  20              		.align	2
+  21              		.global	printToLCD
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	printToLCD, %function
+  25              	printToLCD:
+  26              	.LFB64:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * PSoc Thermistor
+   4:main.c        ****  * Amatherm 1DC103K-EC NTC thermistor interfaced to PSoC51p
+   5:main.c        ****  * Temperature reported on LCD character screen
+   6:main.c        ****  * Brian DuVerneay
+   7:main.c        ****  *
+   8:main.c        ****  * ========================================
+   9:main.c        **** */
+  10:main.c        **** #include "project.h"
+  11:main.c        **** #include "math.h"
+  12:main.c        **** #include "float.h"
+  13:main.c        **** 
+  14:main.c        **** void printToLCD();
+  15:main.c        **** 
+  16:main.c        **** uint32 loop_counter, LCD_write_counter, thermistor_R;
+  17:main.c        **** uint16 R_1_result, thermistor_result;
+  18:main.c        **** int16 thermistor_mV, R_1_mV, temperature;
+  19:main.c        **** uint8 tempDAC;
+  20:main.c        **** float R_1_result_f, R_1_mV_f, thermistor_mV_f, ratio_f, voltage_f;
+  21:main.c        **** float thermistor_RA_f, thermistor_RB_f;
+  22:main.c        **** float current_mA_f, temperature_K_f;
+  23:main.c        **** 
+  24:main.c        **** int main(void)
+  25:main.c        **** {
+  26:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  27:main.c        ****     
+  28:main.c        ****     // Power on ADC and Mux
+  29:main.c        ****     ADC_DelSig_1_Start();
+  30:main.c        ****     AMux_1_Start();
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 2
+
+
+  31:main.c        ****     
+  32:main.c        ****     // LCD power on and setup
+  33:main.c        ****     LCD_Start();
+  34:main.c        ****     LCD_Position(0,0);
+  35:main.c        ****     LCD_PrintString("Thermistor Test");
+  36:main.c        ****     
+  37:main.c        ****     CyDelay(1000);
+  38:main.c        ****     LCD_Position(0,0);
+  39:main.c        ****     LCD_ClearDisplay();
+  40:main.c        ****     
+  41:main.c        ****     DAC_Start();
+  42:main.c        ****     
+  43:main.c        ****     while(1)
+  44:main.c        ****     {
+  45:main.c        ****         loop_counter++;
+  46:main.c        ****         LCD_write_counter++;
+  47:main.c        ****         
+  48:main.c        ****         // measure loop time on P0[1]
+  49:main.c        ****         P0_1_Write(1);
+  50:main.c        ****         
+  51:main.c        ****         //AMux_1_Select(0);
+  52:main.c        ****         AMux_1_Select(1);
+  53:main.c        ****         ADC_DelSig_1_StartConvert();
+  54:main.c        ****         ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_WAIT_FOR_RESULT);
+  55:main.c        ****         
+  56:main.c        ****         // time to start 
+  57:main.c        ****         P0_1_Write(0);
+  58:main.c        ****         
+  59:main.c        ****         // Get voltage and current for 10k resistor
+  60:main.c        ****         R_1_result = ADC_DelSig_1_GetResult16();
+  61:main.c        ****         R_1_result_f = (float) R_1_result;
+  62:main.c        ****         
+  63:main.c        ****         R_1_mV = (int16) ADC_DelSig_1_CountsTo_mVolts(R_1_result);
+  64:main.c        ****         R_1_mV_f = (float) R_1_mV;
+  65:main.c        ****         
+  66:main.c        ****         // If I don't add a delay here it doesn't work
+  67:main.c        ****         CyDelay(1);
+  68:main.c        ****         
+  69:main.c        ****         current_mA_f = R_1_mV_f / 10000.;
+  70:main.c        ****         
+  71:main.c        ****         AMux_1_Select(0);
+  72:main.c        ****         ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_WAIT_FOR_RESULT);
+  73:main.c        ****         thermistor_result = ADC_DelSig_1_GetResult16();
+  74:main.c        ****         
+  75:main.c        ****         thermistor_mV = (int16) ADC_DelSig_1_CountsTo_mVolts(thermistor_result);
+  76:main.c        ****         thermistor_mV_f = (float) thermistor_mV;
+  77:main.c        ****                     
+  78:main.c        ****         thermistor_RA_f = thermistor_mV_f / current_mA_f;
+  79:main.c        ****         
+  80:main.c        ****         thermistor_R = Thermistor_1_GetResistance(R_1_mV, thermistor_mV);
+  81:main.c        ****         thermistor_RB_f = (float) thermistor_R;
+  82:main.c        ****         
+  83:main.c        ****         temperature = Thermistor_1_GetTemperature(thermistor_R);
+  84:main.c        ****         
+  85:main.c        ****         //Min temp = 1000 (10C), Max temp = (40C)
+  86:main.c        ****         tempDAC = (uint8) ((temperature - 1000) * (256 - 0) / (4000 - 1000) + 0);
+  87:main.c        **** 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 3
+
+
+  88:main.c        ****         DAC_SetValue(tempDAC);
+  89:main.c        ****         
+  90:main.c        ****         if ( LCD_write_counter++ > 100) {
+  91:main.c        ****             printToLCD();
+  92:main.c        ****         }
+  93:main.c        ****     }
+  94:main.c        **** }
+  95:main.c        **** void printToLCD () {
+  28              		.loc 1 95 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 70B5     		push	{r4, r5, r6, lr}
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 4, -16
+  35              		.cfi_offset 5, -12
+  36              		.cfi_offset 6, -8
+  37              		.cfi_offset 14, -4
+  96:main.c        ****     LCD_write_counter = 0;
+  38              		.loc 1 96 0
+  39 0002 0024     		movs	r4, #0
+  40 0004 224B     		ldr	r3, .L3
+  41 0006 1C60     		str	r4, [r3]
+  97:main.c        ****     P0_0_Write(1);
+  42              		.loc 1 97 0
+  43 0008 0120     		movs	r0, #1
+  44 000a FFF7FEFF 		bl	P0_0_Write
+  45              	.LVL0:
+  98:main.c        ****     LCD_IsReady();
+  46              		.loc 1 98 0
+  47 000e FFF7FEFF 		bl	LCD_IsReady
+  48              	.LVL1:
+  99:main.c        ****     LCD_Position(0,0);
+  49              		.loc 1 99 0
+  50 0012 2146     		mov	r1, r4
+  51 0014 2046     		mov	r0, r4
+  52 0016 FFF7FEFF 		bl	LCD_Position
+  53              	.LVL2:
+ 100:main.c        ****     LCD_PrintString("loop cnt:");
+  54              		.loc 1 100 0
+  55 001a 1E48     		ldr	r0, .L3+4
+  56 001c FFF7FEFF 		bl	LCD_PrintString
+  57              	.LVL3:
+ 101:main.c        ****     LCD_Position(0, 10);
+  58              		.loc 1 101 0
+  59 0020 0A21     		movs	r1, #10
+  60 0022 2046     		mov	r0, r4
+  61 0024 FFF7FEFF 		bl	LCD_Position
+  62              	.LVL4:
+ 102:main.c        ****     LCD_PrintU32Number(loop_counter);
+  63              		.loc 1 102 0
+  64 0028 1B4B     		ldr	r3, .L3+8
+  65 002a 1868     		ldr	r0, [r3]
+  66 002c FFF7FEFF 		bl	LCD_PrintU32Number
+  67              	.LVL5:
+ 103:main.c        ****     LCD_Position(1,6);
+  68              		.loc 1 103 0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 4
+
+
+  69 0030 0621     		movs	r1, #6
+  70 0032 0120     		movs	r0, #1
+  71 0034 FFF7FEFF 		bl	LCD_Position
+  72              	.LVL6:
+ 104:main.c        ****     
+ 105:main.c        ****     LCD_PrintString("degrees ");
+  73              		.loc 1 105 0
+  74 0038 1848     		ldr	r0, .L3+12
+  75 003a FFF7FEFF 		bl	LCD_PrintString
+  76              	.LVL7:
+ 106:main.c        ****     LCD_Position(1,0);
+  77              		.loc 1 106 0
+  78 003e 2146     		mov	r1, r4
+  79 0040 0120     		movs	r0, #1
+  80 0042 FFF7FEFF 		bl	LCD_Position
+  81              	.LVL8:
+ 107:main.c        ****     LCD_PrintNumber(temperature / 100);
+  82              		.loc 1 107 0
+  83 0046 164E     		ldr	r6, .L3+16
+  84 0048 B6F90030 		ldrsh	r3, [r6]
+  85 004c 154D     		ldr	r5, .L3+20
+  86 004e 85FB0320 		smull	r2, r0, r5, r3
+  87 0052 DB17     		asrs	r3, r3, #31
+  88 0054 C3EB6010 		rsb	r0, r3, r0, asr #5
+  89 0058 80B2     		uxth	r0, r0
+  90 005a FFF7FEFF 		bl	LCD_PrintU32Number
+  91              	.LVL9:
+ 108:main.c        ****     LCD_Position(1,2);
+  92              		.loc 1 108 0
+  93 005e 0221     		movs	r1, #2
+  94 0060 0120     		movs	r0, #1
+  95 0062 FFF7FEFF 		bl	LCD_Position
+  96              	.LVL10:
+ 109:main.c        ****     LCD_PrintString(".");
+  97              		.loc 1 109 0
+  98 0066 1048     		ldr	r0, .L3+24
+  99 0068 FFF7FEFF 		bl	LCD_PrintString
+ 100              	.LVL11:
+ 110:main.c        ****     LCD_PrintNumber(temperature % 100);
+ 101              		.loc 1 110 0
+ 102 006c B6F90020 		ldrsh	r2, [r6]
+ 103 0070 85FB0235 		smull	r3, r5, r5, r2
+ 104 0074 D317     		asrs	r3, r2, #31
+ 105 0076 C3EB6513 		rsb	r3, r3, r5, asr #5
+ 106 007a 6420     		movs	r0, #100
+ 107 007c 00FB1320 		mls	r0, r0, r3, r2
+ 108 0080 80B2     		uxth	r0, r0
+ 109 0082 FFF7FEFF 		bl	LCD_PrintU32Number
+ 110              	.LVL12:
+ 111:main.c        ****     P0_0_Write(0);
+ 111              		.loc 1 111 0
+ 112 0086 2046     		mov	r0, r4
+ 113 0088 FFF7FEFF 		bl	P0_0_Write
+ 114              	.LVL13:
+ 115 008c 70BD     		pop	{r4, r5, r6, pc}
+ 116              	.L4:
+ 117 008e 00BF     		.align	2
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 5
+
+
+ 118              	.L3:
+ 119 0090 00000000 		.word	LCD_write_counter
+ 120 0094 00000000 		.word	.LC0
+ 121 0098 00000000 		.word	loop_counter
+ 122 009c 0C000000 		.word	.LC1
+ 123 00a0 00000000 		.word	temperature
+ 124 00a4 1F85EB51 		.word	1374389535
+ 125 00a8 18000000 		.word	.LC2
+ 126              		.cfi_endproc
+ 127              	.LFE64:
+ 128              		.size	printToLCD, .-printToLCD
+ 129              		.global	__aeabi_ui2f
+ 130              		.global	__aeabi_i2f
+ 131              		.global	__aeabi_fdiv
+ 132              		.section	.text.main,"ax",%progbits
+ 133              		.align	2
+ 134              		.global	main
+ 135              		.thumb
+ 136              		.thumb_func
+ 137              		.type	main, %function
+ 138              	main:
+ 139              	.LFB63:
+  25:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 140              		.loc 1 25 0
+ 141              		.cfi_startproc
+ 142              		@ Volatile: function does not return.
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145 0000 80B5     		push	{r7, lr}
+ 146              		.cfi_def_cfa_offset 8
+ 147              		.cfi_offset 7, -8
+ 148              		.cfi_offset 14, -4
+  26:main.c        ****     
+ 149              		.loc 1 26 0
+ 150              		.syntax unified
+ 151              	@ 26 "main.c" 1
+ 152 0002 62B6     		CPSIE   i
+ 153              	@ 0 "" 2
+  29:main.c        ****     AMux_1_Start();
+ 154              		.loc 1 29 0
+ 155              		.thumb
+ 156              		.syntax unified
+ 157 0004 FFF7FEFF 		bl	ADC_DelSig_1_Start
+ 158              	.LVL14:
+  30:main.c        ****     
+ 159              		.loc 1 30 0
+ 160 0008 FFF7FEFF 		bl	AMux_1_Start
+ 161              	.LVL15:
+  33:main.c        ****     LCD_Position(0,0);
+ 162              		.loc 1 33 0
+ 163 000c FFF7FEFF 		bl	LCD_Start
+ 164              	.LVL16:
+  34:main.c        ****     LCD_PrintString("Thermistor Test");
+ 165              		.loc 1 34 0
+ 166 0010 0021     		movs	r1, #0
+ 167 0012 0846     		mov	r0, r1
+ 168 0014 FFF7FEFF 		bl	LCD_Position
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 6
+
+
+ 169              	.LVL17:
+  35:main.c        ****     
+ 170              		.loc 1 35 0
+ 171 0018 4048     		ldr	r0, .L9
+ 172 001a FFF7FEFF 		bl	LCD_PrintString
+ 173              	.LVL18:
+  37:main.c        ****     LCD_Position(0,0);
+ 174              		.loc 1 37 0
+ 175 001e 4FF47A70 		mov	r0, #1000
+ 176 0022 FFF7FEFF 		bl	CyDelay
+ 177              	.LVL19:
+  38:main.c        ****     LCD_ClearDisplay();
+ 178              		.loc 1 38 0
+ 179 0026 0021     		movs	r1, #0
+ 180 0028 0846     		mov	r0, r1
+ 181 002a FFF7FEFF 		bl	LCD_Position
+ 182              	.LVL20:
+  39:main.c        ****     
+ 183              		.loc 1 39 0
+ 184 002e 0120     		movs	r0, #1
+ 185 0030 FFF7FEFF 		bl	LCD_WriteControl
+ 186              	.LVL21:
+  41:main.c        ****     
+ 187              		.loc 1 41 0
+ 188 0034 FFF7FEFF 		bl	DAC_Start
+ 189              	.LVL22:
+ 190              	.L6:
+  45:main.c        ****         LCD_write_counter++;
+ 191              		.loc 1 45 0
+ 192 0038 394A     		ldr	r2, .L9+4
+ 193 003a 1368     		ldr	r3, [r2]
+ 194 003c 0133     		adds	r3, r3, #1
+ 195 003e 1360     		str	r3, [r2]
+  46:main.c        ****         
+ 196              		.loc 1 46 0
+ 197 0040 384C     		ldr	r4, .L9+8
+ 198 0042 2368     		ldr	r3, [r4]
+ 199 0044 0133     		adds	r3, r3, #1
+ 200 0046 2360     		str	r3, [r4]
+  49:main.c        ****         
+ 201              		.loc 1 49 0
+ 202 0048 0120     		movs	r0, #1
+ 203 004a FFF7FEFF 		bl	P0_1_Write
+ 204              	.LVL23:
+  52:main.c        ****         ADC_DelSig_1_StartConvert();
+ 205              		.loc 1 52 0
+ 206 004e 0120     		movs	r0, #1
+ 207 0050 FFF7FEFF 		bl	AMux_1_Select
+ 208              	.LVL24:
+  53:main.c        ****         ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_WAIT_FOR_RESULT);
+ 209              		.loc 1 53 0
+ 210 0054 FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
+ 211              	.LVL25:
+  54:main.c        ****         
+ 212              		.loc 1 54 0
+ 213 0058 0020     		movs	r0, #0
+ 214 005a FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 7
+
+
+ 215              	.LVL26:
+  57:main.c        ****         
+ 216              		.loc 1 57 0
+ 217 005e 0020     		movs	r0, #0
+ 218 0060 FFF7FEFF 		bl	P0_1_Write
+ 219              	.LVL27:
+  60:main.c        ****         R_1_result_f = (float) R_1_result;
+ 220              		.loc 1 60 0
+ 221 0064 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 222              	.LVL28:
+ 223 0068 85B2     		uxth	r5, r0
+ 224 006a 2F4B     		ldr	r3, .L9+12
+ 225 006c 1D80     		strh	r5, [r3]	@ movhi
+  61:main.c        ****         
+ 226              		.loc 1 61 0
+ 227 006e 2846     		mov	r0, r5
+ 228 0070 FFF7FEFF 		bl	__aeabi_ui2f
+ 229              	.LVL29:
+ 230 0074 2D4B     		ldr	r3, .L9+16
+ 231 0076 1860     		str	r0, [r3]	@ float
+  63:main.c        ****         R_1_mV_f = (float) R_1_mV;
+ 232              		.loc 1 63 0
+ 233 0078 2846     		mov	r0, r5
+ 234 007a FFF7FEFF 		bl	ADC_DelSig_1_CountsTo_mVolts
+ 235              	.LVL30:
+ 236 007e 2C4D     		ldr	r5, .L9+20
+ 237 0080 2880     		strh	r0, [r5]	@ movhi
+  64:main.c        ****         
+ 238              		.loc 1 64 0
+ 239 0082 FFF7FEFF 		bl	__aeabi_i2f
+ 240              	.LVL31:
+ 241 0086 2B4E     		ldr	r6, .L9+24
+ 242 0088 3060     		str	r0, [r6]	@ float
+  67:main.c        ****         
+ 243              		.loc 1 67 0
+ 244 008a 0120     		movs	r0, #1
+ 245 008c FFF7FEFF 		bl	CyDelay
+ 246              	.LVL32:
+  69:main.c        ****         
+ 247              		.loc 1 69 0
+ 248 0090 294F     		ldr	r7, .L9+28
+ 249 0092 2A49     		ldr	r1, .L9+32
+ 250 0094 3068     		ldr	r0, [r6]	@ float
+ 251 0096 FFF7FEFF 		bl	__aeabi_fdiv
+ 252              	.LVL33:
+ 253 009a 3860     		str	r0, [r7]	@ float
+  71:main.c        ****         ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_WAIT_FOR_RESULT);
+ 254              		.loc 1 71 0
+ 255 009c 0020     		movs	r0, #0
+ 256 009e FFF7FEFF 		bl	AMux_1_Select
+ 257              	.LVL34:
+  72:main.c        ****         thermistor_result = ADC_DelSig_1_GetResult16();
+ 258              		.loc 1 72 0
+ 259 00a2 0020     		movs	r0, #0
+ 260 00a4 FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+ 261              	.LVL35:
+  73:main.c        ****         
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 8
+
+
+ 262              		.loc 1 73 0
+ 263 00a8 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 264              	.LVL36:
+ 265 00ac 80B2     		uxth	r0, r0
+ 266 00ae 244B     		ldr	r3, .L9+36
+ 267 00b0 1880     		strh	r0, [r3]	@ movhi
+  75:main.c        ****         thermistor_mV_f = (float) thermistor_mV;
+ 268              		.loc 1 75 0
+ 269 00b2 FFF7FEFF 		bl	ADC_DelSig_1_CountsTo_mVolts
+ 270              	.LVL37:
+ 271 00b6 0646     		mov	r6, r0
+ 272 00b8 224B     		ldr	r3, .L9+40
+ 273 00ba 1880     		strh	r0, [r3]	@ movhi
+  76:main.c        ****                     
+ 274              		.loc 1 76 0
+ 275 00bc FFF7FEFF 		bl	__aeabi_i2f
+ 276              	.LVL38:
+ 277 00c0 214B     		ldr	r3, .L9+44
+ 278 00c2 1860     		str	r0, [r3]	@ float
+  78:main.c        ****         
+ 279              		.loc 1 78 0
+ 280 00c4 3968     		ldr	r1, [r7]	@ float
+ 281 00c6 FFF7FEFF 		bl	__aeabi_fdiv
+ 282              	.LVL39:
+ 283 00ca 204B     		ldr	r3, .L9+48
+ 284 00cc 1860     		str	r0, [r3]	@ float
+  80:main.c        ****         thermistor_RB_f = (float) thermistor_R;
+ 285              		.loc 1 80 0
+ 286 00ce 3146     		mov	r1, r6
+ 287 00d0 B5F90000 		ldrsh	r0, [r5]
+ 288 00d4 FFF7FEFF 		bl	Thermistor_1_GetResistance
+ 289              	.LVL40:
+ 290 00d8 0546     		mov	r5, r0
+ 291 00da 1D4B     		ldr	r3, .L9+52
+ 292 00dc 1860     		str	r0, [r3]
+  81:main.c        ****         
+ 293              		.loc 1 81 0
+ 294 00de FFF7FEFF 		bl	__aeabi_ui2f
+ 295              	.LVL41:
+ 296 00e2 1C4B     		ldr	r3, .L9+56
+ 297 00e4 1860     		str	r0, [r3]	@ float
+  83:main.c        ****         
+ 298              		.loc 1 83 0
+ 299 00e6 2846     		mov	r0, r5
+ 300 00e8 FFF7FEFF 		bl	Thermistor_1_GetTemperature
+ 301              	.LVL42:
+ 302 00ec 1A4B     		ldr	r3, .L9+60
+ 303 00ee 1880     		strh	r0, [r3]	@ movhi
+  86:main.c        **** 
+ 304              		.loc 1 86 0
+ 305 00f0 A0F57A70 		sub	r0, r0, #1000
+ 306 00f4 0302     		lsls	r3, r0, #8
+ 307 00f6 1948     		ldr	r0, .L9+64
+ 308 00f8 80FB0320 		smull	r2, r0, r0, r3
+ 309 00fc DB17     		asrs	r3, r3, #31
+ 310 00fe C3EBA010 		rsb	r0, r3, r0, asr #6
+ 311 0102 C0B2     		uxtb	r0, r0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 9
+
+
+ 312 0104 164B     		ldr	r3, .L9+68
+ 313 0106 1870     		strb	r0, [r3]
+  88:main.c        ****         
+ 314              		.loc 1 88 0
+ 315 0108 FFF7FEFF 		bl	DAC_SetValue
+ 316              	.LVL43:
+  90:main.c        ****             printToLCD();
+ 317              		.loc 1 90 0
+ 318 010c 2368     		ldr	r3, [r4]
+ 319 010e 5A1C     		adds	r2, r3, #1
+ 320 0110 2260     		str	r2, [r4]
+ 321 0112 642B     		cmp	r3, #100
+ 322 0114 90D9     		bls	.L6
+  91:main.c        ****         }
+ 323              		.loc 1 91 0
+ 324 0116 FFF7FEFF 		bl	printToLCD
+ 325              	.LVL44:
+ 326 011a 8DE7     		b	.L6
+ 327              	.L10:
+ 328              		.align	2
+ 329              	.L9:
+ 330 011c 1C000000 		.word	.LC3
+ 331 0120 00000000 		.word	loop_counter
+ 332 0124 00000000 		.word	LCD_write_counter
+ 333 0128 00000000 		.word	R_1_result
+ 334 012c 00000000 		.word	R_1_result_f
+ 335 0130 00000000 		.word	R_1_mV
+ 336 0134 00000000 		.word	R_1_mV_f
+ 337 0138 00000000 		.word	current_mA_f
+ 338 013c 00401C46 		.word	1176256512
+ 339 0140 00000000 		.word	thermistor_result
+ 340 0144 00000000 		.word	thermistor_mV
+ 341 0148 00000000 		.word	thermistor_mV_f
+ 342 014c 00000000 		.word	thermistor_RA_f
+ 343 0150 00000000 		.word	thermistor_R
+ 344 0154 00000000 		.word	thermistor_RB_f
+ 345 0158 00000000 		.word	temperature
+ 346 015c F1197605 		.word	91625969
+ 347 0160 00000000 		.word	tempDAC
+ 348              		.cfi_endproc
+ 349              	.LFE63:
+ 350              		.size	main, .-main
+ 351              		.comm	temperature_K_f,4,4
+ 352              		.comm	current_mA_f,4,4
+ 353              		.comm	thermistor_RB_f,4,4
+ 354              		.comm	thermistor_RA_f,4,4
+ 355              		.comm	voltage_f,4,4
+ 356              		.comm	ratio_f,4,4
+ 357              		.comm	thermistor_mV_f,4,4
+ 358              		.comm	R_1_mV_f,4,4
+ 359              		.comm	R_1_result_f,4,4
+ 360              		.comm	tempDAC,1,1
+ 361              		.comm	temperature,2,2
+ 362              		.comm	R_1_mV,2,2
+ 363              		.comm	thermistor_mV,2,2
+ 364              		.comm	thermistor_result,2,2
+ 365              		.comm	R_1_result,2,2
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 10
+
+
+ 366              		.comm	thermistor_R,4,4
+ 367              		.comm	LCD_write_counter,4,4
+ 368              		.comm	loop_counter,4,4
+ 369              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 370              		.align	2
+ 371              	.LC0:
+ 372 0000 6C6F6F70 		.ascii	"loop cnt:\000"
+ 372      20636E74 
+ 372      3A00
+ 373 000a 0000     		.space	2
+ 374              	.LC1:
+ 375 000c 64656772 		.ascii	"degrees \000"
+ 375      65657320 
+ 375      00
+ 376 0015 000000   		.space	3
+ 377              	.LC2:
+ 378 0018 2E00     		.ascii	".\000"
+ 379 001a 0000     		.space	2
+ 380              	.LC3:
+ 381 001c 54686572 		.ascii	"Thermistor Test\000"
+ 381      6D697374 
+ 381      6F722054 
+ 381      65737400 
+ 382              		.text
+ 383              	.Letext0:
+ 384              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 385              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 386              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 387              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 388              		.file 6 "Generated_Source\\PSoC5/P0_0.h"
+ 389              		.file 7 "Generated_Source\\PSoC5/LCD.h"
+ 390              		.file 8 "Generated_Source\\PSoC5/ADC_DelSig_1.h"
+ 391              		.file 9 "Generated_Source\\PSoC5/AMux_1.h"
+ 392              		.file 10 "Generated_Source\\PSoC5/CyLib.h"
+ 393              		.file 11 "Generated_Source\\PSoC5/DAC.h"
+ 394              		.file 12 "Generated_Source\\PSoC5/P0_1.h"
+ 395              		.file 13 "Generated_Source\\PSoC5/Thermistor_1.h"
+ 396              		.section	.debug_info,"",%progbits
+ 397              	.Ldebug_info0:
+ 398 0000 B2050000 		.4byte	0x5b2
+ 399 0004 0400     		.2byte	0x4
+ 400 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 401 000a 04       		.byte	0x4
+ 402 000b 01       		.uleb128 0x1
+ 403 000c 41020000 		.4byte	.LASF59
+ 404 0010 0C       		.byte	0xc
+ 405 0011 30030000 		.4byte	.LASF60
+ 406 0015 20000000 		.4byte	.LASF61
+ 407 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 408 001d 00000000 		.4byte	0
+ 409 0021 00000000 		.4byte	.Ldebug_line0
+ 410 0025 02       		.uleb128 0x2
+ 411 0026 01       		.byte	0x1
+ 412 0027 06       		.byte	0x6
+ 413 0028 CA010000 		.4byte	.LASF0
+ 414 002c 02       		.uleb128 0x2
+ 415 002d 01       		.byte	0x1
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 11
+
+
+ 416 002e 08       		.byte	0x8
+ 417 002f 7E010000 		.4byte	.LASF1
+ 418 0033 02       		.uleb128 0x2
+ 419 0034 02       		.byte	0x2
+ 420 0035 05       		.byte	0x5
+ 421 0036 7D000000 		.4byte	.LASF2
+ 422 003a 02       		.uleb128 0x2
+ 423 003b 02       		.byte	0x2
+ 424 003c 07       		.byte	0x7
+ 425 003d 01030000 		.4byte	.LASF3
+ 426 0041 03       		.uleb128 0x3
+ 427 0042 8D030000 		.4byte	.LASF9
+ 428 0046 02       		.byte	0x2
+ 429 0047 3F       		.byte	0x3f
+ 430 0048 4C000000 		.4byte	0x4c
+ 431 004c 02       		.uleb128 0x2
+ 432 004d 04       		.byte	0x4
+ 433 004e 05       		.byte	0x5
+ 434 004f 75010000 		.4byte	.LASF4
+ 435 0053 02       		.uleb128 0x2
+ 436 0054 04       		.byte	0x4
+ 437 0055 07       		.byte	0x7
+ 438 0056 37030000 		.4byte	.LASF5
+ 439 005a 02       		.uleb128 0x2
+ 440 005b 08       		.byte	0x8
+ 441 005c 05       		.byte	0x5
+ 442 005d 38010000 		.4byte	.LASF6
+ 443 0061 02       		.uleb128 0x2
+ 444 0062 08       		.byte	0x8
+ 445 0063 07       		.byte	0x7
+ 446 0064 D6010000 		.4byte	.LASF7
+ 447 0068 04       		.uleb128 0x4
+ 448 0069 04       		.byte	0x4
+ 449 006a 05       		.byte	0x5
+ 450 006b 696E7400 		.ascii	"int\000"
+ 451 006f 02       		.uleb128 0x2
+ 452 0070 04       		.byte	0x4
+ 453 0071 07       		.byte	0x7
+ 454 0072 ED010000 		.4byte	.LASF8
+ 455 0076 03       		.uleb128 0x3
+ 456 0077 F9020000 		.4byte	.LASF10
+ 457 007b 03       		.byte	0x3
+ 458 007c 2C       		.byte	0x2c
+ 459 007d 41000000 		.4byte	0x41
+ 460 0081 05       		.uleb128 0x5
+ 461 0082 DA000000 		.4byte	.LASF11
+ 462 0086 04       		.byte	0x4
+ 463 0087 E401     		.2byte	0x1e4
+ 464 0089 2C000000 		.4byte	0x2c
+ 465 008d 05       		.uleb128 0x5
+ 466 008e A8000000 		.4byte	.LASF12
+ 467 0092 04       		.byte	0x4
+ 468 0093 E501     		.2byte	0x1e5
+ 469 0095 3A000000 		.4byte	0x3a
+ 470 0099 05       		.uleb128 0x5
+ 471 009a 29030000 		.4byte	.LASF13
+ 472 009e 04       		.byte	0x4
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 12
+
+
+ 473 009f E601     		.2byte	0x1e6
+ 474 00a1 53000000 		.4byte	0x53
+ 475 00a5 05       		.uleb128 0x5
+ 476 00a6 CC000000 		.4byte	.LASF14
+ 477 00aa 04       		.byte	0x4
+ 478 00ab E801     		.2byte	0x1e8
+ 479 00ad 33000000 		.4byte	0x33
+ 480 00b1 02       		.uleb128 0x2
+ 481 00b2 04       		.byte	0x4
+ 482 00b3 04       		.byte	0x4
+ 483 00b4 32010000 		.4byte	.LASF15
+ 484 00b8 02       		.uleb128 0x2
+ 485 00b9 08       		.byte	0x8
+ 486 00ba 04       		.byte	0x4
+ 487 00bb 0C000000 		.4byte	.LASF16
+ 488 00bf 02       		.uleb128 0x2
+ 489 00c0 01       		.byte	0x1
+ 490 00c1 08       		.byte	0x8
+ 491 00c2 EF020000 		.4byte	.LASF17
+ 492 00c6 02       		.uleb128 0x2
+ 493 00c7 08       		.byte	0x8
+ 494 00c8 04       		.byte	0x4
+ 495 00c9 A9010000 		.4byte	.LASF18
+ 496 00cd 02       		.uleb128 0x2
+ 497 00ce 04       		.byte	0x4
+ 498 00cf 07       		.byte	0x7
+ 499 00d0 87000000 		.4byte	.LASF19
+ 500 00d4 06       		.uleb128 0x6
+ 501 00d5 6A010000 		.4byte	.LASF62
+ 502 00d9 01       		.byte	0x1
+ 503 00da 5F       		.byte	0x5f
+ 504 00db 00000000 		.4byte	.LFB64
+ 505 00df AC000000 		.4byte	.LFE64-.LFB64
+ 506 00e3 01       		.uleb128 0x1
+ 507 00e4 9C       		.byte	0x9c
+ 508 00e5 F2010000 		.4byte	0x1f2
+ 509 00e9 07       		.uleb128 0x7
+ 510 00ea 0E000000 		.4byte	.LVL0
+ 511 00ee D9040000 		.4byte	0x4d9
+ 512 00f2 FC000000 		.4byte	0xfc
+ 513 00f6 08       		.uleb128 0x8
+ 514 00f7 01       		.uleb128 0x1
+ 515 00f8 50       		.byte	0x50
+ 516 00f9 01       		.uleb128 0x1
+ 517 00fa 31       		.byte	0x31
+ 518 00fb 00       		.byte	0
+ 519 00fc 09       		.uleb128 0x9
+ 520 00fd 12000000 		.4byte	.LVL1
+ 521 0101 E4040000 		.4byte	0x4e4
+ 522 0105 07       		.uleb128 0x7
+ 523 0106 1A000000 		.4byte	.LVL2
+ 524 010a EF040000 		.4byte	0x4ef
+ 525 010e 1F010000 		.4byte	0x11f
+ 526 0112 08       		.uleb128 0x8
+ 527 0113 01       		.uleb128 0x1
+ 528 0114 50       		.byte	0x50
+ 529 0115 02       		.uleb128 0x2
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 13
+
+
+ 530 0116 74       		.byte	0x74
+ 531 0117 00       		.sleb128 0
+ 532 0118 08       		.uleb128 0x8
+ 533 0119 01       		.uleb128 0x1
+ 534 011a 51       		.byte	0x51
+ 535 011b 02       		.uleb128 0x2
+ 536 011c 74       		.byte	0x74
+ 537 011d 00       		.sleb128 0
+ 538 011e 00       		.byte	0
+ 539 011f 07       		.uleb128 0x7
+ 540 0120 20000000 		.4byte	.LVL3
+ 541 0124 FA040000 		.4byte	0x4fa
+ 542 0128 36010000 		.4byte	0x136
+ 543 012c 08       		.uleb128 0x8
+ 544 012d 01       		.uleb128 0x1
+ 545 012e 50       		.byte	0x50
+ 546 012f 05       		.uleb128 0x5
+ 547 0130 03       		.byte	0x3
+ 548 0131 00000000 		.4byte	.LC0
+ 549 0135 00       		.byte	0
+ 550 0136 07       		.uleb128 0x7
+ 551 0137 28000000 		.4byte	.LVL4
+ 552 013b EF040000 		.4byte	0x4ef
+ 553 013f 4F010000 		.4byte	0x14f
+ 554 0143 08       		.uleb128 0x8
+ 555 0144 01       		.uleb128 0x1
+ 556 0145 50       		.byte	0x50
+ 557 0146 02       		.uleb128 0x2
+ 558 0147 74       		.byte	0x74
+ 559 0148 00       		.sleb128 0
+ 560 0149 08       		.uleb128 0x8
+ 561 014a 01       		.uleb128 0x1
+ 562 014b 51       		.byte	0x51
+ 563 014c 01       		.uleb128 0x1
+ 564 014d 3A       		.byte	0x3a
+ 565 014e 00       		.byte	0
+ 566 014f 09       		.uleb128 0x9
+ 567 0150 30000000 		.4byte	.LVL5
+ 568 0154 05050000 		.4byte	0x505
+ 569 0158 07       		.uleb128 0x7
+ 570 0159 38000000 		.4byte	.LVL6
+ 571 015d EF040000 		.4byte	0x4ef
+ 572 0161 70010000 		.4byte	0x170
+ 573 0165 08       		.uleb128 0x8
+ 574 0166 01       		.uleb128 0x1
+ 575 0167 50       		.byte	0x50
+ 576 0168 01       		.uleb128 0x1
+ 577 0169 31       		.byte	0x31
+ 578 016a 08       		.uleb128 0x8
+ 579 016b 01       		.uleb128 0x1
+ 580 016c 51       		.byte	0x51
+ 581 016d 01       		.uleb128 0x1
+ 582 016e 36       		.byte	0x36
+ 583 016f 00       		.byte	0
+ 584 0170 07       		.uleb128 0x7
+ 585 0171 3E000000 		.4byte	.LVL7
+ 586 0175 FA040000 		.4byte	0x4fa
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 14
+
+
+ 587 0179 87010000 		.4byte	0x187
+ 588 017d 08       		.uleb128 0x8
+ 589 017e 01       		.uleb128 0x1
+ 590 017f 50       		.byte	0x50
+ 591 0180 05       		.uleb128 0x5
+ 592 0181 03       		.byte	0x3
+ 593 0182 0C000000 		.4byte	.LC1
+ 594 0186 00       		.byte	0
+ 595 0187 07       		.uleb128 0x7
+ 596 0188 46000000 		.4byte	.LVL8
+ 597 018c EF040000 		.4byte	0x4ef
+ 598 0190 A0010000 		.4byte	0x1a0
+ 599 0194 08       		.uleb128 0x8
+ 600 0195 01       		.uleb128 0x1
+ 601 0196 50       		.byte	0x50
+ 602 0197 01       		.uleb128 0x1
+ 603 0198 31       		.byte	0x31
+ 604 0199 08       		.uleb128 0x8
+ 605 019a 01       		.uleb128 0x1
+ 606 019b 51       		.byte	0x51
+ 607 019c 02       		.uleb128 0x2
+ 608 019d 74       		.byte	0x74
+ 609 019e 00       		.sleb128 0
+ 610 019f 00       		.byte	0
+ 611 01a0 09       		.uleb128 0x9
+ 612 01a1 5E000000 		.4byte	.LVL9
+ 613 01a5 05050000 		.4byte	0x505
+ 614 01a9 07       		.uleb128 0x7
+ 615 01aa 66000000 		.4byte	.LVL10
+ 616 01ae EF040000 		.4byte	0x4ef
+ 617 01b2 C1010000 		.4byte	0x1c1
+ 618 01b6 08       		.uleb128 0x8
+ 619 01b7 01       		.uleb128 0x1
+ 620 01b8 50       		.byte	0x50
+ 621 01b9 01       		.uleb128 0x1
+ 622 01ba 31       		.byte	0x31
+ 623 01bb 08       		.uleb128 0x8
+ 624 01bc 01       		.uleb128 0x1
+ 625 01bd 51       		.byte	0x51
+ 626 01be 01       		.uleb128 0x1
+ 627 01bf 32       		.byte	0x32
+ 628 01c0 00       		.byte	0
+ 629 01c1 07       		.uleb128 0x7
+ 630 01c2 6C000000 		.4byte	.LVL11
+ 631 01c6 FA040000 		.4byte	0x4fa
+ 632 01ca D8010000 		.4byte	0x1d8
+ 633 01ce 08       		.uleb128 0x8
+ 634 01cf 01       		.uleb128 0x1
+ 635 01d0 50       		.byte	0x50
+ 636 01d1 05       		.uleb128 0x5
+ 637 01d2 03       		.byte	0x3
+ 638 01d3 18000000 		.4byte	.LC2
+ 639 01d7 00       		.byte	0
+ 640 01d8 09       		.uleb128 0x9
+ 641 01d9 86000000 		.4byte	.LVL12
+ 642 01dd 05050000 		.4byte	0x505
+ 643 01e1 0A       		.uleb128 0xa
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 15
+
+
+ 644 01e2 8C000000 		.4byte	.LVL13
+ 645 01e6 D9040000 		.4byte	0x4d9
+ 646 01ea 08       		.uleb128 0x8
+ 647 01eb 01       		.uleb128 0x1
+ 648 01ec 50       		.byte	0x50
+ 649 01ed 02       		.uleb128 0x2
+ 650 01ee 74       		.byte	0x74
+ 651 01ef 00       		.sleb128 0
+ 652 01f0 00       		.byte	0
+ 653 01f1 00       		.byte	0
+ 654 01f2 0B       		.uleb128 0xb
+ 655 01f3 F4020000 		.4byte	.LASF63
+ 656 01f7 01       		.byte	0x1
+ 657 01f8 18       		.byte	0x18
+ 658 01f9 68000000 		.4byte	0x68
+ 659 01fd 00000000 		.4byte	.LFB63
+ 660 0201 64010000 		.4byte	.LFE63-.LFB63
+ 661 0205 01       		.uleb128 0x1
+ 662 0206 9C       		.byte	0x9c
+ 663 0207 96030000 		.4byte	0x396
+ 664 020b 09       		.uleb128 0x9
+ 665 020c 08000000 		.4byte	.LVL14
+ 666 0210 10050000 		.4byte	0x510
+ 667 0214 09       		.uleb128 0x9
+ 668 0215 0C000000 		.4byte	.LVL15
+ 669 0219 1B050000 		.4byte	0x51b
+ 670 021d 09       		.uleb128 0x9
+ 671 021e 10000000 		.4byte	.LVL16
+ 672 0222 26050000 		.4byte	0x526
+ 673 0226 07       		.uleb128 0x7
+ 674 0227 18000000 		.4byte	.LVL17
+ 675 022b EF040000 		.4byte	0x4ef
+ 676 022f 3E020000 		.4byte	0x23e
+ 677 0233 08       		.uleb128 0x8
+ 678 0234 01       		.uleb128 0x1
+ 679 0235 50       		.byte	0x50
+ 680 0236 01       		.uleb128 0x1
+ 681 0237 30       		.byte	0x30
+ 682 0238 08       		.uleb128 0x8
+ 683 0239 01       		.uleb128 0x1
+ 684 023a 51       		.byte	0x51
+ 685 023b 01       		.uleb128 0x1
+ 686 023c 30       		.byte	0x30
+ 687 023d 00       		.byte	0
+ 688 023e 07       		.uleb128 0x7
+ 689 023f 1E000000 		.4byte	.LVL18
+ 690 0243 FA040000 		.4byte	0x4fa
+ 691 0247 55020000 		.4byte	0x255
+ 692 024b 08       		.uleb128 0x8
+ 693 024c 01       		.uleb128 0x1
+ 694 024d 50       		.byte	0x50
+ 695 024e 05       		.uleb128 0x5
+ 696 024f 03       		.byte	0x3
+ 697 0250 1C000000 		.4byte	.LC3
+ 698 0254 00       		.byte	0
+ 699 0255 07       		.uleb128 0x7
+ 700 0256 26000000 		.4byte	.LVL19
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 16
+
+
+ 701 025a 31050000 		.4byte	0x531
+ 702 025e 6A020000 		.4byte	0x26a
+ 703 0262 08       		.uleb128 0x8
+ 704 0263 01       		.uleb128 0x1
+ 705 0264 50       		.byte	0x50
+ 706 0265 03       		.uleb128 0x3
+ 707 0266 0A       		.byte	0xa
+ 708 0267 E803     		.2byte	0x3e8
+ 709 0269 00       		.byte	0
+ 710 026a 07       		.uleb128 0x7
+ 711 026b 2E000000 		.4byte	.LVL20
+ 712 026f EF040000 		.4byte	0x4ef
+ 713 0273 82020000 		.4byte	0x282
+ 714 0277 08       		.uleb128 0x8
+ 715 0278 01       		.uleb128 0x1
+ 716 0279 50       		.byte	0x50
+ 717 027a 01       		.uleb128 0x1
+ 718 027b 30       		.byte	0x30
+ 719 027c 08       		.uleb128 0x8
+ 720 027d 01       		.uleb128 0x1
+ 721 027e 51       		.byte	0x51
+ 722 027f 01       		.uleb128 0x1
+ 723 0280 30       		.byte	0x30
+ 724 0281 00       		.byte	0
+ 725 0282 07       		.uleb128 0x7
+ 726 0283 34000000 		.4byte	.LVL21
+ 727 0287 3C050000 		.4byte	0x53c
+ 728 028b 95020000 		.4byte	0x295
+ 729 028f 08       		.uleb128 0x8
+ 730 0290 01       		.uleb128 0x1
+ 731 0291 50       		.byte	0x50
+ 732 0292 01       		.uleb128 0x1
+ 733 0293 31       		.byte	0x31
+ 734 0294 00       		.byte	0
+ 735 0295 09       		.uleb128 0x9
+ 736 0296 38000000 		.4byte	.LVL22
+ 737 029a 47050000 		.4byte	0x547
+ 738 029e 07       		.uleb128 0x7
+ 739 029f 4E000000 		.4byte	.LVL23
+ 740 02a3 52050000 		.4byte	0x552
+ 741 02a7 B1020000 		.4byte	0x2b1
+ 742 02ab 08       		.uleb128 0x8
+ 743 02ac 01       		.uleb128 0x1
+ 744 02ad 50       		.byte	0x50
+ 745 02ae 01       		.uleb128 0x1
+ 746 02af 31       		.byte	0x31
+ 747 02b0 00       		.byte	0
+ 748 02b1 07       		.uleb128 0x7
+ 749 02b2 54000000 		.4byte	.LVL24
+ 750 02b6 5D050000 		.4byte	0x55d
+ 751 02ba C4020000 		.4byte	0x2c4
+ 752 02be 08       		.uleb128 0x8
+ 753 02bf 01       		.uleb128 0x1
+ 754 02c0 50       		.byte	0x50
+ 755 02c1 01       		.uleb128 0x1
+ 756 02c2 31       		.byte	0x31
+ 757 02c3 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 17
+
+
+ 758 02c4 09       		.uleb128 0x9
+ 759 02c5 58000000 		.4byte	.LVL25
+ 760 02c9 68050000 		.4byte	0x568
+ 761 02cd 07       		.uleb128 0x7
+ 762 02ce 5E000000 		.4byte	.LVL26
+ 763 02d2 73050000 		.4byte	0x573
+ 764 02d6 E0020000 		.4byte	0x2e0
+ 765 02da 08       		.uleb128 0x8
+ 766 02db 01       		.uleb128 0x1
+ 767 02dc 50       		.byte	0x50
+ 768 02dd 01       		.uleb128 0x1
+ 769 02de 30       		.byte	0x30
+ 770 02df 00       		.byte	0
+ 771 02e0 07       		.uleb128 0x7
+ 772 02e1 64000000 		.4byte	.LVL27
+ 773 02e5 52050000 		.4byte	0x552
+ 774 02e9 F3020000 		.4byte	0x2f3
+ 775 02ed 08       		.uleb128 0x8
+ 776 02ee 01       		.uleb128 0x1
+ 777 02ef 50       		.byte	0x50
+ 778 02f0 01       		.uleb128 0x1
+ 779 02f1 30       		.byte	0x30
+ 780 02f2 00       		.byte	0
+ 781 02f3 09       		.uleb128 0x9
+ 782 02f4 68000000 		.4byte	.LVL28
+ 783 02f8 7E050000 		.4byte	0x57e
+ 784 02fc 07       		.uleb128 0x7
+ 785 02fd 7E000000 		.4byte	.LVL30
+ 786 0301 89050000 		.4byte	0x589
+ 787 0305 10030000 		.4byte	0x310
+ 788 0309 08       		.uleb128 0x8
+ 789 030a 01       		.uleb128 0x1
+ 790 030b 50       		.byte	0x50
+ 791 030c 02       		.uleb128 0x2
+ 792 030d 75       		.byte	0x75
+ 793 030e 00       		.sleb128 0
+ 794 030f 00       		.byte	0
+ 795 0310 07       		.uleb128 0x7
+ 796 0311 90000000 		.4byte	.LVL32
+ 797 0315 31050000 		.4byte	0x531
+ 798 0319 23030000 		.4byte	0x323
+ 799 031d 08       		.uleb128 0x8
+ 800 031e 01       		.uleb128 0x1
+ 801 031f 50       		.byte	0x50
+ 802 0320 01       		.uleb128 0x1
+ 803 0321 31       		.byte	0x31
+ 804 0322 00       		.byte	0
+ 805 0323 07       		.uleb128 0x7
+ 806 0324 A2000000 		.4byte	.LVL34
+ 807 0328 5D050000 		.4byte	0x55d
+ 808 032c 36030000 		.4byte	0x336
+ 809 0330 08       		.uleb128 0x8
+ 810 0331 01       		.uleb128 0x1
+ 811 0332 50       		.byte	0x50
+ 812 0333 01       		.uleb128 0x1
+ 813 0334 30       		.byte	0x30
+ 814 0335 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 18
+
+
+ 815 0336 07       		.uleb128 0x7
+ 816 0337 A8000000 		.4byte	.LVL35
+ 817 033b 73050000 		.4byte	0x573
+ 818 033f 49030000 		.4byte	0x349
+ 819 0343 08       		.uleb128 0x8
+ 820 0344 01       		.uleb128 0x1
+ 821 0345 50       		.byte	0x50
+ 822 0346 01       		.uleb128 0x1
+ 823 0347 30       		.byte	0x30
+ 824 0348 00       		.byte	0
+ 825 0349 09       		.uleb128 0x9
+ 826 034a AC000000 		.4byte	.LVL36
+ 827 034e 7E050000 		.4byte	0x57e
+ 828 0352 09       		.uleb128 0x9
+ 829 0353 B6000000 		.4byte	.LVL37
+ 830 0357 89050000 		.4byte	0x589
+ 831 035b 07       		.uleb128 0x7
+ 832 035c D8000000 		.4byte	.LVL40
+ 833 0360 94050000 		.4byte	0x594
+ 834 0364 6F030000 		.4byte	0x36f
+ 835 0368 08       		.uleb128 0x8
+ 836 0369 01       		.uleb128 0x1
+ 837 036a 51       		.byte	0x51
+ 838 036b 02       		.uleb128 0x2
+ 839 036c 76       		.byte	0x76
+ 840 036d 00       		.sleb128 0
+ 841 036e 00       		.byte	0
+ 842 036f 07       		.uleb128 0x7
+ 843 0370 EC000000 		.4byte	.LVL42
+ 844 0374 9F050000 		.4byte	0x59f
+ 845 0378 83030000 		.4byte	0x383
+ 846 037c 08       		.uleb128 0x8
+ 847 037d 01       		.uleb128 0x1
+ 848 037e 50       		.byte	0x50
+ 849 037f 02       		.uleb128 0x2
+ 850 0380 75       		.byte	0x75
+ 851 0381 00       		.sleb128 0
+ 852 0382 00       		.byte	0
+ 853 0383 09       		.uleb128 0x9
+ 854 0384 0C010000 		.4byte	.LVL43
+ 855 0388 AA050000 		.4byte	0x5aa
+ 856 038c 09       		.uleb128 0x9
+ 857 038d 1A010000 		.4byte	.LVL44
+ 858 0391 D4000000 		.4byte	0xd4
+ 859 0395 00       		.byte	0
+ 860 0396 0C       		.uleb128 0xc
+ 861 0397 57030000 		.4byte	.LASF20
+ 862 039b 05       		.byte	0x5
+ 863 039c 1207     		.2byte	0x712
+ 864 039e A2030000 		.4byte	0x3a2
+ 865 03a2 0D       		.uleb128 0xd
+ 866 03a3 76000000 		.4byte	0x76
+ 867 03a7 0E       		.uleb128 0xe
+ 868 03a8 B5010000 		.4byte	.LASF21
+ 869 03ac 01       		.byte	0x1
+ 870 03ad 10       		.byte	0x10
+ 871 03ae 99000000 		.4byte	0x99
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 19
+
+
+ 872 03b2 05       		.uleb128 0x5
+ 873 03b3 03       		.byte	0x3
+ 874 03b4 00000000 		.4byte	loop_counter
+ 875 03b8 0E       		.uleb128 0xe
+ 876 03b9 58010000 		.4byte	.LASF22
+ 877 03bd 01       		.byte	0x1
+ 878 03be 10       		.byte	0x10
+ 879 03bf 99000000 		.4byte	0x99
+ 880 03c3 05       		.uleb128 0x5
+ 881 03c4 03       		.byte	0x3
+ 882 03c5 00000000 		.4byte	LCD_write_counter
+ 883 03c9 0E       		.uleb128 0xe
+ 884 03ca 8C010000 		.4byte	.LASF23
+ 885 03ce 01       		.byte	0x1
+ 886 03cf 10       		.byte	0x10
+ 887 03d0 99000000 		.4byte	0x99
+ 888 03d4 05       		.uleb128 0x5
+ 889 03d5 03       		.byte	0x3
+ 890 03d6 00000000 		.4byte	thermistor_R
+ 891 03da 0E       		.uleb128 0xe
+ 892 03db 9D000000 		.4byte	.LASF24
+ 893 03df 01       		.byte	0x1
+ 894 03e0 11       		.byte	0x11
+ 895 03e1 8D000000 		.4byte	0x8d
+ 896 03e5 05       		.uleb128 0x5
+ 897 03e6 03       		.byte	0x3
+ 898 03e7 00000000 		.4byte	R_1_result
+ 899 03eb 0E       		.uleb128 0xe
+ 900 03ec 46010000 		.4byte	.LASF25
+ 901 03f0 01       		.byte	0x1
+ 902 03f1 11       		.byte	0x11
+ 903 03f2 8D000000 		.4byte	0x8d
+ 904 03f6 05       		.uleb128 0x5
+ 905 03f7 03       		.byte	0x3
+ 906 03f8 00000000 		.4byte	thermistor_result
+ 907 03fc 0E       		.uleb128 0xe
+ 908 03fd 14030000 		.4byte	.LASF26
+ 909 0401 01       		.byte	0x1
+ 910 0402 12       		.byte	0x12
+ 911 0403 A5000000 		.4byte	0xa5
+ 912 0407 05       		.uleb128 0x5
+ 913 0408 03       		.byte	0x3
+ 914 0409 00000000 		.4byte	thermistor_mV
+ 915 040d 0E       		.uleb128 0xe
+ 916 040e 22030000 		.4byte	.LASF27
+ 917 0412 01       		.byte	0x1
+ 918 0413 12       		.byte	0x12
+ 919 0414 A5000000 		.4byte	0xa5
+ 920 0418 05       		.uleb128 0x5
+ 921 0419 03       		.byte	0x3
+ 922 041a 00000000 		.4byte	R_1_mV
+ 923 041e 0E       		.uleb128 0xe
+ 924 041f 64030000 		.4byte	.LASF28
+ 925 0423 01       		.byte	0x1
+ 926 0424 12       		.byte	0x12
+ 927 0425 A5000000 		.4byte	0xa5
+ 928 0429 05       		.uleb128 0x5
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 20
+
+
+ 929 042a 03       		.byte	0x3
+ 930 042b 00000000 		.4byte	temperature
+ 931 042f 0E       		.uleb128 0xe
+ 932 0430 D2000000 		.4byte	.LASF29
+ 933 0434 01       		.byte	0x1
+ 934 0435 13       		.byte	0x13
+ 935 0436 81000000 		.4byte	0x81
+ 936 043a 05       		.uleb128 0x5
+ 937 043b 03       		.byte	0x3
+ 938 043c 00000000 		.4byte	tempDAC
+ 939 0440 0E       		.uleb128 0xe
+ 940 0441 13000000 		.4byte	.LASF30
+ 941 0445 01       		.byte	0x1
+ 942 0446 14       		.byte	0x14
+ 943 0447 B1000000 		.4byte	0xb1
+ 944 044b 05       		.uleb128 0x5
+ 945 044c 03       		.byte	0x3
+ 946 044d 00000000 		.4byte	R_1_result_f
+ 947 0451 0E       		.uleb128 0xe
+ 948 0452 E4030000 		.4byte	.LASF31
+ 949 0456 01       		.byte	0x1
+ 950 0457 14       		.byte	0x14
+ 951 0458 B1000000 		.4byte	0xb1
+ 952 045c 05       		.uleb128 0x5
+ 953 045d 03       		.byte	0x3
+ 954 045e 00000000 		.4byte	R_1_mV_f
+ 955 0462 0E       		.uleb128 0xe
+ 956 0463 99010000 		.4byte	.LASF32
+ 957 0467 01       		.byte	0x1
+ 958 0468 14       		.byte	0x14
+ 959 0469 B1000000 		.4byte	0xb1
+ 960 046d 05       		.uleb128 0x5
+ 961 046e 03       		.byte	0x3
+ 962 046f 00000000 		.4byte	thermistor_mV_f
+ 963 0473 0E       		.uleb128 0xe
+ 964 0474 C2010000 		.4byte	.LASF33
+ 965 0478 01       		.byte	0x1
+ 966 0479 14       		.byte	0x14
+ 967 047a B1000000 		.4byte	0xb1
+ 968 047e 05       		.uleb128 0x5
+ 969 047f 03       		.byte	0x3
+ 970 0480 00000000 		.4byte	ratio_f
+ 971 0484 0E       		.uleb128 0xe
+ 972 0485 0A020000 		.4byte	.LASF34
+ 973 0489 01       		.byte	0x1
+ 974 048a 14       		.byte	0x14
+ 975 048b B1000000 		.4byte	0xb1
+ 976 048f 05       		.uleb128 0x5
+ 977 0490 03       		.byte	0x3
+ 978 0491 00000000 		.4byte	voltage_f
+ 979 0495 0E       		.uleb128 0xe
+ 980 0496 FF030000 		.4byte	.LASF35
+ 981 049a 01       		.byte	0x1
+ 982 049b 15       		.byte	0x15
+ 983 049c B1000000 		.4byte	0xb1
+ 984 04a0 05       		.uleb128 0x5
+ 985 04a1 03       		.byte	0x3
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 21
+
+
+ 986 04a2 00000000 		.4byte	thermistor_RA_f
+ 987 04a6 0E       		.uleb128 0xe
+ 988 04a7 97030000 		.4byte	.LASF36
+ 989 04ab 01       		.byte	0x1
+ 990 04ac 15       		.byte	0x15
+ 991 04ad B1000000 		.4byte	0xb1
+ 992 04b1 05       		.uleb128 0x5
+ 993 04b2 03       		.byte	0x3
+ 994 04b3 00000000 		.4byte	thermistor_RB_f
+ 995 04b7 0E       		.uleb128 0xe
+ 996 04b8 90000000 		.4byte	.LASF37
+ 997 04bc 01       		.byte	0x1
+ 998 04bd 16       		.byte	0x16
+ 999 04be B1000000 		.4byte	0xb1
+ 1000 04c2 05       		.uleb128 0x5
+ 1001 04c3 03       		.byte	0x3
+ 1002 04c4 00000000 		.4byte	current_mA_f
+ 1003 04c8 0E       		.uleb128 0xe
+ 1004 04c9 E0000000 		.4byte	.LASF38
+ 1005 04cd 01       		.byte	0x1
+ 1006 04ce 16       		.byte	0x16
+ 1007 04cf B1000000 		.4byte	0xb1
+ 1008 04d3 05       		.uleb128 0x5
+ 1009 04d4 03       		.byte	0x3
+ 1010 04d5 00000000 		.4byte	temperature_K_f
+ 1011 04d9 0F       		.uleb128 0xf
+ 1012 04da D9030000 		.4byte	.LASF39
+ 1013 04de D9030000 		.4byte	.LASF39
+ 1014 04e2 06       		.byte	0x6
+ 1015 04e3 26       		.byte	0x26
+ 1016 04e4 0F       		.uleb128 0xf
+ 1017 04e5 00000000 		.4byte	.LASF40
+ 1018 04e9 00000000 		.4byte	.LASF40
+ 1019 04ed 07       		.byte	0x7
+ 1020 04ee 3F       		.byte	0x3f
+ 1021 04ef 0F       		.uleb128 0xf
+ 1022 04f0 CC030000 		.4byte	.LASF41
+ 1023 04f4 CC030000 		.4byte	.LASF41
+ 1024 04f8 07       		.byte	0x7
+ 1025 04f9 3D       		.byte	0x3d
+ 1026 04fa 0F       		.uleb128 0xf
+ 1027 04fb FA010000 		.4byte	.LASF42
+ 1028 04ff FA010000 		.4byte	.LASF42
+ 1029 0503 07       		.byte	0x7
+ 1030 0504 3C       		.byte	0x3c
+ 1031 0505 0F       		.uleb128 0xf
+ 1032 0506 CF020000 		.4byte	.LASF43
+ 1033 050a CF020000 		.4byte	.LASF43
+ 1034 050e 07       		.byte	0x7
+ 1035 050f 61       		.byte	0x61
+ 1036 0510 0F       		.uleb128 0xf
+ 1037 0511 2E020000 		.4byte	.LASF44
+ 1038 0515 2E020000 		.4byte	.LASF44
+ 1039 0519 08       		.byte	0x8
+ 1040 051a 3A       		.byte	0x3a
+ 1041 051b 0F       		.uleb128 0xf
+ 1042 051c 25010000 		.4byte	.LASF45
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 22
+
+
+ 1043 0520 25010000 		.4byte	.LASF45
+ 1044 0524 09       		.byte	0x9
+ 1045 0525 25       		.byte	0x25
+ 1046 0526 0F       		.uleb128 0xf
+ 1047 0527 C2030000 		.4byte	.LASF46
+ 1048 052b C2030000 		.4byte	.LASF46
+ 1049 052f 07       		.byte	0x7
+ 1050 0530 38       		.byte	0x38
+ 1051 0531 0F       		.uleb128 0xf
+ 1052 0532 F7030000 		.4byte	.LASF47
+ 1053 0536 F7030000 		.4byte	.LASF47
+ 1054 053a 0A       		.byte	0xa
+ 1055 053b 76       		.byte	0x76
+ 1056 053c 0F       		.uleb128 0xf
+ 1057 053d 1A040000 		.4byte	.LASF48
+ 1058 0541 1A040000 		.4byte	.LASF48
+ 1059 0545 07       		.byte	0x7
+ 1060 0546 3A       		.byte	0x3a
+ 1061 0547 0F       		.uleb128 0xf
+ 1062 0548 ED030000 		.4byte	.LASF49
+ 1063 054c ED030000 		.4byte	.LASF49
+ 1064 0550 0B       		.byte	0xb
+ 1065 0551 33       		.byte	0x33
+ 1066 0552 0F       		.uleb128 0xf
+ 1067 0553 0F040000 		.4byte	.LASF50
+ 1068 0557 0F040000 		.4byte	.LASF50
+ 1069 055b 0C       		.byte	0xc
+ 1070 055c 26       		.byte	0x26
+ 1071 055d 0F       		.uleb128 0xf
+ 1072 055e 49030000 		.4byte	.LASF51
+ 1073 0562 49030000 		.4byte	.LASF51
+ 1074 0566 09       		.byte	0x9
+ 1075 0567 57       		.byte	0x57
+ 1076 0568 0F       		.uleb128 0xf
+ 1077 0569 14020000 		.4byte	.LASF52
+ 1078 056d 14020000 		.4byte	.LASF52
+ 1079 0571 08       		.byte	0x8
+ 1080 0572 3D       		.byte	0x3d
+ 1081 0573 0F       		.uleb128 0xf
+ 1082 0574 AF000000 		.4byte	.LASF53
+ 1083 0578 AF000000 		.4byte	.LASF53
+ 1084 057c 08       		.byte	0x8
+ 1085 057d 3F       		.byte	0x3f
+ 1086 057e 0F       		.uleb128 0xf
+ 1087 057f 0C010000 		.4byte	.LASF54
+ 1088 0583 0C010000 		.4byte	.LASF54
+ 1089 0587 08       		.byte	0x8
+ 1090 0588 41       		.byte	0x41
+ 1091 0589 0F       		.uleb128 0xf
+ 1092 058a 70030000 		.4byte	.LASF55
+ 1093 058e 70030000 		.4byte	.LASF55
+ 1094 0592 08       		.byte	0x8
+ 1095 0593 47       		.byte	0x47
+ 1096 0594 0F       		.uleb128 0xf
+ 1097 0595 A7030000 		.4byte	.LASF56
+ 1098 0599 A7030000 		.4byte	.LASF56
+ 1099 059d 0D       		.byte	0xd
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 23
+
+
+ 1100 059e 30       		.byte	0x30
+ 1101 059f 0F       		.uleb128 0xf
+ 1102 05a0 F0000000 		.4byte	.LASF57
+ 1103 05a4 F0000000 		.4byte	.LASF57
+ 1104 05a8 0D       		.byte	0xd
+ 1105 05a9 32       		.byte	0x32
+ 1106 05aa 0F       		.uleb128 0xf
+ 1107 05ab E2020000 		.4byte	.LASF58
+ 1108 05af E2020000 		.4byte	.LASF58
+ 1109 05b3 0B       		.byte	0xb
+ 1110 05b4 37       		.byte	0x37
+ 1111 05b5 00       		.byte	0
+ 1112              		.section	.debug_abbrev,"",%progbits
+ 1113              	.Ldebug_abbrev0:
+ 1114 0000 01       		.uleb128 0x1
+ 1115 0001 11       		.uleb128 0x11
+ 1116 0002 01       		.byte	0x1
+ 1117 0003 25       		.uleb128 0x25
+ 1118 0004 0E       		.uleb128 0xe
+ 1119 0005 13       		.uleb128 0x13
+ 1120 0006 0B       		.uleb128 0xb
+ 1121 0007 03       		.uleb128 0x3
+ 1122 0008 0E       		.uleb128 0xe
+ 1123 0009 1B       		.uleb128 0x1b
+ 1124 000a 0E       		.uleb128 0xe
+ 1125 000b 55       		.uleb128 0x55
+ 1126 000c 17       		.uleb128 0x17
+ 1127 000d 11       		.uleb128 0x11
+ 1128 000e 01       		.uleb128 0x1
+ 1129 000f 10       		.uleb128 0x10
+ 1130 0010 17       		.uleb128 0x17
+ 1131 0011 00       		.byte	0
+ 1132 0012 00       		.byte	0
+ 1133 0013 02       		.uleb128 0x2
+ 1134 0014 24       		.uleb128 0x24
+ 1135 0015 00       		.byte	0
+ 1136 0016 0B       		.uleb128 0xb
+ 1137 0017 0B       		.uleb128 0xb
+ 1138 0018 3E       		.uleb128 0x3e
+ 1139 0019 0B       		.uleb128 0xb
+ 1140 001a 03       		.uleb128 0x3
+ 1141 001b 0E       		.uleb128 0xe
+ 1142 001c 00       		.byte	0
+ 1143 001d 00       		.byte	0
+ 1144 001e 03       		.uleb128 0x3
+ 1145 001f 16       		.uleb128 0x16
+ 1146 0020 00       		.byte	0
+ 1147 0021 03       		.uleb128 0x3
+ 1148 0022 0E       		.uleb128 0xe
+ 1149 0023 3A       		.uleb128 0x3a
+ 1150 0024 0B       		.uleb128 0xb
+ 1151 0025 3B       		.uleb128 0x3b
+ 1152 0026 0B       		.uleb128 0xb
+ 1153 0027 49       		.uleb128 0x49
+ 1154 0028 13       		.uleb128 0x13
+ 1155 0029 00       		.byte	0
+ 1156 002a 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 24
+
+
+ 1157 002b 04       		.uleb128 0x4
+ 1158 002c 24       		.uleb128 0x24
+ 1159 002d 00       		.byte	0
+ 1160 002e 0B       		.uleb128 0xb
+ 1161 002f 0B       		.uleb128 0xb
+ 1162 0030 3E       		.uleb128 0x3e
+ 1163 0031 0B       		.uleb128 0xb
+ 1164 0032 03       		.uleb128 0x3
+ 1165 0033 08       		.uleb128 0x8
+ 1166 0034 00       		.byte	0
+ 1167 0035 00       		.byte	0
+ 1168 0036 05       		.uleb128 0x5
+ 1169 0037 16       		.uleb128 0x16
+ 1170 0038 00       		.byte	0
+ 1171 0039 03       		.uleb128 0x3
+ 1172 003a 0E       		.uleb128 0xe
+ 1173 003b 3A       		.uleb128 0x3a
+ 1174 003c 0B       		.uleb128 0xb
+ 1175 003d 3B       		.uleb128 0x3b
+ 1176 003e 05       		.uleb128 0x5
+ 1177 003f 49       		.uleb128 0x49
+ 1178 0040 13       		.uleb128 0x13
+ 1179 0041 00       		.byte	0
+ 1180 0042 00       		.byte	0
+ 1181 0043 06       		.uleb128 0x6
+ 1182 0044 2E       		.uleb128 0x2e
+ 1183 0045 01       		.byte	0x1
+ 1184 0046 3F       		.uleb128 0x3f
+ 1185 0047 19       		.uleb128 0x19
+ 1186 0048 03       		.uleb128 0x3
+ 1187 0049 0E       		.uleb128 0xe
+ 1188 004a 3A       		.uleb128 0x3a
+ 1189 004b 0B       		.uleb128 0xb
+ 1190 004c 3B       		.uleb128 0x3b
+ 1191 004d 0B       		.uleb128 0xb
+ 1192 004e 11       		.uleb128 0x11
+ 1193 004f 01       		.uleb128 0x1
+ 1194 0050 12       		.uleb128 0x12
+ 1195 0051 06       		.uleb128 0x6
+ 1196 0052 40       		.uleb128 0x40
+ 1197 0053 18       		.uleb128 0x18
+ 1198 0054 9742     		.uleb128 0x2117
+ 1199 0056 19       		.uleb128 0x19
+ 1200 0057 01       		.uleb128 0x1
+ 1201 0058 13       		.uleb128 0x13
+ 1202 0059 00       		.byte	0
+ 1203 005a 00       		.byte	0
+ 1204 005b 07       		.uleb128 0x7
+ 1205 005c 898201   		.uleb128 0x4109
+ 1206 005f 01       		.byte	0x1
+ 1207 0060 11       		.uleb128 0x11
+ 1208 0061 01       		.uleb128 0x1
+ 1209 0062 31       		.uleb128 0x31
+ 1210 0063 13       		.uleb128 0x13
+ 1211 0064 01       		.uleb128 0x1
+ 1212 0065 13       		.uleb128 0x13
+ 1213 0066 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 25
+
+
+ 1214 0067 00       		.byte	0
+ 1215 0068 08       		.uleb128 0x8
+ 1216 0069 8A8201   		.uleb128 0x410a
+ 1217 006c 00       		.byte	0
+ 1218 006d 02       		.uleb128 0x2
+ 1219 006e 18       		.uleb128 0x18
+ 1220 006f 9142     		.uleb128 0x2111
+ 1221 0071 18       		.uleb128 0x18
+ 1222 0072 00       		.byte	0
+ 1223 0073 00       		.byte	0
+ 1224 0074 09       		.uleb128 0x9
+ 1225 0075 898201   		.uleb128 0x4109
+ 1226 0078 00       		.byte	0
+ 1227 0079 11       		.uleb128 0x11
+ 1228 007a 01       		.uleb128 0x1
+ 1229 007b 31       		.uleb128 0x31
+ 1230 007c 13       		.uleb128 0x13
+ 1231 007d 00       		.byte	0
+ 1232 007e 00       		.byte	0
+ 1233 007f 0A       		.uleb128 0xa
+ 1234 0080 898201   		.uleb128 0x4109
+ 1235 0083 01       		.byte	0x1
+ 1236 0084 11       		.uleb128 0x11
+ 1237 0085 01       		.uleb128 0x1
+ 1238 0086 31       		.uleb128 0x31
+ 1239 0087 13       		.uleb128 0x13
+ 1240 0088 00       		.byte	0
+ 1241 0089 00       		.byte	0
+ 1242 008a 0B       		.uleb128 0xb
+ 1243 008b 2E       		.uleb128 0x2e
+ 1244 008c 01       		.byte	0x1
+ 1245 008d 3F       		.uleb128 0x3f
+ 1246 008e 19       		.uleb128 0x19
+ 1247 008f 03       		.uleb128 0x3
+ 1248 0090 0E       		.uleb128 0xe
+ 1249 0091 3A       		.uleb128 0x3a
+ 1250 0092 0B       		.uleb128 0xb
+ 1251 0093 3B       		.uleb128 0x3b
+ 1252 0094 0B       		.uleb128 0xb
+ 1253 0095 27       		.uleb128 0x27
+ 1254 0096 19       		.uleb128 0x19
+ 1255 0097 49       		.uleb128 0x49
+ 1256 0098 13       		.uleb128 0x13
+ 1257 0099 8701     		.uleb128 0x87
+ 1258 009b 19       		.uleb128 0x19
+ 1259 009c 11       		.uleb128 0x11
+ 1260 009d 01       		.uleb128 0x1
+ 1261 009e 12       		.uleb128 0x12
+ 1262 009f 06       		.uleb128 0x6
+ 1263 00a0 40       		.uleb128 0x40
+ 1264 00a1 18       		.uleb128 0x18
+ 1265 00a2 9642     		.uleb128 0x2116
+ 1266 00a4 19       		.uleb128 0x19
+ 1267 00a5 01       		.uleb128 0x1
+ 1268 00a6 13       		.uleb128 0x13
+ 1269 00a7 00       		.byte	0
+ 1270 00a8 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 26
+
+
+ 1271 00a9 0C       		.uleb128 0xc
+ 1272 00aa 34       		.uleb128 0x34
+ 1273 00ab 00       		.byte	0
+ 1274 00ac 03       		.uleb128 0x3
+ 1275 00ad 0E       		.uleb128 0xe
+ 1276 00ae 3A       		.uleb128 0x3a
+ 1277 00af 0B       		.uleb128 0xb
+ 1278 00b0 3B       		.uleb128 0x3b
+ 1279 00b1 05       		.uleb128 0x5
+ 1280 00b2 49       		.uleb128 0x49
+ 1281 00b3 13       		.uleb128 0x13
+ 1282 00b4 3F       		.uleb128 0x3f
+ 1283 00b5 19       		.uleb128 0x19
+ 1284 00b6 3C       		.uleb128 0x3c
+ 1285 00b7 19       		.uleb128 0x19
+ 1286 00b8 00       		.byte	0
+ 1287 00b9 00       		.byte	0
+ 1288 00ba 0D       		.uleb128 0xd
+ 1289 00bb 35       		.uleb128 0x35
+ 1290 00bc 00       		.byte	0
+ 1291 00bd 49       		.uleb128 0x49
+ 1292 00be 13       		.uleb128 0x13
+ 1293 00bf 00       		.byte	0
+ 1294 00c0 00       		.byte	0
+ 1295 00c1 0E       		.uleb128 0xe
+ 1296 00c2 34       		.uleb128 0x34
+ 1297 00c3 00       		.byte	0
+ 1298 00c4 03       		.uleb128 0x3
+ 1299 00c5 0E       		.uleb128 0xe
+ 1300 00c6 3A       		.uleb128 0x3a
+ 1301 00c7 0B       		.uleb128 0xb
+ 1302 00c8 3B       		.uleb128 0x3b
+ 1303 00c9 0B       		.uleb128 0xb
+ 1304 00ca 49       		.uleb128 0x49
+ 1305 00cb 13       		.uleb128 0x13
+ 1306 00cc 3F       		.uleb128 0x3f
+ 1307 00cd 19       		.uleb128 0x19
+ 1308 00ce 02       		.uleb128 0x2
+ 1309 00cf 18       		.uleb128 0x18
+ 1310 00d0 00       		.byte	0
+ 1311 00d1 00       		.byte	0
+ 1312 00d2 0F       		.uleb128 0xf
+ 1313 00d3 2E       		.uleb128 0x2e
+ 1314 00d4 00       		.byte	0
+ 1315 00d5 3F       		.uleb128 0x3f
+ 1316 00d6 19       		.uleb128 0x19
+ 1317 00d7 3C       		.uleb128 0x3c
+ 1318 00d8 19       		.uleb128 0x19
+ 1319 00d9 6E       		.uleb128 0x6e
+ 1320 00da 0E       		.uleb128 0xe
+ 1321 00db 03       		.uleb128 0x3
+ 1322 00dc 0E       		.uleb128 0xe
+ 1323 00dd 3A       		.uleb128 0x3a
+ 1324 00de 0B       		.uleb128 0xb
+ 1325 00df 3B       		.uleb128 0x3b
+ 1326 00e0 0B       		.uleb128 0xb
+ 1327 00e1 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 27
+
+
+ 1328 00e2 00       		.byte	0
+ 1329 00e3 00       		.byte	0
+ 1330              		.section	.debug_aranges,"",%progbits
+ 1331 0000 24000000 		.4byte	0x24
+ 1332 0004 0200     		.2byte	0x2
+ 1333 0006 00000000 		.4byte	.Ldebug_info0
+ 1334 000a 04       		.byte	0x4
+ 1335 000b 00       		.byte	0
+ 1336 000c 0000     		.2byte	0
+ 1337 000e 0000     		.2byte	0
+ 1338 0010 00000000 		.4byte	.LFB64
+ 1339 0014 AC000000 		.4byte	.LFE64-.LFB64
+ 1340 0018 00000000 		.4byte	.LFB63
+ 1341 001c 64010000 		.4byte	.LFE63-.LFB63
+ 1342 0020 00000000 		.4byte	0
+ 1343 0024 00000000 		.4byte	0
+ 1344              		.section	.debug_ranges,"",%progbits
+ 1345              	.Ldebug_ranges0:
+ 1346 0000 00000000 		.4byte	.LFB64
+ 1347 0004 AC000000 		.4byte	.LFE64
+ 1348 0008 00000000 		.4byte	.LFB63
+ 1349 000c 64010000 		.4byte	.LFE63
+ 1350 0010 00000000 		.4byte	0
+ 1351 0014 00000000 		.4byte	0
+ 1352              		.section	.debug_line,"",%progbits
+ 1353              	.Ldebug_line0:
+ 1354 0000 05020000 		.section	.debug_str,"MS",%progbits,1
+ 1354      0200AD01 
+ 1354      00000201 
+ 1354      FB0E0D00 
+ 1354      01010101 
+ 1355              	.LASF40:
+ 1356 0000 4C43445F 		.ascii	"LCD_IsReady\000"
+ 1356      49735265 
+ 1356      61647900 
+ 1357              	.LASF16:
+ 1358 000c 646F7562 		.ascii	"double\000"
+ 1358      6C6500
+ 1359              	.LASF30:
+ 1360 0013 525F315F 		.ascii	"R_1_result_f\000"
+ 1360      72657375 
+ 1360      6C745F66 
+ 1360      00
+ 1361              	.LASF61:
+ 1362 0020 433A5C55 		.ascii	"C:\\Users\\duver\\OneDrive\\Documents\\Classes\\Cou"
+ 1362      73657273 
+ 1362      5C647576 
+ 1362      65725C4F 
+ 1362      6E654472 
+ 1363 004d 72736572 		.ascii	"rsera\\Sensors\\Lab1 - Workspace01\\Design01.cydsn\000"
+ 1363      615C5365 
+ 1363      6E736F72 
+ 1363      735C4C61 
+ 1363      6231202D 
+ 1364              	.LASF2:
+ 1365 007d 73686F72 		.ascii	"short int\000"
+ 1365      7420696E 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 28
+
+
+ 1365      7400
+ 1366              	.LASF19:
+ 1367 0087 73697A65 		.ascii	"sizetype\000"
+ 1367      74797065 
+ 1367      00
+ 1368              	.LASF37:
+ 1369 0090 63757272 		.ascii	"current_mA_f\000"
+ 1369      656E745F 
+ 1369      6D415F66 
+ 1369      00
+ 1370              	.LASF24:
+ 1371 009d 525F315F 		.ascii	"R_1_result\000"
+ 1371      72657375 
+ 1371      6C7400
+ 1372              	.LASF12:
+ 1373 00a8 75696E74 		.ascii	"uint16\000"
+ 1373      313600
+ 1374              	.LASF53:
+ 1375 00af 4144435F 		.ascii	"ADC_DelSig_1_IsEndConversion\000"
+ 1375      44656C53 
+ 1375      69675F31 
+ 1375      5F497345 
+ 1375      6E64436F 
+ 1376              	.LASF14:
+ 1377 00cc 696E7431 		.ascii	"int16\000"
+ 1377      3600
+ 1378              	.LASF29:
+ 1379 00d2 74656D70 		.ascii	"tempDAC\000"
+ 1379      44414300 
+ 1380              	.LASF11:
+ 1381 00da 75696E74 		.ascii	"uint8\000"
+ 1381      3800
+ 1382              	.LASF38:
+ 1383 00e0 74656D70 		.ascii	"temperature_K_f\000"
+ 1383      65726174 
+ 1383      7572655F 
+ 1383      4B5F6600 
+ 1384              	.LASF57:
+ 1385 00f0 54686572 		.ascii	"Thermistor_1_GetTemperature\000"
+ 1385      6D697374 
+ 1385      6F725F31 
+ 1385      5F476574 
+ 1385      54656D70 
+ 1386              	.LASF54:
+ 1387 010c 4144435F 		.ascii	"ADC_DelSig_1_GetResult16\000"
+ 1387      44656C53 
+ 1387      69675F31 
+ 1387      5F476574 
+ 1387      52657375 
+ 1388              	.LASF45:
+ 1389 0125 414D7578 		.ascii	"AMux_1_Start\000"
+ 1389      5F315F53 
+ 1389      74617274 
+ 1389      00
+ 1390              	.LASF15:
+ 1391 0132 666C6F61 		.ascii	"float\000"
+ 1391      7400
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 29
+
+
+ 1392              	.LASF6:
+ 1393 0138 6C6F6E67 		.ascii	"long long int\000"
+ 1393      206C6F6E 
+ 1393      6720696E 
+ 1393      7400
+ 1394              	.LASF25:
+ 1395 0146 74686572 		.ascii	"thermistor_result\000"
+ 1395      6D697374 
+ 1395      6F725F72 
+ 1395      6573756C 
+ 1395      7400
+ 1396              	.LASF22:
+ 1397 0158 4C43445F 		.ascii	"LCD_write_counter\000"
+ 1397      77726974 
+ 1397      655F636F 
+ 1397      756E7465 
+ 1397      7200
+ 1398              	.LASF62:
+ 1399 016a 7072696E 		.ascii	"printToLCD\000"
+ 1399      74546F4C 
+ 1399      434400
+ 1400              	.LASF4:
+ 1401 0175 6C6F6E67 		.ascii	"long int\000"
+ 1401      20696E74 
+ 1401      00
+ 1402              	.LASF1:
+ 1403 017e 756E7369 		.ascii	"unsigned char\000"
+ 1403      676E6564 
+ 1403      20636861 
+ 1403      7200
+ 1404              	.LASF23:
+ 1405 018c 74686572 		.ascii	"thermistor_R\000"
+ 1405      6D697374 
+ 1405      6F725F52 
+ 1405      00
+ 1406              	.LASF32:
+ 1407 0199 74686572 		.ascii	"thermistor_mV_f\000"
+ 1407      6D697374 
+ 1407      6F725F6D 
+ 1407      565F6600 
+ 1408              	.LASF18:
+ 1409 01a9 6C6F6E67 		.ascii	"long double\000"
+ 1409      20646F75 
+ 1409      626C6500 
+ 1410              	.LASF21:
+ 1411 01b5 6C6F6F70 		.ascii	"loop_counter\000"
+ 1411      5F636F75 
+ 1411      6E746572 
+ 1411      00
+ 1412              	.LASF33:
+ 1413 01c2 72617469 		.ascii	"ratio_f\000"
+ 1413      6F5F6600 
+ 1414              	.LASF0:
+ 1415 01ca 7369676E 		.ascii	"signed char\000"
+ 1415      65642063 
+ 1415      68617200 
+ 1416              	.LASF7:
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 30
+
+
+ 1417 01d6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1417      206C6F6E 
+ 1417      6720756E 
+ 1417      7369676E 
+ 1417      65642069 
+ 1418              	.LASF8:
+ 1419 01ed 756E7369 		.ascii	"unsigned int\000"
+ 1419      676E6564 
+ 1419      20696E74 
+ 1419      00
+ 1420              	.LASF42:
+ 1421 01fa 4C43445F 		.ascii	"LCD_PrintString\000"
+ 1421      5072696E 
+ 1421      74537472 
+ 1421      696E6700 
+ 1422              	.LASF34:
+ 1423 020a 766F6C74 		.ascii	"voltage_f\000"
+ 1423      6167655F 
+ 1423      6600
+ 1424              	.LASF52:
+ 1425 0214 4144435F 		.ascii	"ADC_DelSig_1_StartConvert\000"
+ 1425      44656C53 
+ 1425      69675F31 
+ 1425      5F537461 
+ 1425      7274436F 
+ 1426              	.LASF44:
+ 1427 022e 4144435F 		.ascii	"ADC_DelSig_1_Start\000"
+ 1427      44656C53 
+ 1427      69675F31 
+ 1427      5F537461 
+ 1427      727400
+ 1428              	.LASF59:
+ 1429 0241 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1429      43313120 
+ 1429      352E342E 
+ 1429      31203230 
+ 1429      31363036 
+ 1430 0274 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1430      20726576 
+ 1430      6973696F 
+ 1430      6E203233 
+ 1430      37373135 
+ 1431 02a7 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1431      66756E63 
+ 1431      74696F6E 
+ 1431      2D736563 
+ 1431      74696F6E 
+ 1432              	.LASF43:
+ 1433 02cf 4C43445F 		.ascii	"LCD_PrintU32Number\000"
+ 1433      5072696E 
+ 1433      74553332 
+ 1433      4E756D62 
+ 1433      657200
+ 1434              	.LASF58:
+ 1435 02e2 4441435F 		.ascii	"DAC_SetValue\000"
+ 1435      53657456 
+ 1435      616C7565 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 31
+
+
+ 1435      00
+ 1436              	.LASF17:
+ 1437 02ef 63686172 		.ascii	"char\000"
+ 1437      00
+ 1438              	.LASF63:
+ 1439 02f4 6D61696E 		.ascii	"main\000"
+ 1439      00
+ 1440              	.LASF10:
+ 1441 02f9 696E7433 		.ascii	"int32_t\000"
+ 1441      325F7400 
+ 1442              	.LASF3:
+ 1443 0301 73686F72 		.ascii	"short unsigned int\000"
+ 1443      7420756E 
+ 1443      7369676E 
+ 1443      65642069 
+ 1443      6E7400
+ 1444              	.LASF26:
+ 1445 0314 74686572 		.ascii	"thermistor_mV\000"
+ 1445      6D697374 
+ 1445      6F725F6D 
+ 1445      5600
+ 1446              	.LASF27:
+ 1447 0322 525F315F 		.ascii	"R_1_mV\000"
+ 1447      6D5600
+ 1448              	.LASF13:
+ 1449 0329 75696E74 		.ascii	"uint32\000"
+ 1449      333200
+ 1450              	.LASF60:
+ 1451 0330 6D61696E 		.ascii	"main.c\000"
+ 1451      2E6300
+ 1452              	.LASF5:
+ 1453 0337 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1453      20756E73 
+ 1453      69676E65 
+ 1453      6420696E 
+ 1453      7400
+ 1454              	.LASF51:
+ 1455 0349 414D7578 		.ascii	"AMux_1_Select\000"
+ 1455      5F315F53 
+ 1455      656C6563 
+ 1455      7400
+ 1456              	.LASF20:
+ 1457 0357 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1457      52784275 
+ 1457      66666572 
+ 1457      00
+ 1458              	.LASF28:
+ 1459 0364 74656D70 		.ascii	"temperature\000"
+ 1459      65726174 
+ 1459      75726500 
+ 1460              	.LASF55:
+ 1461 0370 4144435F 		.ascii	"ADC_DelSig_1_CountsTo_mVolts\000"
+ 1461      44656C53 
+ 1461      69675F31 
+ 1461      5F436F75 
+ 1461      6E747354 
+ 1462              	.LASF9:
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccOov97v.s 			page 32
+
+
+ 1463 038d 5F5F696E 		.ascii	"__int32_t\000"
+ 1463      7433325F 
+ 1463      7400
+ 1464              	.LASF36:
+ 1465 0397 74686572 		.ascii	"thermistor_RB_f\000"
+ 1465      6D697374 
+ 1465      6F725F52 
+ 1465      425F6600 
+ 1466              	.LASF56:
+ 1467 03a7 54686572 		.ascii	"Thermistor_1_GetResistance\000"
+ 1467      6D697374 
+ 1467      6F725F31 
+ 1467      5F476574 
+ 1467      52657369 
+ 1468              	.LASF46:
+ 1469 03c2 4C43445F 		.ascii	"LCD_Start\000"
+ 1469      53746172 
+ 1469      7400
+ 1470              	.LASF41:
+ 1471 03cc 4C43445F 		.ascii	"LCD_Position\000"
+ 1471      506F7369 
+ 1471      74696F6E 
+ 1471      00
+ 1472              	.LASF39:
+ 1473 03d9 50305F30 		.ascii	"P0_0_Write\000"
+ 1473      5F577269 
+ 1473      746500
+ 1474              	.LASF31:
+ 1475 03e4 525F315F 		.ascii	"R_1_mV_f\000"
+ 1475      6D565F66 
+ 1475      00
+ 1476              	.LASF49:
+ 1477 03ed 4441435F 		.ascii	"DAC_Start\000"
+ 1477      53746172 
+ 1477      7400
+ 1478              	.LASF47:
+ 1479 03f7 43794465 		.ascii	"CyDelay\000"
+ 1479      6C617900 
+ 1480              	.LASF35:
+ 1481 03ff 74686572 		.ascii	"thermistor_RA_f\000"
+ 1481      6D697374 
+ 1481      6F725F52 
+ 1481      415F6600 
+ 1482              	.LASF50:
+ 1483 040f 50305F31 		.ascii	"P0_1_Write\000"
+ 1483      5F577269 
+ 1483      746500
+ 1484              	.LASF48:
+ 1485 041a 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 1485      57726974 
+ 1485      65436F6E 
+ 1485      74726F6C 
+ 1485      00
+ 1486              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
