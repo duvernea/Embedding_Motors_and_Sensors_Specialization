@@ -1,0 +1,8 @@
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Design01.cydsn\Design01.cyprj|d644af64-58b6-4e77-a9a7-5b6865f66b5f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|422a7719-7084-4ca7-ba1c-fd91500b38af
+C:\Users\duver\OneDrive\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|824d02da-cfda-4487-b48c-648f415a57b2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|20f6a9b1-19e3-40fb-aa20-5087acb07b3b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|d2c9848e-d992-4f8b-ae4e-df52982c4036
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|7f3c3df0-22da-4924-a8d8-3b8499e5433f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|fbdb8e3c-4990-4517-a845-7aa2ee0f5429
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\DC_Motor.cydsn\DC_Motor.cyprj|6c65668b-13c4-4aa0-bd47-d709f1d50bb4
