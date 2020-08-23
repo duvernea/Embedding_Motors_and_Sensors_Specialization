@@ -1,0 +1,983 @@
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB64:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** #include "stdio.h"
+  14:main.c        **** 
+  15:main.c        **** int loop_counter = 0;
+  16:main.c        **** char displayStr[6];
+  17:main.c        **** 
+  18:main.c        **** int main(void)
+  19:main.c        **** {
+  28              		.loc 1 19 0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  20:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  37              		.loc 1 20 0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 2
+
+
+  38              		.syntax unified
+  39              	@ 20 "main.c" 1
+  40 0002 62B6     		CPSIE   i
+  41              	@ 0 "" 2
+  21:main.c        ****     
+  22:main.c        ****     PGA_1_Start();
+  42              		.loc 1 22 0
+  43              		.thumb
+  44              		.syntax unified
+  45 0004 FFF7FEFF 		bl	PGA_1_Start
+  46              	.LVL0:
+  23:main.c        ****     
+  24:main.c        ****     LCD_Start();
+  47              		.loc 1 24 0
+  48 0008 FFF7FEFF 		bl	LCD_Start
+  49              	.LVL1:
+  25:main.c        ****     LCD_IsReady();
+  50              		.loc 1 25 0
+  51 000c FFF7FEFF 		bl	LCD_IsReady
+  52              	.LVL2:
+  26:main.c        ****     
+  27:main.c        ****     LCD_ClearDisplay();
+  53              		.loc 1 27 0
+  54 0010 0120     		movs	r0, #1
+  55 0012 FFF7FEFF 		bl	LCD_WriteControl
+  56              	.LVL3:
+  28:main.c        ****     LCD_Position(0,0);
+  57              		.loc 1 28 0
+  58 0016 0021     		movs	r1, #0
+  59 0018 0846     		mov	r0, r1
+  60 001a FFF7FEFF 		bl	LCD_Position
+  61              	.LVL4:
+  29:main.c        ****     LCD_PrintString("Load Cell Lab");
+  62              		.loc 1 29 0
+  63 001e 1648     		ldr	r0, .L5
+  64 0020 FFF7FEFF 		bl	LCD_PrintString
+  65              	.LVL5:
+  30:main.c        ****     CyDelay(2000);
+  66              		.loc 1 30 0
+  67 0024 4FF4FA60 		mov	r0, #2000
+  68 0028 FFF7FEFF 		bl	CyDelay
+  69              	.LVL6:
+  31:main.c        ****     
+  32:main.c        ****     SW_Tx_UART_1_Start();
+  70              		.loc 1 32 0
+  71 002c FFF7FEFF 		bl	SW_Tx_UART_1_Start
+  72              	.LVL7:
+  33:main.c        ****     SW_Tx_UART_1_PutString("hi");
+  73              		.loc 1 33 0
+  74 0030 1248     		ldr	r0, .L5+4
+  75 0032 FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  76              	.LVL8:
+  34:main.c        ****     SW_Tx_UART_1_PutCRLF();
+  77              		.loc 1 34 0
+  78 0036 FFF7FEFF 		bl	SW_Tx_UART_1_PutCRLF
+  79              	.LVL9:
+  35:main.c        ****     SW_Tx_UART_1_PutString("hi2");
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 3
+
+
+  80              		.loc 1 35 0
+  81 003a 1148     		ldr	r0, .L5+8
+  82 003c FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  83              	.LVL10:
+  36:main.c        ****     SW_Tx_UART_1_PutCRLF();
+  84              		.loc 1 36 0
+  85 0040 FFF7FEFF 		bl	SW_Tx_UART_1_PutCRLF
+  86              	.LVL11:
+  37:main.c        ****     SW_Tx_UART_1_PutString("hi3");
+  87              		.loc 1 37 0
+  88 0044 0F48     		ldr	r0, .L5+12
+  89 0046 FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  90              	.LVL12:
+  91              	.L2:
+  38:main.c        ****    
+  39:main.c        ****     for(;;)
+  40:main.c        ****     {
+  41:main.c        ****         loop_counter = loop_counter + 1;
+  92              		.loc 1 41 0
+  93 004a 0F4A     		ldr	r2, .L5+16
+  94 004c 1368     		ldr	r3, [r2]
+  95 004e 0133     		adds	r3, r3, #1
+  96 0050 1360     		str	r3, [r2]
+  42:main.c        ****         
+  43:main.c        ****         if (loop_counter > 100) {
+  97              		.loc 1 43 0
+  98 0052 642B     		cmp	r3, #100
+  99 0054 F9DD     		ble	.L2
+  44:main.c        ****             LCD_Position(1,0);
+ 100              		.loc 1 44 0
+ 101 0056 0021     		movs	r1, #0
+ 102 0058 0120     		movs	r0, #1
+ 103 005a FFF7FEFF 		bl	LCD_Position
+ 104              	.LVL13:
+  45:main.c        ****             sprintf(displayStr, "%d  ", loop_counter);
+ 105              		.loc 1 45 0
+ 106 005e 0A4C     		ldr	r4, .L5+16
+ 107 0060 0A4D     		ldr	r5, .L5+20
+ 108 0062 2268     		ldr	r2, [r4]
+ 109 0064 0A49     		ldr	r1, .L5+24
+ 110 0066 2846     		mov	r0, r5
+ 111 0068 FFF7FEFF 		bl	sprintf
+ 112              	.LVL14:
+  46:main.c        ****             LCD_PrintString(displayStr);
+ 113              		.loc 1 46 0
+ 114 006c 2846     		mov	r0, r5
+ 115 006e FFF7FEFF 		bl	LCD_PrintString
+ 116              	.LVL15:
+  47:main.c        ****             loop_counter = 0;
+ 117              		.loc 1 47 0
+ 118 0072 0023     		movs	r3, #0
+ 119 0074 2360     		str	r3, [r4]
+ 120 0076 E8E7     		b	.L2
+ 121              	.L6:
+ 122              		.align	2
+ 123              	.L5:
+ 124 0078 00000000 		.word	.LC0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 4
+
+
+ 125 007c 10000000 		.word	.LC1
+ 126 0080 14000000 		.word	.LC2
+ 127 0084 18000000 		.word	.LC3
+ 128 0088 00000000 		.word	.LANCHOR0
+ 129 008c 00000000 		.word	displayStr
+ 130 0090 1C000000 		.word	.LC4
+ 131              		.cfi_endproc
+ 132              	.LFE64:
+ 133              		.size	main, .-main
+ 134              		.comm	displayStr,6,4
+ 135              		.global	loop_counter
+ 136              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 137              		.align	2
+ 138              	.LC0:
+ 139 0000 4C6F6164 		.ascii	"Load Cell Lab\000"
+ 139      2043656C 
+ 139      6C204C61 
+ 139      6200
+ 140 000e 0000     		.space	2
+ 141              	.LC1:
+ 142 0010 686900   		.ascii	"hi\000"
+ 143 0013 00       		.space	1
+ 144              	.LC2:
+ 145 0014 68693200 		.ascii	"hi2\000"
+ 146              	.LC3:
+ 147 0018 68693300 		.ascii	"hi3\000"
+ 148              	.LC4:
+ 149 001c 25642020 		.ascii	"%d  \000"
+ 149      00
+ 150              		.bss
+ 151              		.align	2
+ 152              		.set	.LANCHOR0,. + 0
+ 153              		.type	loop_counter, %object
+ 154              		.size	loop_counter, 4
+ 155              	loop_counter:
+ 156 0000 00000000 		.space	4
+ 157              		.text
+ 158              	.Letext0:
+ 159              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 160              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 161              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 162              		.file 5 "Generated_Source\\PSoC5/PGA_1.h"
+ 163              		.file 6 "Generated_Source\\PSoC5/LCD.h"
+ 164              		.file 7 "Generated_Source\\PSoC5/CyLib.h"
+ 165              		.file 8 "Generated_Source\\PSoC5/SW_Tx_UART_1.h"
+ 166              		.file 9 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 167              		.section	.debug_info,"",%progbits
+ 168              	.Ldebug_info0:
+ 169 0000 8E020000 		.4byte	0x28e
+ 170 0004 0400     		.2byte	0x4
+ 171 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 172 000a 04       		.byte	0x4
+ 173 000b 01       		.uleb128 0x1
+ 174 000c 6E000000 		.4byte	.LASF30
+ 175 0010 0C       		.byte	0xc
+ 176 0011 C9010000 		.4byte	.LASF31
+ 177 0015 EA010000 		.4byte	.LASF32
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 5
+
+
+ 178 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 179 001d 00000000 		.4byte	0
+ 180 0021 00000000 		.4byte	.Ldebug_line0
+ 181 0025 02       		.uleb128 0x2
+ 182 0026 01       		.byte	0x1
+ 183 0027 06       		.byte	0x6
+ 184 0028 5C020000 		.4byte	.LASF0
+ 185 002c 02       		.uleb128 0x2
+ 186 002d 01       		.byte	0x1
+ 187 002e 08       		.byte	0x8
+ 188 002f 60000000 		.4byte	.LASF1
+ 189 0033 02       		.uleb128 0x2
+ 190 0034 02       		.byte	0x2
+ 191 0035 05       		.byte	0x5
+ 192 0036 E0010000 		.4byte	.LASF2
+ 193 003a 02       		.uleb128 0x2
+ 194 003b 02       		.byte	0x2
+ 195 003c 07       		.byte	0x7
+ 196 003d 0E010000 		.4byte	.LASF3
+ 197 0041 03       		.uleb128 0x3
+ 198 0042 1E000000 		.4byte	.LASF9
+ 199 0046 02       		.byte	0x2
+ 200 0047 3F       		.byte	0x3f
+ 201 0048 4C000000 		.4byte	0x4c
+ 202 004c 02       		.uleb128 0x2
+ 203 004d 04       		.byte	0x4
+ 204 004e 05       		.byte	0x5
+ 205 004f 47020000 		.4byte	.LASF4
+ 206 0053 02       		.uleb128 0x2
+ 207 0054 04       		.byte	0x4
+ 208 0055 07       		.byte	0x7
+ 209 0056 FC000000 		.4byte	.LASF5
+ 210 005a 02       		.uleb128 0x2
+ 211 005b 08       		.byte	0x8
+ 212 005c 05       		.byte	0x5
+ 213 005d BB010000 		.4byte	.LASF6
+ 214 0061 02       		.uleb128 0x2
+ 215 0062 08       		.byte	0x8
+ 216 0063 07       		.byte	0x7
+ 217 0064 86010000 		.4byte	.LASF7
+ 218 0068 04       		.uleb128 0x4
+ 219 0069 04       		.byte	0x4
+ 220 006a 05       		.byte	0x5
+ 221 006b 696E7400 		.ascii	"int\000"
+ 222 006f 02       		.uleb128 0x2
+ 223 0070 04       		.byte	0x4
+ 224 0071 07       		.byte	0x7
+ 225 0072 62010000 		.4byte	.LASF8
+ 226 0076 03       		.uleb128 0x3
+ 227 0077 AA010000 		.4byte	.LASF10
+ 228 007b 03       		.byte	0x3
+ 229 007c 2C       		.byte	0x2c
+ 230 007d 41000000 		.4byte	0x41
+ 231 0081 02       		.uleb128 0x2
+ 232 0082 04       		.byte	0x4
+ 233 0083 04       		.byte	0x4
+ 234 0084 3D000000 		.4byte	.LASF11
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 6
+
+
+ 235 0088 02       		.uleb128 0x2
+ 236 0089 08       		.byte	0x8
+ 237 008a 04       		.byte	0x4
+ 238 008b 2E010000 		.4byte	.LASF12
+ 239 008f 02       		.uleb128 0x2
+ 240 0090 01       		.byte	0x1
+ 241 0091 08       		.byte	0x8
+ 242 0092 D0010000 		.4byte	.LASF13
+ 243 0096 02       		.uleb128 0x2
+ 244 0097 08       		.byte	0x8
+ 245 0098 04       		.byte	0x4
+ 246 0099 50020000 		.4byte	.LASF14
+ 247 009d 02       		.uleb128 0x2
+ 248 009e 04       		.byte	0x4
+ 249 009f 07       		.byte	0x7
+ 250 00a0 B2010000 		.4byte	.LASF15
+ 251 00a4 05       		.uleb128 0x5
+ 252 00a5 35010000 		.4byte	.LASF33
+ 253 00a9 01       		.byte	0x1
+ 254 00aa 12       		.byte	0x12
+ 255 00ab 68000000 		.4byte	0x68
+ 256 00af 00000000 		.4byte	.LFB64
+ 257 00b3 94000000 		.4byte	.LFE64-.LFB64
+ 258 00b7 01       		.uleb128 0x1
+ 259 00b8 9C       		.byte	0x9c
+ 260 00b9 D5010000 		.4byte	0x1d5
+ 261 00bd 06       		.uleb128 0x6
+ 262 00be 08000000 		.4byte	.LVL0
+ 263 00c2 18020000 		.4byte	0x218
+ 264 00c6 06       		.uleb128 0x6
+ 265 00c7 0C000000 		.4byte	.LVL1
+ 266 00cb 23020000 		.4byte	0x223
+ 267 00cf 06       		.uleb128 0x6
+ 268 00d0 10000000 		.4byte	.LVL2
+ 269 00d4 2E020000 		.4byte	0x22e
+ 270 00d8 07       		.uleb128 0x7
+ 271 00d9 16000000 		.4byte	.LVL3
+ 272 00dd 39020000 		.4byte	0x239
+ 273 00e1 EB000000 		.4byte	0xeb
+ 274 00e5 08       		.uleb128 0x8
+ 275 00e6 01       		.uleb128 0x1
+ 276 00e7 50       		.byte	0x50
+ 277 00e8 01       		.uleb128 0x1
+ 278 00e9 31       		.byte	0x31
+ 279 00ea 00       		.byte	0
+ 280 00eb 07       		.uleb128 0x7
+ 281 00ec 1E000000 		.4byte	.LVL4
+ 282 00f0 44020000 		.4byte	0x244
+ 283 00f4 03010000 		.4byte	0x103
+ 284 00f8 08       		.uleb128 0x8
+ 285 00f9 01       		.uleb128 0x1
+ 286 00fa 50       		.byte	0x50
+ 287 00fb 01       		.uleb128 0x1
+ 288 00fc 30       		.byte	0x30
+ 289 00fd 08       		.uleb128 0x8
+ 290 00fe 01       		.uleb128 0x1
+ 291 00ff 51       		.byte	0x51
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 7
+
+
+ 292 0100 01       		.uleb128 0x1
+ 293 0101 30       		.byte	0x30
+ 294 0102 00       		.byte	0
+ 295 0103 07       		.uleb128 0x7
+ 296 0104 24000000 		.4byte	.LVL5
+ 297 0108 4F020000 		.4byte	0x24f
+ 298 010c 1A010000 		.4byte	0x11a
+ 299 0110 08       		.uleb128 0x8
+ 300 0111 01       		.uleb128 0x1
+ 301 0112 50       		.byte	0x50
+ 302 0113 05       		.uleb128 0x5
+ 303 0114 03       		.byte	0x3
+ 304 0115 00000000 		.4byte	.LC0
+ 305 0119 00       		.byte	0
+ 306 011a 07       		.uleb128 0x7
+ 307 011b 2C000000 		.4byte	.LVL6
+ 308 011f 5A020000 		.4byte	0x25a
+ 309 0123 2F010000 		.4byte	0x12f
+ 310 0127 08       		.uleb128 0x8
+ 311 0128 01       		.uleb128 0x1
+ 312 0129 50       		.byte	0x50
+ 313 012a 03       		.uleb128 0x3
+ 314 012b 0A       		.byte	0xa
+ 315 012c D007     		.2byte	0x7d0
+ 316 012e 00       		.byte	0
+ 317 012f 06       		.uleb128 0x6
+ 318 0130 30000000 		.4byte	.LVL7
+ 319 0134 65020000 		.4byte	0x265
+ 320 0138 07       		.uleb128 0x7
+ 321 0139 36000000 		.4byte	.LVL8
+ 322 013d 70020000 		.4byte	0x270
+ 323 0141 4F010000 		.4byte	0x14f
+ 324 0145 08       		.uleb128 0x8
+ 325 0146 01       		.uleb128 0x1
+ 326 0147 50       		.byte	0x50
+ 327 0148 05       		.uleb128 0x5
+ 328 0149 03       		.byte	0x3
+ 329 014a 10000000 		.4byte	.LC1
+ 330 014e 00       		.byte	0
+ 331 014f 06       		.uleb128 0x6
+ 332 0150 3A000000 		.4byte	.LVL9
+ 333 0154 7B020000 		.4byte	0x27b
+ 334 0158 07       		.uleb128 0x7
+ 335 0159 40000000 		.4byte	.LVL10
+ 336 015d 70020000 		.4byte	0x270
+ 337 0161 6F010000 		.4byte	0x16f
+ 338 0165 08       		.uleb128 0x8
+ 339 0166 01       		.uleb128 0x1
+ 340 0167 50       		.byte	0x50
+ 341 0168 05       		.uleb128 0x5
+ 342 0169 03       		.byte	0x3
+ 343 016a 14000000 		.4byte	.LC2
+ 344 016e 00       		.byte	0
+ 345 016f 06       		.uleb128 0x6
+ 346 0170 44000000 		.4byte	.LVL11
+ 347 0174 7B020000 		.4byte	0x27b
+ 348 0178 07       		.uleb128 0x7
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 8
+
+
+ 349 0179 4A000000 		.4byte	.LVL12
+ 350 017d 70020000 		.4byte	0x270
+ 351 0181 8F010000 		.4byte	0x18f
+ 352 0185 08       		.uleb128 0x8
+ 353 0186 01       		.uleb128 0x1
+ 354 0187 50       		.byte	0x50
+ 355 0188 05       		.uleb128 0x5
+ 356 0189 03       		.byte	0x3
+ 357 018a 18000000 		.4byte	.LC3
+ 358 018e 00       		.byte	0
+ 359 018f 07       		.uleb128 0x7
+ 360 0190 5E000000 		.4byte	.LVL13
+ 361 0194 44020000 		.4byte	0x244
+ 362 0198 A7010000 		.4byte	0x1a7
+ 363 019c 08       		.uleb128 0x8
+ 364 019d 01       		.uleb128 0x1
+ 365 019e 50       		.byte	0x50
+ 366 019f 01       		.uleb128 0x1
+ 367 01a0 31       		.byte	0x31
+ 368 01a1 08       		.uleb128 0x8
+ 369 01a2 01       		.uleb128 0x1
+ 370 01a3 51       		.byte	0x51
+ 371 01a4 01       		.uleb128 0x1
+ 372 01a5 30       		.byte	0x30
+ 373 01a6 00       		.byte	0
+ 374 01a7 07       		.uleb128 0x7
+ 375 01a8 6C000000 		.4byte	.LVL14
+ 376 01ac 86020000 		.4byte	0x286
+ 377 01b0 C4010000 		.4byte	0x1c4
+ 378 01b4 08       		.uleb128 0x8
+ 379 01b5 01       		.uleb128 0x1
+ 380 01b6 50       		.byte	0x50
+ 381 01b7 02       		.uleb128 0x2
+ 382 01b8 75       		.byte	0x75
+ 383 01b9 00       		.sleb128 0
+ 384 01ba 08       		.uleb128 0x8
+ 385 01bb 01       		.uleb128 0x1
+ 386 01bc 51       		.byte	0x51
+ 387 01bd 05       		.uleb128 0x5
+ 388 01be 03       		.byte	0x3
+ 389 01bf 1C000000 		.4byte	.LC4
+ 390 01c3 00       		.byte	0
+ 391 01c4 09       		.uleb128 0x9
+ 392 01c5 72000000 		.4byte	.LVL15
+ 393 01c9 4F020000 		.4byte	0x24f
+ 394 01cd 08       		.uleb128 0x8
+ 395 01ce 01       		.uleb128 0x1
+ 396 01cf 50       		.byte	0x50
+ 397 01d0 02       		.uleb128 0x2
+ 398 01d1 75       		.byte	0x75
+ 399 01d2 00       		.sleb128 0
+ 400 01d3 00       		.byte	0
+ 401 01d4 00       		.byte	0
+ 402 01d5 0A       		.uleb128 0xa
+ 403 01d6 21010000 		.4byte	.LASF16
+ 404 01da 04       		.byte	0x4
+ 405 01db 1207     		.2byte	0x712
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 9
+
+
+ 406 01dd E1010000 		.4byte	0x1e1
+ 407 01e1 0B       		.uleb128 0xb
+ 408 01e2 76000000 		.4byte	0x76
+ 409 01e6 0C       		.uleb128 0xc
+ 410 01e7 00000000 		.4byte	.LASF17
+ 411 01eb 01       		.byte	0x1
+ 412 01ec 0F       		.byte	0xf
+ 413 01ed 68000000 		.4byte	0x68
+ 414 01f1 05       		.uleb128 0x5
+ 415 01f2 03       		.byte	0x3
+ 416 01f3 00000000 		.4byte	loop_counter
+ 417 01f7 0D       		.uleb128 0xd
+ 418 01f8 8F000000 		.4byte	0x8f
+ 419 01fc 07020000 		.4byte	0x207
+ 420 0200 0E       		.uleb128 0xe
+ 421 0201 9D000000 		.4byte	0x9d
+ 422 0205 05       		.byte	0x5
+ 423 0206 00       		.byte	0
+ 424 0207 0C       		.uleb128 0xc
+ 425 0208 D5010000 		.4byte	.LASF18
+ 426 020c 01       		.byte	0x1
+ 427 020d 10       		.byte	0x10
+ 428 020e F7010000 		.4byte	0x1f7
+ 429 0212 05       		.uleb128 0x5
+ 430 0213 03       		.byte	0x3
+ 431 0214 00000000 		.4byte	displayStr
+ 432 0218 0F       		.uleb128 0xf
+ 433 0219 56010000 		.4byte	.LASF19
+ 434 021d 56010000 		.4byte	.LASF19
+ 435 0221 05       		.byte	0x5
+ 436 0222 3E       		.byte	0x3e
+ 437 0223 0F       		.uleb128 0xf
+ 438 0224 43000000 		.4byte	.LASF20
+ 439 0228 43000000 		.4byte	.LASF20
+ 440 022c 06       		.byte	0x6
+ 441 022d 38       		.byte	0x38
+ 442 022e 0F       		.uleb128 0xf
+ 443 022f 4A010000 		.4byte	.LASF21
+ 444 0233 4A010000 		.4byte	.LASF21
+ 445 0237 06       		.byte	0x6
+ 446 0238 3F       		.byte	0x3f
+ 447 0239 0F       		.uleb128 0xf
+ 448 023a 0D000000 		.4byte	.LASF22
+ 449 023e 0D000000 		.4byte	.LASF22
+ 450 0242 06       		.byte	0x6
+ 451 0243 3A       		.byte	0x3a
+ 452 0244 0F       		.uleb128 0xf
+ 453 0245 9D010000 		.4byte	.LASF23
+ 454 0249 9D010000 		.4byte	.LASF23
+ 455 024d 06       		.byte	0x6
+ 456 024e 3D       		.byte	0x3d
+ 457 024f 0F       		.uleb128 0xf
+ 458 0250 3A010000 		.4byte	.LASF24
+ 459 0254 3A010000 		.4byte	.LASF24
+ 460 0258 06       		.byte	0x6
+ 461 0259 3C       		.byte	0x3c
+ 462 025a 0F       		.uleb128 0xf
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 10
+
+
+ 463 025b 70020000 		.4byte	.LASF25
+ 464 025f 70020000 		.4byte	.LASF25
+ 465 0263 07       		.byte	0x7
+ 466 0264 76       		.byte	0x76
+ 467 0265 0F       		.uleb128 0xf
+ 468 0266 4D000000 		.4byte	.LASF26
+ 469 026a 4D000000 		.4byte	.LASF26
+ 470 026e 08       		.byte	0x8
+ 471 026f 1F       		.byte	0x1f
+ 472 0270 0F       		.uleb128 0xf
+ 473 0271 6F010000 		.4byte	.LASF27
+ 474 0275 6F010000 		.4byte	.LASF27
+ 475 0279 08       		.byte	0x8
+ 476 027a 26       		.byte	0x26
+ 477 027b 0F       		.uleb128 0xf
+ 478 027c 28000000 		.4byte	.LASF28
+ 479 0280 28000000 		.4byte	.LASF28
+ 480 0284 08       		.byte	0x8
+ 481 0285 2A       		.byte	0x2a
+ 482 0286 0F       		.uleb128 0xf
+ 483 0287 68020000 		.4byte	.LASF29
+ 484 028b 68020000 		.4byte	.LASF29
+ 485 028f 09       		.byte	0x9
+ 486 0290 E7       		.byte	0xe7
+ 487 0291 00       		.byte	0
+ 488              		.section	.debug_abbrev,"",%progbits
+ 489              	.Ldebug_abbrev0:
+ 490 0000 01       		.uleb128 0x1
+ 491 0001 11       		.uleb128 0x11
+ 492 0002 01       		.byte	0x1
+ 493 0003 25       		.uleb128 0x25
+ 494 0004 0E       		.uleb128 0xe
+ 495 0005 13       		.uleb128 0x13
+ 496 0006 0B       		.uleb128 0xb
+ 497 0007 03       		.uleb128 0x3
+ 498 0008 0E       		.uleb128 0xe
+ 499 0009 1B       		.uleb128 0x1b
+ 500 000a 0E       		.uleb128 0xe
+ 501 000b 55       		.uleb128 0x55
+ 502 000c 17       		.uleb128 0x17
+ 503 000d 11       		.uleb128 0x11
+ 504 000e 01       		.uleb128 0x1
+ 505 000f 10       		.uleb128 0x10
+ 506 0010 17       		.uleb128 0x17
+ 507 0011 00       		.byte	0
+ 508 0012 00       		.byte	0
+ 509 0013 02       		.uleb128 0x2
+ 510 0014 24       		.uleb128 0x24
+ 511 0015 00       		.byte	0
+ 512 0016 0B       		.uleb128 0xb
+ 513 0017 0B       		.uleb128 0xb
+ 514 0018 3E       		.uleb128 0x3e
+ 515 0019 0B       		.uleb128 0xb
+ 516 001a 03       		.uleb128 0x3
+ 517 001b 0E       		.uleb128 0xe
+ 518 001c 00       		.byte	0
+ 519 001d 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 11
+
+
+ 520 001e 03       		.uleb128 0x3
+ 521 001f 16       		.uleb128 0x16
+ 522 0020 00       		.byte	0
+ 523 0021 03       		.uleb128 0x3
+ 524 0022 0E       		.uleb128 0xe
+ 525 0023 3A       		.uleb128 0x3a
+ 526 0024 0B       		.uleb128 0xb
+ 527 0025 3B       		.uleb128 0x3b
+ 528 0026 0B       		.uleb128 0xb
+ 529 0027 49       		.uleb128 0x49
+ 530 0028 13       		.uleb128 0x13
+ 531 0029 00       		.byte	0
+ 532 002a 00       		.byte	0
+ 533 002b 04       		.uleb128 0x4
+ 534 002c 24       		.uleb128 0x24
+ 535 002d 00       		.byte	0
+ 536 002e 0B       		.uleb128 0xb
+ 537 002f 0B       		.uleb128 0xb
+ 538 0030 3E       		.uleb128 0x3e
+ 539 0031 0B       		.uleb128 0xb
+ 540 0032 03       		.uleb128 0x3
+ 541 0033 08       		.uleb128 0x8
+ 542 0034 00       		.byte	0
+ 543 0035 00       		.byte	0
+ 544 0036 05       		.uleb128 0x5
+ 545 0037 2E       		.uleb128 0x2e
+ 546 0038 01       		.byte	0x1
+ 547 0039 3F       		.uleb128 0x3f
+ 548 003a 19       		.uleb128 0x19
+ 549 003b 03       		.uleb128 0x3
+ 550 003c 0E       		.uleb128 0xe
+ 551 003d 3A       		.uleb128 0x3a
+ 552 003e 0B       		.uleb128 0xb
+ 553 003f 3B       		.uleb128 0x3b
+ 554 0040 0B       		.uleb128 0xb
+ 555 0041 27       		.uleb128 0x27
+ 556 0042 19       		.uleb128 0x19
+ 557 0043 49       		.uleb128 0x49
+ 558 0044 13       		.uleb128 0x13
+ 559 0045 8701     		.uleb128 0x87
+ 560 0047 19       		.uleb128 0x19
+ 561 0048 11       		.uleb128 0x11
+ 562 0049 01       		.uleb128 0x1
+ 563 004a 12       		.uleb128 0x12
+ 564 004b 06       		.uleb128 0x6
+ 565 004c 40       		.uleb128 0x40
+ 566 004d 18       		.uleb128 0x18
+ 567 004e 9742     		.uleb128 0x2117
+ 568 0050 19       		.uleb128 0x19
+ 569 0051 01       		.uleb128 0x1
+ 570 0052 13       		.uleb128 0x13
+ 571 0053 00       		.byte	0
+ 572 0054 00       		.byte	0
+ 573 0055 06       		.uleb128 0x6
+ 574 0056 898201   		.uleb128 0x4109
+ 575 0059 00       		.byte	0
+ 576 005a 11       		.uleb128 0x11
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 12
+
+
+ 577 005b 01       		.uleb128 0x1
+ 578 005c 31       		.uleb128 0x31
+ 579 005d 13       		.uleb128 0x13
+ 580 005e 00       		.byte	0
+ 581 005f 00       		.byte	0
+ 582 0060 07       		.uleb128 0x7
+ 583 0061 898201   		.uleb128 0x4109
+ 584 0064 01       		.byte	0x1
+ 585 0065 11       		.uleb128 0x11
+ 586 0066 01       		.uleb128 0x1
+ 587 0067 31       		.uleb128 0x31
+ 588 0068 13       		.uleb128 0x13
+ 589 0069 01       		.uleb128 0x1
+ 590 006a 13       		.uleb128 0x13
+ 591 006b 00       		.byte	0
+ 592 006c 00       		.byte	0
+ 593 006d 08       		.uleb128 0x8
+ 594 006e 8A8201   		.uleb128 0x410a
+ 595 0071 00       		.byte	0
+ 596 0072 02       		.uleb128 0x2
+ 597 0073 18       		.uleb128 0x18
+ 598 0074 9142     		.uleb128 0x2111
+ 599 0076 18       		.uleb128 0x18
+ 600 0077 00       		.byte	0
+ 601 0078 00       		.byte	0
+ 602 0079 09       		.uleb128 0x9
+ 603 007a 898201   		.uleb128 0x4109
+ 604 007d 01       		.byte	0x1
+ 605 007e 11       		.uleb128 0x11
+ 606 007f 01       		.uleb128 0x1
+ 607 0080 31       		.uleb128 0x31
+ 608 0081 13       		.uleb128 0x13
+ 609 0082 00       		.byte	0
+ 610 0083 00       		.byte	0
+ 611 0084 0A       		.uleb128 0xa
+ 612 0085 34       		.uleb128 0x34
+ 613 0086 00       		.byte	0
+ 614 0087 03       		.uleb128 0x3
+ 615 0088 0E       		.uleb128 0xe
+ 616 0089 3A       		.uleb128 0x3a
+ 617 008a 0B       		.uleb128 0xb
+ 618 008b 3B       		.uleb128 0x3b
+ 619 008c 05       		.uleb128 0x5
+ 620 008d 49       		.uleb128 0x49
+ 621 008e 13       		.uleb128 0x13
+ 622 008f 3F       		.uleb128 0x3f
+ 623 0090 19       		.uleb128 0x19
+ 624 0091 3C       		.uleb128 0x3c
+ 625 0092 19       		.uleb128 0x19
+ 626 0093 00       		.byte	0
+ 627 0094 00       		.byte	0
+ 628 0095 0B       		.uleb128 0xb
+ 629 0096 35       		.uleb128 0x35
+ 630 0097 00       		.byte	0
+ 631 0098 49       		.uleb128 0x49
+ 632 0099 13       		.uleb128 0x13
+ 633 009a 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 13
+
+
+ 634 009b 00       		.byte	0
+ 635 009c 0C       		.uleb128 0xc
+ 636 009d 34       		.uleb128 0x34
+ 637 009e 00       		.byte	0
+ 638 009f 03       		.uleb128 0x3
+ 639 00a0 0E       		.uleb128 0xe
+ 640 00a1 3A       		.uleb128 0x3a
+ 641 00a2 0B       		.uleb128 0xb
+ 642 00a3 3B       		.uleb128 0x3b
+ 643 00a4 0B       		.uleb128 0xb
+ 644 00a5 49       		.uleb128 0x49
+ 645 00a6 13       		.uleb128 0x13
+ 646 00a7 3F       		.uleb128 0x3f
+ 647 00a8 19       		.uleb128 0x19
+ 648 00a9 02       		.uleb128 0x2
+ 649 00aa 18       		.uleb128 0x18
+ 650 00ab 00       		.byte	0
+ 651 00ac 00       		.byte	0
+ 652 00ad 0D       		.uleb128 0xd
+ 653 00ae 01       		.uleb128 0x1
+ 654 00af 01       		.byte	0x1
+ 655 00b0 49       		.uleb128 0x49
+ 656 00b1 13       		.uleb128 0x13
+ 657 00b2 01       		.uleb128 0x1
+ 658 00b3 13       		.uleb128 0x13
+ 659 00b4 00       		.byte	0
+ 660 00b5 00       		.byte	0
+ 661 00b6 0E       		.uleb128 0xe
+ 662 00b7 21       		.uleb128 0x21
+ 663 00b8 00       		.byte	0
+ 664 00b9 49       		.uleb128 0x49
+ 665 00ba 13       		.uleb128 0x13
+ 666 00bb 2F       		.uleb128 0x2f
+ 667 00bc 0B       		.uleb128 0xb
+ 668 00bd 00       		.byte	0
+ 669 00be 00       		.byte	0
+ 670 00bf 0F       		.uleb128 0xf
+ 671 00c0 2E       		.uleb128 0x2e
+ 672 00c1 00       		.byte	0
+ 673 00c2 3F       		.uleb128 0x3f
+ 674 00c3 19       		.uleb128 0x19
+ 675 00c4 3C       		.uleb128 0x3c
+ 676 00c5 19       		.uleb128 0x19
+ 677 00c6 6E       		.uleb128 0x6e
+ 678 00c7 0E       		.uleb128 0xe
+ 679 00c8 03       		.uleb128 0x3
+ 680 00c9 0E       		.uleb128 0xe
+ 681 00ca 3A       		.uleb128 0x3a
+ 682 00cb 0B       		.uleb128 0xb
+ 683 00cc 3B       		.uleb128 0x3b
+ 684 00cd 0B       		.uleb128 0xb
+ 685 00ce 00       		.byte	0
+ 686 00cf 00       		.byte	0
+ 687 00d0 00       		.byte	0
+ 688              		.section	.debug_aranges,"",%progbits
+ 689 0000 1C000000 		.4byte	0x1c
+ 690 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 14
+
+
+ 691 0006 00000000 		.4byte	.Ldebug_info0
+ 692 000a 04       		.byte	0x4
+ 693 000b 00       		.byte	0
+ 694 000c 0000     		.2byte	0
+ 695 000e 0000     		.2byte	0
+ 696 0010 00000000 		.4byte	.LFB64
+ 697 0014 94000000 		.4byte	.LFE64-.LFB64
+ 698 0018 00000000 		.4byte	0
+ 699 001c 00000000 		.4byte	0
+ 700              		.section	.debug_ranges,"",%progbits
+ 701              	.Ldebug_ranges0:
+ 702 0000 00000000 		.4byte	.LFB64
+ 703 0004 94000000 		.4byte	.LFE64
+ 704 0008 00000000 		.4byte	0
+ 705 000c 00000000 		.4byte	0
+ 706              		.section	.debug_line,"",%progbits
+ 707              	.Ldebug_line0:
+ 708 0000 0B020000 		.section	.debug_str,"MS",%progbits,1
+ 708      0200E301 
+ 708      00000201 
+ 708      FB0E0D00 
+ 708      01010101 
+ 709              	.LASF17:
+ 710 0000 6C6F6F70 		.ascii	"loop_counter\000"
+ 710      5F636F75 
+ 710      6E746572 
+ 710      00
+ 711              	.LASF22:
+ 712 000d 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 712      57726974 
+ 712      65436F6E 
+ 712      74726F6C 
+ 712      00
+ 713              	.LASF9:
+ 714 001e 5F5F696E 		.ascii	"__int32_t\000"
+ 714      7433325F 
+ 714      7400
+ 715              	.LASF28:
+ 716 0028 53575F54 		.ascii	"SW_Tx_UART_1_PutCRLF\000"
+ 716      785F5541 
+ 716      52545F31 
+ 716      5F507574 
+ 716      43524C46 
+ 717              	.LASF11:
+ 718 003d 666C6F61 		.ascii	"float\000"
+ 718      7400
+ 719              	.LASF20:
+ 720 0043 4C43445F 		.ascii	"LCD_Start\000"
+ 720      53746172 
+ 720      7400
+ 721              	.LASF26:
+ 722 004d 53575F54 		.ascii	"SW_Tx_UART_1_Start\000"
+ 722      785F5541 
+ 722      52545F31 
+ 722      5F537461 
+ 722      727400
+ 723              	.LASF1:
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 15
+
+
+ 724 0060 756E7369 		.ascii	"unsigned char\000"
+ 724      676E6564 
+ 724      20636861 
+ 724      7200
+ 725              	.LASF30:
+ 726 006e 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 726      43313120 
+ 726      352E342E 
+ 726      31203230 
+ 726      31363036 
+ 727 00a1 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 727      20726576 
+ 727      6973696F 
+ 727      6E203233 
+ 727      37373135 
+ 728 00d4 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 728      66756E63 
+ 728      74696F6E 
+ 728      2D736563 
+ 728      74696F6E 
+ 729              	.LASF5:
+ 730 00fc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 730      20756E73 
+ 730      69676E65 
+ 730      6420696E 
+ 730      7400
+ 731              	.LASF3:
+ 732 010e 73686F72 		.ascii	"short unsigned int\000"
+ 732      7420756E 
+ 732      7369676E 
+ 732      65642069 
+ 732      6E7400
+ 733              	.LASF16:
+ 734 0121 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 734      52784275 
+ 734      66666572 
+ 734      00
+ 735              	.LASF12:
+ 736 012e 646F7562 		.ascii	"double\000"
+ 736      6C6500
+ 737              	.LASF33:
+ 738 0135 6D61696E 		.ascii	"main\000"
+ 738      00
+ 739              	.LASF24:
+ 740 013a 4C43445F 		.ascii	"LCD_PrintString\000"
+ 740      5072696E 
+ 740      74537472 
+ 740      696E6700 
+ 741              	.LASF21:
+ 742 014a 4C43445F 		.ascii	"LCD_IsReady\000"
+ 742      49735265 
+ 742      61647900 
+ 743              	.LASF19:
+ 744 0156 5047415F 		.ascii	"PGA_1_Start\000"
+ 744      315F5374 
+ 744      61727400 
+ 745              	.LASF8:
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 16
+
+
+ 746 0162 756E7369 		.ascii	"unsigned int\000"
+ 746      676E6564 
+ 746      20696E74 
+ 746      00
+ 747              	.LASF27:
+ 748 016f 53575F54 		.ascii	"SW_Tx_UART_1_PutString\000"
+ 748      785F5541 
+ 748      52545F31 
+ 748      5F507574 
+ 748      53747269 
+ 749              	.LASF7:
+ 750 0186 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 750      206C6F6E 
+ 750      6720756E 
+ 750      7369676E 
+ 750      65642069 
+ 751              	.LASF23:
+ 752 019d 4C43445F 		.ascii	"LCD_Position\000"
+ 752      506F7369 
+ 752      74696F6E 
+ 752      00
+ 753              	.LASF10:
+ 754 01aa 696E7433 		.ascii	"int32_t\000"
+ 754      325F7400 
+ 755              	.LASF15:
+ 756 01b2 73697A65 		.ascii	"sizetype\000"
+ 756      74797065 
+ 756      00
+ 757              	.LASF6:
+ 758 01bb 6C6F6E67 		.ascii	"long long int\000"
+ 758      206C6F6E 
+ 758      6720696E 
+ 758      7400
+ 759              	.LASF31:
+ 760 01c9 6D61696E 		.ascii	"main.c\000"
+ 760      2E6300
+ 761              	.LASF13:
+ 762 01d0 63686172 		.ascii	"char\000"
+ 762      00
+ 763              	.LASF18:
+ 764 01d5 64697370 		.ascii	"displayStr\000"
+ 764      6C617953 
+ 764      747200
+ 765              	.LASF2:
+ 766 01e0 73686F72 		.ascii	"short int\000"
+ 766      7420696E 
+ 766      7400
+ 767              	.LASF32:
+ 768 01ea 433A5C55 		.ascii	"C:\\Users\\duver\\OneDrive\\Documents\\Classes\\Cou"
+ 768      73657273 
+ 768      5C647576 
+ 768      65725C4F 
+ 768      6E654472 
+ 769 0217 72736572 		.ascii	"rsera\\Sensors\\Lab1 - Workspace01\\LoadCell.cydsn\000"
+ 769      615C5365 
+ 769      6E736F72 
+ 769      735C4C61 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbcKFE1.s 			page 17
+
+
+ 769      6231202D 
+ 770              	.LASF4:
+ 771 0247 6C6F6E67 		.ascii	"long int\000"
+ 771      20696E74 
+ 771      00
+ 772              	.LASF14:
+ 773 0250 6C6F6E67 		.ascii	"long double\000"
+ 773      20646F75 
+ 773      626C6500 
+ 774              	.LASF0:
+ 775 025c 7369676E 		.ascii	"signed char\000"
+ 775      65642063 
+ 775      68617200 
+ 776              	.LASF29:
+ 777 0268 73707269 		.ascii	"sprintf\000"
+ 777      6E746600 
+ 778              	.LASF25:
+ 779 0270 43794465 		.ascii	"CyDelay\000"
+ 779      6C617900 
+ 780              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

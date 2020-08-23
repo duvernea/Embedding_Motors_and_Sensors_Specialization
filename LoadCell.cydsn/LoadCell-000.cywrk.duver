@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="LoadCell-000\LoadCell_Try2">
+<ExpandedNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2\TopDesign</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Pins</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Analog</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Clocks</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Interrupts</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\DMA</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\System</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Directives</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\Flash Security</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.cydwr\EEPROM</v>
+<v>LoadCell-000\LoadCell_Try2\Header Files</v>
+<v>LoadCell-000\LoadCell_Try2\Header Files\cyapicallbacks.h</v>
+<v>LoadCell-000\LoadCell_Try2\Source Files</v>
+<v>LoadCell-000\LoadCell_Try2\Source Files\main.c</v>
+<v>LoadCell-000\LoadCell_Try2\Generated_Source</v>
+<v>LoadCell-000\LoadCell_Try2\Generated_Source\PSoC5</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\TopDesign</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Pins</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Analog</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Clocks</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Interrupts</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\DMA</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\System</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Directives</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Flash Security</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\EEPROM</v>
+<v>LoadCell-000\PID_Controller\Header Files</v>
+<v>LoadCell-000\PID_Controller\Header Files\cyapicallbacks.h</v>
+<v>LoadCell-000\PID_Controller\Source Files</v>
+<v>LoadCell-000\PID_Controller\Source Files\main.c</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\TopDesign</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Pins</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Analog</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Clocks</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Interrupts</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\DMA</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\System</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Directives</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\Flash Security</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.cydwr\EEPROM</v>
+<v>LoadCell-000\PID_Controller\Header Files</v>
+<v>LoadCell-000\PID_Controller\Header Files\cyapicallbacks.h</v>
+<v>LoadCell-000\PID_Controller\Source Files</v>
+<v>LoadCell-000\PID_Controller\Source Files\main.c</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\TopDesign</v>
+<v>LoadCell-000\LoadCell_Try2\TopDesign\TopDesign.cysch</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\TopDesign</v>
+<v>LoadCell-000\PID_Controller\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\TopDesign</v>
+<v>LoadCell-000\LoadCell_Try2\TopDesign\TopDesign.cysch</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\TopDesign</v>
+<v>LoadCell-000\PID_Controller\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_LCDPort.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_0.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_2.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_7.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_7.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_1_AsmGnu.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\VDAC8_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\LoadCell_Try2.elf</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\LoadCell_Try2.hex</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\LoadCell_Try2.map</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.gpdsc</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2.rpt</v>
+<v>LoadCell-000\LoadCell_Try2\LoadCell_Try2_timing.html</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.gpdsc</v>
+<v>LoadCell-000\PID_Controller\PID_Controller.rpt</v>
+<v>LoadCell-000\PID_Controller\PID_Controller_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_LCDPort.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1_PM.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_0.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_1.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_2.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_7.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_7.lst</v>
+<v>LoadCell-000\LoadCell_Try2\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\PSoC 5LP Architecture TRM</v>
+<v>LoadCell-000\LoadCell_Try2\CY8C58LP Family Datasheet</v>
+<v>LoadCell-000\LoadCell_Try2\System Reference Guides</v>
+<v>LoadCell-000\LoadCell_Try2\System Reference Guides\cy_boot_v5_90</v>
+<v>LoadCell-000\LoadCell_Try2\ADC_DelSig_v3_30.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\CharLCD_v2_20.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\cy_pins_v2_20</v>
+<v>LoadCell-000\LoadCell_Try2\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Gnd_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\OpAmp_v1_90.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\PGA_v2_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Power_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Resistor_v1_0</v>
+<v>LoadCell-000\LoadCell_Try2\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\SW_Tx_UART_v1_50.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\VDAC8_v1_90.pdf</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\PSoC 5LP Architecture TRM</v>
+<v>LoadCell-000\PID_Controller\CY8C58LP Family Datasheet</v>
+<v>LoadCell-000\PID_Controller\System Reference Guides</v>
+<v>LoadCell-000\PID_Controller\System Reference Guides\cy_boot_v5_90</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>LoadCell-000</v>
+<v>LoadCell-000\LoadCell_Try2</v>
+<v>LoadCell-000\LoadCell_Try2\PSoC 5LP Architecture TRM</v>
+<v>LoadCell-000\LoadCell_Try2\CY8C58LP Family Datasheet</v>
+<v>LoadCell-000\LoadCell_Try2\System Reference Guides</v>
+<v>LoadCell-000\LoadCell_Try2\System Reference Guides\cy_boot_v5_90</v>
+<v>LoadCell-000\LoadCell_Try2\ADC_DelSig_v3_30.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\CharLCD_v2_20.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\cy_pins_v2_20</v>
+<v>LoadCell-000\LoadCell_Try2\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Gnd_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\OpAmp_v1_90.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\PGA_v2_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Power_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\Resistor_v1_0</v>
+<v>LoadCell-000\LoadCell_Try2\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\SW_Tx_UART_v1_50.pdf</v>
+<v>LoadCell-000\LoadCell_Try2\VDAC8_v1_90.pdf</v>
+<v>LoadCell-000\PID_Controller</v>
+<v>LoadCell-000\PID_Controller\PSoC 5LP Architecture TRM</v>
+<v>LoadCell-000\PID_Controller\CY8C58LP Family Datasheet</v>
+<v>LoadCell-000\PID_Controller\System Reference Guides</v>
+<v>LoadCell-000\PID_Controller\System Reference Guides\cy_boot_v5_90</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded>
+<project v=".\LoadCell.cyprj" />
+</Unloaded>
+<OpenDocs>
+<name v=".\LoadCell.cydwr" />
+<name v=".\LoadCell_Try2.cydsn\TopDesign\TopDesign.cysch" />
+<name v=".\LoadCell_Try2.cydsn\LoadCell_Try2.cydwr" />
+<name v=".\LoadCell_Try2.cydsn\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1098, 495" SelectedTabbedMdiWindow="216b2544-af55-43ef-b513-78859f171dae"><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell.cydwr" Guid="3ef3712f-a4ad-4144-ae04-ba4ba5b26ffb" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="a800d1f1-656b-4357-8631-d71ede23acf9" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell_Try2.cydsn\TopDesign\TopDesign.cysch" Guid="5b9950ad-0dab-459f-b72b-31fa03f9dd19" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell_Try2.cydsn\LoadCell_Try2.cydwr" Guid="53adbdf2-7677-4f50-bc19-3a8468d4046d" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell_Try2.cydsn\main.c" Guid="216b2544-af55-43ef-b513-78859f171dae" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
