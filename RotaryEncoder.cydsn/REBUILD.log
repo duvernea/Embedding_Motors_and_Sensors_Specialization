@@ -1,0 +1,22 @@
+--------------- Rebuild Started: 08/11/2020 18:17:25 Project: main.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/main.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -Og -c main.c -o .\CortexM3\ARM_GCC_541\Debug\main.o
+In file included from Generated_Source\PSoC5/project.h:24:0,
+                 from main.c:12:
+main.c: In function 'main':
+main.c:40:29: error: 'count2' undeclared (first use in this function)
+             LCD_PrintNumber(count2);
+                             ^
+Generated_Source\PSoC5/LCD.h:110:61: note: in definition of macro 'LCD_PrintNumber'
+ #define LCD_PrintNumber(value) LCD_PrintU32Number((uint16) (value))
+                                                             ^
+main.c:40:29: note: each undeclared identifier is reported only once for each function it appears in
+             LCD_PrintNumber(count2);
+                             ^
+Generated_Source\PSoC5/LCD.h:110:61: note: in definition of macro 'LCD_PrintNumber'
+ #define LCD_PrintNumber(value) LCD_PrintU32Number((uint16) (value))
+                                                             ^
+main.c:18:11: warning: variable 'rotary1' set but not used [-Wunused-but-set-variable]
+     _Bool rotary1 = 1;
+           ^
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+--------------- Rebuild Failed: 08/11/2020 18:17:25 ---------------

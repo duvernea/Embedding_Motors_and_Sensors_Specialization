@@ -1,0 +1,1400 @@
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.main,"ax",%progbits
+  20              		.align	2
+  21              		.global	main
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	main, %function
+  25              	main:
+  26              	.LFB64:
+  27              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** #include "stdio.h"
+  14:main.c        **** 
+  15:main.c        **** int loop_counter = 0;
+  16:main.c        **** int count = 0;
+  17:main.c        **** int count_last = 0;
+  18:main.c        **** 
+  19:main.c        **** int count_manual = 0;
+  20:main.c        **** _Bool rotary1 = 1;
+  21:main.c        **** char displayStr[6] = "";
+  22:main.c        **** char displayStr2[6] = "";
+  23:main.c        **** 
+  24:main.c        **** _Bool sample_n;
+  25:main.c        **** _Bool sample_n_minus_1;
+  26:main.c        **** _Bool sample_n_minus_2;
+  27:main.c        **** 
+  28:main.c        **** _Bool sample_m;
+  29:main.c        **** _Bool sample_m_minus_1;
+  30:main.c        **** _Bool sample_m_minus_2;
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 2
+
+
+  31:main.c        **** 
+  32:main.c        **** 
+  33:main.c        **** _Bool sample_out;
+  34:main.c        **** 
+  35:main.c        **** 
+  36:main.c        **** //CY_ISR ( sample_interrupt_handler ) {
+  37:main.c        **** //    sample_n_minus_2 = sample_n_minus_1;
+  38:main.c        **** //    sample_n_minus_1 = sample_n;
+  39:main.c        **** //    sample_n = P3_5_Read();
+  40:main.c        **** //    
+  41:main.c        **** //    sample_m_minus_2 = sample_m_minus_1;
+  42:main.c        **** //    sample_m_minus_1 = sample_m;
+  43:main.c        **** //    sample_m = P3_7_Read();
+  44:main.c        **** //    
+  45:main.c        **** //    if (sample_n == 0 && sample_n_minus_1 == 0 && sample_n_minus_2 == 0) {
+  46:main.c        **** //        sample_out = 0;
+  47:main.c        **** //        if (P3_7_Read() == 1) {
+  48:main.c        **** //            // we record a turn
+  49:main.c        **** //            count_manual = count_manual - 1;
+  50:main.c        **** //            LCD_Position(1,12);
+  51:main.c        **** //            sprintf(displayStr2, "%d   ", count_manual);
+  52:main.c        **** //            LCD_PrintString(displayStr2);
+  53:main.c        **** //            // we ignore all the zeros after this?
+  54:main.c        **** //        }
+  55:main.c        **** //    }
+  56:main.c        **** //    if (sample_m == 0 && sample_m_minus_1 == 0 && sample_m_minus_2 == 0) {
+  57:main.c        **** //        sample_out = 0;
+  58:main.c        **** //        if (P3_5_Read() == 1) {
+  59:main.c        **** //            // we record a turn
+  60:main.c        **** //            count_manual = count_manual + 1;
+  61:main.c        **** //            LCD_Position(1,12);
+  62:main.c        **** //            sprintf(displayStr2, "%d   ", count_manual);
+  63:main.c        **** //            LCD_PrintString(displayStr2);
+  64:main.c        **** //            // we ignore all the zeros after this?
+  65:main.c        **** //        }
+  66:main.c        **** //    }
+  67:main.c        **** //    Timer_1_ReadStatusRegister();
+  68:main.c        **** //}
+  69:main.c        **** 
+  70:main.c        **** int main(void)
+  71:main.c        **** {
+  28              		.loc 1 71 0
+  29              		.cfi_startproc
+  30              		@ Volatile: function does not return.
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  72:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  37              		.loc 1 72 0
+  38              		.syntax unified
+  39              	@ 72 "main.c" 1
+  40 0002 62B6     		CPSIE   i
+  41              	@ 0 "" 2
+  73:main.c        ****     
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 3
+
+
+  74:main.c        **** 
+  75:main.c        ****     LCD_Start();
+  42              		.loc 1 75 0
+  43              		.thumb
+  44              		.syntax unified
+  45 0004 FFF7FEFF 		bl	LCD_Start
+  46              	.LVL0:
+  76:main.c        ****     LCD_IsReady();
+  47              		.loc 1 76 0
+  48 0008 FFF7FEFF 		bl	LCD_IsReady
+  49              	.LVL1:
+  77:main.c        ****     LCD_ClearDisplay();
+  50              		.loc 1 77 0
+  51 000c 0120     		movs	r0, #1
+  52 000e FFF7FEFF 		bl	LCD_WriteControl
+  53              	.LVL2:
+  78:main.c        ****     LCD_Position(0,0);
+  54              		.loc 1 78 0
+  55 0012 0021     		movs	r1, #0
+  56 0014 0846     		mov	r0, r1
+  57 0016 FFF7FEFF 		bl	LCD_Position
+  58              	.LVL3:
+  79:main.c        ****     LCD_PrintString("rotary encoder");
+  59              		.loc 1 79 0
+  60 001a 2348     		ldr	r0, .L5
+  61 001c FFF7FEFF 		bl	LCD_PrintString
+  62              	.LVL4:
+  80:main.c        ****     CyDelay(2000);
+  63              		.loc 1 80 0
+  64 0020 4FF4FA60 		mov	r0, #2000
+  65 0024 FFF7FEFF 		bl	CyDelay
+  66              	.LVL5:
+  81:main.c        ****     
+  82:main.c        ****     QuadDec_1_Start();
+  67              		.loc 1 82 0
+  68 0028 FFF7FEFF 		bl	QuadDec_1_Start
+  69              	.LVL6:
+  83:main.c        ****     Timer_1_Start();
+  70              		.loc 1 83 0
+  71 002c FFF7FEFF 		bl	Timer_1_Start
+  72              	.LVL7:
+  84:main.c        ****     SW_Tx_UART_1_Start();
+  73              		.loc 1 84 0
+  74 0030 FFF7FEFF 		bl	SW_Tx_UART_1_Start
+  75              	.LVL8:
+  85:main.c        ****     SW_Tx_UART_1_PutString("test");
+  76              		.loc 1 85 0
+  77 0034 1D48     		ldr	r0, .L5+4
+  78 0036 FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  79              	.LVL9:
+  86:main.c        ****     SW_Tx_UART_1_PutCRLF();
+  80              		.loc 1 86 0
+  81 003a FFF7FEFF 		bl	SW_Tx_UART_1_PutCRLF
+  82              	.LVL10:
+  87:main.c        ****     SW_Tx_UART_1_PutString("hello world");
+  83              		.loc 1 87 0
+  84 003e 1C48     		ldr	r0, .L5+8
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 4
+
+
+  85 0040 FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  86              	.LVL11:
+  88:main.c        ****     SW_Tx_UART_1_PutCRLF();
+  87              		.loc 1 88 0
+  88 0044 FFF7FEFF 		bl	SW_Tx_UART_1_PutCRLF
+  89              	.LVL12:
+  89:main.c        ****     SW_Tx_UART_1_PutString("monkey");
+  90              		.loc 1 89 0
+  91 0048 1A48     		ldr	r0, .L5+12
+  92 004a FFF7FEFF 		bl	SW_Tx_UART_1_PutString
+  93              	.LVL13:
+  90:main.c        ****     //sample_interrupt_StartEx ( sample_interrupt_handler );
+  91:main.c        ****     
+  92:main.c        ****     LCD_ClearDisplay();
+  94              		.loc 1 92 0
+  95 004e 0120     		movs	r0, #1
+  96 0050 FFF7FEFF 		bl	LCD_WriteControl
+  97              	.LVL14:
+  93:main.c        ****     LCD_Position(0,0);
+  98              		.loc 1 93 0
+  99 0054 0021     		movs	r1, #0
+ 100 0056 0846     		mov	r0, r1
+ 101 0058 FFF7FEFF 		bl	LCD_Position
+ 102              	.LVL15:
+  94:main.c        ****     LCD_PrintString("QuadDec");
+ 103              		.loc 1 94 0
+ 104 005c 1648     		ldr	r0, .L5+16
+ 105 005e FFF7FEFF 		bl	LCD_PrintString
+ 106              	.LVL16:
+  95:main.c        ****     
+  96:main.c        ****     LCD_Position(0,10);
+ 107              		.loc 1 96 0
+ 108 0062 0A21     		movs	r1, #10
+ 109 0064 0020     		movs	r0, #0
+ 110 0066 FFF7FEFF 		bl	LCD_Position
+ 111              	.LVL17:
+  97:main.c        ****     LCD_PrintString("MyCode");
+ 112              		.loc 1 97 0
+ 113 006a 1448     		ldr	r0, .L5+20
+ 114 006c FFF7FEFF 		bl	LCD_PrintString
+ 115              	.LVL18:
+ 116              	.L2:
+  98:main.c        ****     
+  99:main.c        ****     
+ 100:main.c        ****     for(;;)
+ 101:main.c        ****     {
+ 102:main.c        ****         loop_counter = loop_counter + 1;
+ 117              		.loc 1 102 0
+ 118 0070 134C     		ldr	r4, .L5+24
+ 119 0072 2368     		ldr	r3, [r4]
+ 120 0074 0133     		adds	r3, r3, #1
+ 121 0076 2360     		str	r3, [r4]
+ 103:main.c        ****         count = QuadDec_1_GetCounter();
+ 122              		.loc 1 103 0
+ 123 0078 FFF7FEFF 		bl	QuadDec_1_GetCounter
+ 124              	.LVL19:
+ 125 007c 6060     		str	r0, [r4, #4]
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 5
+
+
+ 104:main.c        ****         
+ 105:main.c        ****         if (loop_counter > 100) {
+ 126              		.loc 1 105 0
+ 127 007e 2368     		ldr	r3, [r4]
+ 128 0080 642B     		cmp	r3, #100
+ 129 0082 F5DD     		ble	.L2
+ 106:main.c        ****             LCD_Position(1,0);
+ 130              		.loc 1 106 0
+ 131 0084 0021     		movs	r1, #0
+ 132 0086 0120     		movs	r0, #1
+ 133 0088 FFF7FEFF 		bl	LCD_Position
+ 134              	.LVL20:
+ 107:main.c        ****             sprintf(displayStr, "%d  ", count);
+ 135              		.loc 1 107 0
+ 136 008c 04F10805 		add	r5, r4, #8
+ 137 0090 6268     		ldr	r2, [r4, #4]
+ 138 0092 0C49     		ldr	r1, .L5+28
+ 139 0094 2846     		mov	r0, r5
+ 140 0096 FFF7FEFF 		bl	sprintf
+ 141              	.LVL21:
+ 108:main.c        ****             LCD_PrintString(displayStr);
+ 142              		.loc 1 108 0
+ 143 009a 2846     		mov	r0, r5
+ 144 009c FFF7FEFF 		bl	LCD_PrintString
+ 145              	.LVL22:
+ 109:main.c        ****             loop_counter = 0;
+ 146              		.loc 1 109 0
+ 147 00a0 0023     		movs	r3, #0
+ 148 00a2 2360     		str	r3, [r4]
+ 149 00a4 E4E7     		b	.L2
+ 150              	.L6:
+ 151 00a6 00BF     		.align	2
+ 152              	.L5:
+ 153 00a8 00000000 		.word	.LC0
+ 154 00ac 10000000 		.word	.LC1
+ 155 00b0 18000000 		.word	.LC2
+ 156 00b4 24000000 		.word	.LC3
+ 157 00b8 2C000000 		.word	.LC4
+ 158 00bc 34000000 		.word	.LC5
+ 159 00c0 00000000 		.word	.LANCHOR0
+ 160 00c4 3C000000 		.word	.LC6
+ 161              		.cfi_endproc
+ 162              	.LFE64:
+ 163              		.size	main, .-main
+ 164              		.comm	sample_out,1,1
+ 165              		.comm	sample_m_minus_2,1,1
+ 166              		.comm	sample_m_minus_1,1,1
+ 167              		.comm	sample_m,1,1
+ 168              		.comm	sample_n_minus_2,1,1
+ 169              		.comm	sample_n_minus_1,1,1
+ 170              		.comm	sample_n,1,1
+ 171              		.global	displayStr2
+ 172              		.global	displayStr
+ 173              		.global	rotary1
+ 174              		.global	count_manual
+ 175              		.global	count_last
+ 176              		.global	count
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 6
+
+
+ 177              		.global	loop_counter
+ 178              		.data
+ 179              		.type	rotary1, %object
+ 180              		.size	rotary1, 1
+ 181              	rotary1:
+ 182 0000 01       		.byte	1
+ 183              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 184              		.align	2
+ 185              	.LC0:
+ 186 0000 726F7461 		.ascii	"rotary encoder\000"
+ 186      72792065 
+ 186      6E636F64 
+ 186      657200
+ 187 000f 00       		.space	1
+ 188              	.LC1:
+ 189 0010 74657374 		.ascii	"test\000"
+ 189      00
+ 190 0015 000000   		.space	3
+ 191              	.LC2:
+ 192 0018 68656C6C 		.ascii	"hello world\000"
+ 192      6F20776F 
+ 192      726C6400 
+ 193              	.LC3:
+ 194 0024 6D6F6E6B 		.ascii	"monkey\000"
+ 194      657900
+ 195 002b 00       		.space	1
+ 196              	.LC4:
+ 197 002c 51756164 		.ascii	"QuadDec\000"
+ 197      44656300 
+ 198              	.LC5:
+ 199 0034 4D79436F 		.ascii	"MyCode\000"
+ 199      646500
+ 200 003b 00       		.space	1
+ 201              	.LC6:
+ 202 003c 25642020 		.ascii	"%d  \000"
+ 202      00
+ 203              		.bss
+ 204              		.align	2
+ 205              		.set	.LANCHOR0,. + 0
+ 206              		.type	loop_counter, %object
+ 207              		.size	loop_counter, 4
+ 208              	loop_counter:
+ 209 0000 00000000 		.space	4
+ 210              		.type	count, %object
+ 211              		.size	count, 4
+ 212              	count:
+ 213 0004 00000000 		.space	4
+ 214              		.type	displayStr, %object
+ 215              		.size	displayStr, 6
+ 216              	displayStr:
+ 217 0008 00000000 		.space	6
+ 217      0000
+ 218 000e 0000     		.space	2
+ 219              		.type	displayStr2, %object
+ 220              		.size	displayStr2, 6
+ 221              	displayStr2:
+ 222 0010 00000000 		.space	6
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 7
+
+
+ 222      0000
+ 223 0016 0000     		.space	2
+ 224              		.type	count_manual, %object
+ 225              		.size	count_manual, 4
+ 226              	count_manual:
+ 227 0018 00000000 		.space	4
+ 228              		.type	count_last, %object
+ 229              		.size	count_last, 4
+ 230              	count_last:
+ 231 001c 00000000 		.space	4
+ 232              		.text
+ 233              	.Letext0:
+ 234              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 235              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 236              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 237              		.file 5 "Generated_Source\\PSoC5/LCD.h"
+ 238              		.file 6 "Generated_Source\\PSoC5/CyLib.h"
+ 239              		.file 7 "Generated_Source\\PSoC5/QuadDec_1.h"
+ 240              		.file 8 "Generated_Source\\PSoC5/Timer_1.h"
+ 241              		.file 9 "Generated_Source\\PSoC5/SW_Tx_UART_1.h"
+ 242              		.file 10 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4
+ 243              		.section	.debug_info,"",%progbits
+ 244              	.Ldebug_info0:
+ 245 0000 FA030000 		.4byte	0x3fa
+ 246 0004 0400     		.2byte	0x4
+ 247 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 248 000a 04       		.byte	0x4
+ 249 000b 01       		.uleb128 0x1
+ 250 000c 2C010000 		.4byte	.LASF45
+ 251 0010 0C       		.byte	0xc
+ 252 0011 A8020000 		.4byte	.LASF46
+ 253 0015 63000000 		.4byte	.LASF47
+ 254 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 255 001d 00000000 		.4byte	0
+ 256 0021 00000000 		.4byte	.Ldebug_line0
+ 257 0025 02       		.uleb128 0x2
+ 258 0026 01       		.byte	0x1
+ 259 0027 06       		.byte	0x6
+ 260 0028 1B030000 		.4byte	.LASF0
+ 261 002c 02       		.uleb128 0x2
+ 262 002d 01       		.byte	0x1
+ 263 002e 08       		.byte	0x8
+ 264 002f 1E010000 		.4byte	.LASF1
+ 265 0033 02       		.uleb128 0x2
+ 266 0034 02       		.byte	0x2
+ 267 0035 05       		.byte	0x5
+ 268 0036 D2020000 		.4byte	.LASF2
+ 269 003a 02       		.uleb128 0x2
+ 270 003b 02       		.byte	0x2
+ 271 003c 07       		.byte	0x7
+ 272 003d CC010000 		.4byte	.LASF3
+ 273 0041 03       		.uleb128 0x3
+ 274 0042 C5000000 		.4byte	.LASF9
+ 275 0046 02       		.byte	0x2
+ 276 0047 3F       		.byte	0x3f
+ 277 0048 4C000000 		.4byte	0x4c
+ 278 004c 02       		.uleb128 0x2
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 8
+
+
+ 279 004d 04       		.byte	0x4
+ 280 004e 05       		.byte	0x5
+ 281 004f FE020000 		.4byte	.LASF4
+ 282 0053 02       		.uleb128 0x2
+ 283 0054 04       		.byte	0x4
+ 284 0055 07       		.byte	0x7
+ 285 0056 BA010000 		.4byte	.LASF5
+ 286 005a 02       		.uleb128 0x2
+ 287 005b 08       		.byte	0x8
+ 288 005c 05       		.byte	0x5
+ 289 005d 9A020000 		.4byte	.LASF6
+ 290 0061 02       		.uleb128 0x2
+ 291 0062 08       		.byte	0x8
+ 292 0063 07       		.byte	0x7
+ 293 0064 65020000 		.4byte	.LASF7
+ 294 0068 04       		.uleb128 0x4
+ 295 0069 04       		.byte	0x4
+ 296 006a 05       		.byte	0x5
+ 297 006b 696E7400 		.ascii	"int\000"
+ 298 006f 02       		.uleb128 0x2
+ 299 0070 04       		.byte	0x4
+ 300 0071 07       		.byte	0x7
+ 301 0072 41020000 		.4byte	.LASF8
+ 302 0076 03       		.uleb128 0x3
+ 303 0077 89020000 		.4byte	.LASF10
+ 304 007b 03       		.byte	0x3
+ 305 007c 2C       		.byte	0x2c
+ 306 007d 41000000 		.4byte	0x41
+ 307 0081 02       		.uleb128 0x2
+ 308 0082 04       		.byte	0x4
+ 309 0083 04       		.byte	0x4
+ 310 0084 FB000000 		.4byte	.LASF11
+ 311 0088 02       		.uleb128 0x2
+ 312 0089 08       		.byte	0x8
+ 313 008a 04       		.byte	0x4
+ 314 008b 19020000 		.4byte	.LASF12
+ 315 008f 02       		.uleb128 0x2
+ 316 0090 01       		.byte	0x1
+ 317 0091 08       		.byte	0x8
+ 318 0092 AF020000 		.4byte	.LASF13
+ 319 0096 02       		.uleb128 0x2
+ 320 0097 08       		.byte	0x8
+ 321 0098 04       		.byte	0x4
+ 322 0099 07030000 		.4byte	.LASF14
+ 323 009d 02       		.uleb128 0x2
+ 324 009e 04       		.byte	0x4
+ 325 009f 07       		.byte	0x7
+ 326 00a0 91020000 		.4byte	.LASF15
+ 327 00a4 05       		.uleb128 0x5
+ 328 00a5 20020000 		.4byte	.LASF48
+ 329 00a9 01       		.byte	0x1
+ 330 00aa 46       		.byte	0x46
+ 331 00ab 68000000 		.4byte	0x68
+ 332 00af 00000000 		.4byte	.LFB64
+ 333 00b3 C8000000 		.4byte	.LFE64-.LFB64
+ 334 00b7 01       		.uleb128 0x1
+ 335 00b8 9C       		.byte	0x9c
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 9
+
+
+ 336 00b9 58020000 		.4byte	0x258
+ 337 00bd 06       		.uleb128 0x6
+ 338 00be 08000000 		.4byte	.LVL0
+ 339 00c2 6E030000 		.4byte	0x36e
+ 340 00c6 06       		.uleb128 0x6
+ 341 00c7 0C000000 		.4byte	.LVL1
+ 342 00cb 79030000 		.4byte	0x379
+ 343 00cf 07       		.uleb128 0x7
+ 344 00d0 12000000 		.4byte	.LVL2
+ 345 00d4 84030000 		.4byte	0x384
+ 346 00d8 E2000000 		.4byte	0xe2
+ 347 00dc 08       		.uleb128 0x8
+ 348 00dd 01       		.uleb128 0x1
+ 349 00de 50       		.byte	0x50
+ 350 00df 01       		.uleb128 0x1
+ 351 00e0 31       		.byte	0x31
+ 352 00e1 00       		.byte	0
+ 353 00e2 07       		.uleb128 0x7
+ 354 00e3 1A000000 		.4byte	.LVL3
+ 355 00e7 8F030000 		.4byte	0x38f
+ 356 00eb FA000000 		.4byte	0xfa
+ 357 00ef 08       		.uleb128 0x8
+ 358 00f0 01       		.uleb128 0x1
+ 359 00f1 50       		.byte	0x50
+ 360 00f2 01       		.uleb128 0x1
+ 361 00f3 30       		.byte	0x30
+ 362 00f4 08       		.uleb128 0x8
+ 363 00f5 01       		.uleb128 0x1
+ 364 00f6 51       		.byte	0x51
+ 365 00f7 01       		.uleb128 0x1
+ 366 00f8 30       		.byte	0x30
+ 367 00f9 00       		.byte	0
+ 368 00fa 07       		.uleb128 0x7
+ 369 00fb 20000000 		.4byte	.LVL4
+ 370 00ff 9A030000 		.4byte	0x39a
+ 371 0103 11010000 		.4byte	0x111
+ 372 0107 08       		.uleb128 0x8
+ 373 0108 01       		.uleb128 0x1
+ 374 0109 50       		.byte	0x50
+ 375 010a 05       		.uleb128 0x5
+ 376 010b 03       		.byte	0x3
+ 377 010c 00000000 		.4byte	.LC0
+ 378 0110 00       		.byte	0
+ 379 0111 07       		.uleb128 0x7
+ 380 0112 28000000 		.4byte	.LVL5
+ 381 0116 A5030000 		.4byte	0x3a5
+ 382 011a 26010000 		.4byte	0x126
+ 383 011e 08       		.uleb128 0x8
+ 384 011f 01       		.uleb128 0x1
+ 385 0120 50       		.byte	0x50
+ 386 0121 03       		.uleb128 0x3
+ 387 0122 0A       		.byte	0xa
+ 388 0123 D007     		.2byte	0x7d0
+ 389 0125 00       		.byte	0
+ 390 0126 06       		.uleb128 0x6
+ 391 0127 2C000000 		.4byte	.LVL6
+ 392 012b B0030000 		.4byte	0x3b0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 10
+
+
+ 393 012f 06       		.uleb128 0x6
+ 394 0130 30000000 		.4byte	.LVL7
+ 395 0134 BB030000 		.4byte	0x3bb
+ 396 0138 06       		.uleb128 0x6
+ 397 0139 34000000 		.4byte	.LVL8
+ 398 013d C6030000 		.4byte	0x3c6
+ 399 0141 07       		.uleb128 0x7
+ 400 0142 3A000000 		.4byte	.LVL9
+ 401 0146 D1030000 		.4byte	0x3d1
+ 402 014a 58010000 		.4byte	0x158
+ 403 014e 08       		.uleb128 0x8
+ 404 014f 01       		.uleb128 0x1
+ 405 0150 50       		.byte	0x50
+ 406 0151 05       		.uleb128 0x5
+ 407 0152 03       		.byte	0x3
+ 408 0153 10000000 		.4byte	.LC1
+ 409 0157 00       		.byte	0
+ 410 0158 06       		.uleb128 0x6
+ 411 0159 3E000000 		.4byte	.LVL10
+ 412 015d DC030000 		.4byte	0x3dc
+ 413 0161 07       		.uleb128 0x7
+ 414 0162 44000000 		.4byte	.LVL11
+ 415 0166 D1030000 		.4byte	0x3d1
+ 416 016a 78010000 		.4byte	0x178
+ 417 016e 08       		.uleb128 0x8
+ 418 016f 01       		.uleb128 0x1
+ 419 0170 50       		.byte	0x50
+ 420 0171 05       		.uleb128 0x5
+ 421 0172 03       		.byte	0x3
+ 422 0173 18000000 		.4byte	.LC2
+ 423 0177 00       		.byte	0
+ 424 0178 06       		.uleb128 0x6
+ 425 0179 48000000 		.4byte	.LVL12
+ 426 017d DC030000 		.4byte	0x3dc
+ 427 0181 07       		.uleb128 0x7
+ 428 0182 4E000000 		.4byte	.LVL13
+ 429 0186 D1030000 		.4byte	0x3d1
+ 430 018a 98010000 		.4byte	0x198
+ 431 018e 08       		.uleb128 0x8
+ 432 018f 01       		.uleb128 0x1
+ 433 0190 50       		.byte	0x50
+ 434 0191 05       		.uleb128 0x5
+ 435 0192 03       		.byte	0x3
+ 436 0193 24000000 		.4byte	.LC3
+ 437 0197 00       		.byte	0
+ 438 0198 07       		.uleb128 0x7
+ 439 0199 54000000 		.4byte	.LVL14
+ 440 019d 84030000 		.4byte	0x384
+ 441 01a1 AB010000 		.4byte	0x1ab
+ 442 01a5 08       		.uleb128 0x8
+ 443 01a6 01       		.uleb128 0x1
+ 444 01a7 50       		.byte	0x50
+ 445 01a8 01       		.uleb128 0x1
+ 446 01a9 31       		.byte	0x31
+ 447 01aa 00       		.byte	0
+ 448 01ab 07       		.uleb128 0x7
+ 449 01ac 5C000000 		.4byte	.LVL15
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 11
+
+
+ 450 01b0 8F030000 		.4byte	0x38f
+ 451 01b4 C3010000 		.4byte	0x1c3
+ 452 01b8 08       		.uleb128 0x8
+ 453 01b9 01       		.uleb128 0x1
+ 454 01ba 50       		.byte	0x50
+ 455 01bb 01       		.uleb128 0x1
+ 456 01bc 30       		.byte	0x30
+ 457 01bd 08       		.uleb128 0x8
+ 458 01be 01       		.uleb128 0x1
+ 459 01bf 51       		.byte	0x51
+ 460 01c0 01       		.uleb128 0x1
+ 461 01c1 30       		.byte	0x30
+ 462 01c2 00       		.byte	0
+ 463 01c3 07       		.uleb128 0x7
+ 464 01c4 62000000 		.4byte	.LVL16
+ 465 01c8 9A030000 		.4byte	0x39a
+ 466 01cc DA010000 		.4byte	0x1da
+ 467 01d0 08       		.uleb128 0x8
+ 468 01d1 01       		.uleb128 0x1
+ 469 01d2 50       		.byte	0x50
+ 470 01d3 05       		.uleb128 0x5
+ 471 01d4 03       		.byte	0x3
+ 472 01d5 2C000000 		.4byte	.LC4
+ 473 01d9 00       		.byte	0
+ 474 01da 07       		.uleb128 0x7
+ 475 01db 6A000000 		.4byte	.LVL17
+ 476 01df 8F030000 		.4byte	0x38f
+ 477 01e3 F2010000 		.4byte	0x1f2
+ 478 01e7 08       		.uleb128 0x8
+ 479 01e8 01       		.uleb128 0x1
+ 480 01e9 50       		.byte	0x50
+ 481 01ea 01       		.uleb128 0x1
+ 482 01eb 30       		.byte	0x30
+ 483 01ec 08       		.uleb128 0x8
+ 484 01ed 01       		.uleb128 0x1
+ 485 01ee 51       		.byte	0x51
+ 486 01ef 01       		.uleb128 0x1
+ 487 01f0 3A       		.byte	0x3a
+ 488 01f1 00       		.byte	0
+ 489 01f2 07       		.uleb128 0x7
+ 490 01f3 70000000 		.4byte	.LVL18
+ 491 01f7 9A030000 		.4byte	0x39a
+ 492 01fb 09020000 		.4byte	0x209
+ 493 01ff 08       		.uleb128 0x8
+ 494 0200 01       		.uleb128 0x1
+ 495 0201 50       		.byte	0x50
+ 496 0202 05       		.uleb128 0x5
+ 497 0203 03       		.byte	0x3
+ 498 0204 34000000 		.4byte	.LC5
+ 499 0208 00       		.byte	0
+ 500 0209 06       		.uleb128 0x6
+ 501 020a 7C000000 		.4byte	.LVL19
+ 502 020e E7030000 		.4byte	0x3e7
+ 503 0212 07       		.uleb128 0x7
+ 504 0213 8C000000 		.4byte	.LVL20
+ 505 0217 8F030000 		.4byte	0x38f
+ 506 021b 2A020000 		.4byte	0x22a
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 12
+
+
+ 507 021f 08       		.uleb128 0x8
+ 508 0220 01       		.uleb128 0x1
+ 509 0221 50       		.byte	0x50
+ 510 0222 01       		.uleb128 0x1
+ 511 0223 31       		.byte	0x31
+ 512 0224 08       		.uleb128 0x8
+ 513 0225 01       		.uleb128 0x1
+ 514 0226 51       		.byte	0x51
+ 515 0227 01       		.uleb128 0x1
+ 516 0228 30       		.byte	0x30
+ 517 0229 00       		.byte	0
+ 518 022a 07       		.uleb128 0x7
+ 519 022b 9A000000 		.4byte	.LVL21
+ 520 022f F2030000 		.4byte	0x3f2
+ 521 0233 47020000 		.4byte	0x247
+ 522 0237 08       		.uleb128 0x8
+ 523 0238 01       		.uleb128 0x1
+ 524 0239 50       		.byte	0x50
+ 525 023a 02       		.uleb128 0x2
+ 526 023b 75       		.byte	0x75
+ 527 023c 00       		.sleb128 0
+ 528 023d 08       		.uleb128 0x8
+ 529 023e 01       		.uleb128 0x1
+ 530 023f 51       		.byte	0x51
+ 531 0240 05       		.uleb128 0x5
+ 532 0241 03       		.byte	0x3
+ 533 0242 3C000000 		.4byte	.LC6
+ 534 0246 00       		.byte	0
+ 535 0247 09       		.uleb128 0x9
+ 536 0248 A0000000 		.4byte	.LVL22
+ 537 024c 9A030000 		.4byte	0x39a
+ 538 0250 08       		.uleb128 0x8
+ 539 0251 01       		.uleb128 0x1
+ 540 0252 50       		.byte	0x50
+ 541 0253 02       		.uleb128 0x2
+ 542 0254 75       		.byte	0x75
+ 543 0255 00       		.sleb128 0
+ 544 0256 00       		.byte	0
+ 545 0257 00       		.byte	0
+ 546 0258 0A       		.uleb128 0xa
+ 547 0259 DF010000 		.4byte	.LASF16
+ 548 025d 04       		.byte	0x4
+ 549 025e 1207     		.2byte	0x712
+ 550 0260 64020000 		.4byte	0x264
+ 551 0264 0B       		.uleb128 0xb
+ 552 0265 76000000 		.4byte	0x76
+ 553 0269 0C       		.uleb128 0xc
+ 554 026a 00000000 		.4byte	.LASF17
+ 555 026e 01       		.byte	0x1
+ 556 026f 0F       		.byte	0xf
+ 557 0270 68000000 		.4byte	0x68
+ 558 0274 05       		.uleb128 0x5
+ 559 0275 03       		.byte	0x3
+ 560 0276 00000000 		.4byte	loop_counter
+ 561 027a 0C       		.uleb128 0xc
+ 562 027b BF020000 		.4byte	.LASF18
+ 563 027f 01       		.byte	0x1
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 13
+
+
+ 564 0280 10       		.byte	0x10
+ 565 0281 68000000 		.4byte	0x68
+ 566 0285 05       		.uleb128 0x5
+ 567 0286 03       		.byte	0x3
+ 568 0287 00000000 		.4byte	count
+ 569 028b 0C       		.uleb128 0xc
+ 570 028c E4000000 		.4byte	.LASF19
+ 571 0290 01       		.byte	0x1
+ 572 0291 11       		.byte	0x11
+ 573 0292 68000000 		.4byte	0x68
+ 574 0296 05       		.uleb128 0x5
+ 575 0297 03       		.byte	0x3
+ 576 0298 00000000 		.4byte	count_last
+ 577 029c 0C       		.uleb128 0xc
+ 578 029d C5020000 		.4byte	.LASF20
+ 579 02a1 01       		.byte	0x1
+ 580 02a2 13       		.byte	0x13
+ 581 02a3 68000000 		.4byte	0x68
+ 582 02a7 05       		.uleb128 0x5
+ 583 02a8 03       		.byte	0x3
+ 584 02a9 00000000 		.4byte	count_manual
+ 585 02ad 0C       		.uleb128 0xc
+ 586 02ae 13030000 		.4byte	.LASF21
+ 587 02b2 01       		.byte	0x1
+ 588 02b3 14       		.byte	0x14
+ 589 02b4 BE020000 		.4byte	0x2be
+ 590 02b8 05       		.uleb128 0x5
+ 591 02b9 03       		.byte	0x3
+ 592 02ba 00000000 		.4byte	rotary1
+ 593 02be 02       		.uleb128 0x2
+ 594 02bf 01       		.byte	0x1
+ 595 02c0 02       		.byte	0x2
+ 596 02c1 27030000 		.4byte	.LASF22
+ 597 02c5 0D       		.uleb128 0xd
+ 598 02c6 8F000000 		.4byte	0x8f
+ 599 02ca D5020000 		.4byte	0x2d5
+ 600 02ce 0E       		.uleb128 0xe
+ 601 02cf 9D000000 		.4byte	0x9d
+ 602 02d3 05       		.byte	0x5
+ 603 02d4 00       		.byte	0
+ 604 02d5 0C       		.uleb128 0xc
+ 605 02d6 B4020000 		.4byte	.LASF23
+ 606 02da 01       		.byte	0x1
+ 607 02db 15       		.byte	0x15
+ 608 02dc C5020000 		.4byte	0x2c5
+ 609 02e0 05       		.uleb128 0x5
+ 610 02e1 03       		.byte	0x3
+ 611 02e2 00000000 		.4byte	displayStr
+ 612 02e6 0C       		.uleb128 0xc
+ 613 02e7 EF000000 		.4byte	.LASF24
+ 614 02eb 01       		.byte	0x1
+ 615 02ec 16       		.byte	0x16
+ 616 02ed C5020000 		.4byte	0x2c5
+ 617 02f1 05       		.uleb128 0x5
+ 618 02f2 03       		.byte	0x3
+ 619 02f3 00000000 		.4byte	displayStr2
+ 620 02f7 0C       		.uleb128 0xc
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 14
+
+
+ 621 02f8 5A000000 		.4byte	.LASF25
+ 622 02fc 01       		.byte	0x1
+ 623 02fd 18       		.byte	0x18
+ 624 02fe BE020000 		.4byte	0x2be
+ 625 0302 05       		.uleb128 0x5
+ 626 0303 03       		.byte	0x3
+ 627 0304 00000000 		.4byte	sample_n
+ 628 0308 0C       		.uleb128 0xc
+ 629 0309 DC020000 		.4byte	.LASF26
+ 630 030d 01       		.byte	0x1
+ 631 030e 19       		.byte	0x19
+ 632 030f BE020000 		.4byte	0x2be
+ 633 0313 05       		.uleb128 0x5
+ 634 0314 03       		.byte	0x3
+ 635 0315 00000000 		.4byte	sample_n_minus_1
+ 636 0319 0C       		.uleb128 0xc
+ 637 031a ED020000 		.4byte	.LASF27
+ 638 031e 01       		.byte	0x1
+ 639 031f 1A       		.byte	0x1a
+ 640 0320 BE020000 		.4byte	0x2be
+ 641 0324 05       		.uleb128 0x5
+ 642 0325 03       		.byte	0x3
+ 643 0326 00000000 		.4byte	sample_n_minus_2
+ 644 032a 0C       		.uleb128 0xc
+ 645 032b 51000000 		.4byte	.LASF28
+ 646 032f 01       		.byte	0x1
+ 647 0330 1C       		.byte	0x1c
+ 648 0331 BE020000 		.4byte	0x2be
+ 649 0335 05       		.uleb128 0x5
+ 650 0336 03       		.byte	0x3
+ 651 0337 00000000 		.4byte	sample_m
+ 652 033b 0C       		.uleb128 0xc
+ 653 033c F7010000 		.4byte	.LASF29
+ 654 0340 01       		.byte	0x1
+ 655 0341 1D       		.byte	0x1d
+ 656 0342 BE020000 		.4byte	0x2be
+ 657 0346 05       		.uleb128 0x5
+ 658 0347 03       		.byte	0x3
+ 659 0348 00000000 		.4byte	sample_m_minus_1
+ 660 034c 0C       		.uleb128 0xc
+ 661 034d 08020000 		.4byte	.LASF30
+ 662 0351 01       		.byte	0x1
+ 663 0352 1E       		.byte	0x1e
+ 664 0353 BE020000 		.4byte	0x2be
+ 665 0357 05       		.uleb128 0x5
+ 666 0358 03       		.byte	0x3
+ 667 0359 00000000 		.4byte	sample_m_minus_2
+ 668 035d 0C       		.uleb128 0xc
+ 669 035e EC010000 		.4byte	.LASF31
+ 670 0362 01       		.byte	0x1
+ 671 0363 21       		.byte	0x21
+ 672 0364 BE020000 		.4byte	0x2be
+ 673 0368 05       		.uleb128 0x5
+ 674 0369 03       		.byte	0x3
+ 675 036a 00000000 		.4byte	sample_out
+ 676 036e 0F       		.uleb128 0xf
+ 677 036f 01010000 		.4byte	.LASF32
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 15
+
+
+ 678 0373 01010000 		.4byte	.LASF32
+ 679 0377 05       		.byte	0x5
+ 680 0378 38       		.byte	0x38
+ 681 0379 0F       		.uleb128 0xf
+ 682 037a 35020000 		.4byte	.LASF33
+ 683 037e 35020000 		.4byte	.LASF33
+ 684 0382 05       		.byte	0x5
+ 685 0383 3F       		.byte	0x3f
+ 686 0384 0F       		.uleb128 0xf
+ 687 0385 2B000000 		.4byte	.LASF34
+ 688 0389 2B000000 		.4byte	.LASF34
+ 689 038d 05       		.byte	0x5
+ 690 038e 3A       		.byte	0x3a
+ 691 038f 0F       		.uleb128 0xf
+ 692 0390 7C020000 		.4byte	.LASF35
+ 693 0394 7C020000 		.4byte	.LASF35
+ 694 0398 05       		.byte	0x5
+ 695 0399 3D       		.byte	0x3d
+ 696 039a 0F       		.uleb128 0xf
+ 697 039b 25020000 		.4byte	.LASF36
+ 698 039f 25020000 		.4byte	.LASF36
+ 699 03a3 05       		.byte	0x5
+ 700 03a4 3C       		.byte	0x3c
+ 701 03a5 0F       		.uleb128 0xf
+ 702 03a6 35030000 		.4byte	.LASF37
+ 703 03aa 35030000 		.4byte	.LASF37
+ 704 03ae 06       		.byte	0x6
+ 705 03af 76       		.byte	0x76
+ 706 03b0 0F       		.uleb128 0xf
+ 707 03b1 0D000000 		.4byte	.LASF38
+ 708 03b5 0D000000 		.4byte	.LASF38
+ 709 03b9 07       		.byte	0x7
+ 710 03ba 48       		.byte	0x48
+ 711 03bb 0F       		.uleb128 0xf
+ 712 03bc 1D000000 		.4byte	.LASF39
+ 713 03c0 1D000000 		.4byte	.LASF39
+ 714 03c4 08       		.byte	0x8
+ 715 03c5 5A       		.byte	0x5a
+ 716 03c6 0F       		.uleb128 0xf
+ 717 03c7 0B010000 		.4byte	.LASF40
+ 718 03cb 0B010000 		.4byte	.LASF40
+ 719 03cf 09       		.byte	0x9
+ 720 03d0 1F       		.byte	0x1f
+ 721 03d1 0F       		.uleb128 0xf
+ 722 03d2 4E020000 		.4byte	.LASF41
+ 723 03d6 4E020000 		.4byte	.LASF41
+ 724 03da 09       		.byte	0x9
+ 725 03db 26       		.byte	0x26
+ 726 03dc 0F       		.uleb128 0xf
+ 727 03dd 3C000000 		.4byte	.LASF42
+ 728 03e1 3C000000 		.4byte	.LASF42
+ 729 03e5 09       		.byte	0x9
+ 730 03e6 2A       		.byte	0x2a
+ 731 03e7 0F       		.uleb128 0xf
+ 732 03e8 CF000000 		.4byte	.LASF43
+ 733 03ec CF000000 		.4byte	.LASF43
+ 734 03f0 07       		.byte	0x7
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 16
+
+
+ 735 03f1 4E       		.byte	0x4e
+ 736 03f2 0F       		.uleb128 0xf
+ 737 03f3 2D030000 		.4byte	.LASF44
+ 738 03f7 2D030000 		.4byte	.LASF44
+ 739 03fb 0A       		.byte	0xa
+ 740 03fc E7       		.byte	0xe7
+ 741 03fd 00       		.byte	0
+ 742              		.section	.debug_abbrev,"",%progbits
+ 743              	.Ldebug_abbrev0:
+ 744 0000 01       		.uleb128 0x1
+ 745 0001 11       		.uleb128 0x11
+ 746 0002 01       		.byte	0x1
+ 747 0003 25       		.uleb128 0x25
+ 748 0004 0E       		.uleb128 0xe
+ 749 0005 13       		.uleb128 0x13
+ 750 0006 0B       		.uleb128 0xb
+ 751 0007 03       		.uleb128 0x3
+ 752 0008 0E       		.uleb128 0xe
+ 753 0009 1B       		.uleb128 0x1b
+ 754 000a 0E       		.uleb128 0xe
+ 755 000b 55       		.uleb128 0x55
+ 756 000c 17       		.uleb128 0x17
+ 757 000d 11       		.uleb128 0x11
+ 758 000e 01       		.uleb128 0x1
+ 759 000f 10       		.uleb128 0x10
+ 760 0010 17       		.uleb128 0x17
+ 761 0011 00       		.byte	0
+ 762 0012 00       		.byte	0
+ 763 0013 02       		.uleb128 0x2
+ 764 0014 24       		.uleb128 0x24
+ 765 0015 00       		.byte	0
+ 766 0016 0B       		.uleb128 0xb
+ 767 0017 0B       		.uleb128 0xb
+ 768 0018 3E       		.uleb128 0x3e
+ 769 0019 0B       		.uleb128 0xb
+ 770 001a 03       		.uleb128 0x3
+ 771 001b 0E       		.uleb128 0xe
+ 772 001c 00       		.byte	0
+ 773 001d 00       		.byte	0
+ 774 001e 03       		.uleb128 0x3
+ 775 001f 16       		.uleb128 0x16
+ 776 0020 00       		.byte	0
+ 777 0021 03       		.uleb128 0x3
+ 778 0022 0E       		.uleb128 0xe
+ 779 0023 3A       		.uleb128 0x3a
+ 780 0024 0B       		.uleb128 0xb
+ 781 0025 3B       		.uleb128 0x3b
+ 782 0026 0B       		.uleb128 0xb
+ 783 0027 49       		.uleb128 0x49
+ 784 0028 13       		.uleb128 0x13
+ 785 0029 00       		.byte	0
+ 786 002a 00       		.byte	0
+ 787 002b 04       		.uleb128 0x4
+ 788 002c 24       		.uleb128 0x24
+ 789 002d 00       		.byte	0
+ 790 002e 0B       		.uleb128 0xb
+ 791 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 17
+
+
+ 792 0030 3E       		.uleb128 0x3e
+ 793 0031 0B       		.uleb128 0xb
+ 794 0032 03       		.uleb128 0x3
+ 795 0033 08       		.uleb128 0x8
+ 796 0034 00       		.byte	0
+ 797 0035 00       		.byte	0
+ 798 0036 05       		.uleb128 0x5
+ 799 0037 2E       		.uleb128 0x2e
+ 800 0038 01       		.byte	0x1
+ 801 0039 3F       		.uleb128 0x3f
+ 802 003a 19       		.uleb128 0x19
+ 803 003b 03       		.uleb128 0x3
+ 804 003c 0E       		.uleb128 0xe
+ 805 003d 3A       		.uleb128 0x3a
+ 806 003e 0B       		.uleb128 0xb
+ 807 003f 3B       		.uleb128 0x3b
+ 808 0040 0B       		.uleb128 0xb
+ 809 0041 27       		.uleb128 0x27
+ 810 0042 19       		.uleb128 0x19
+ 811 0043 49       		.uleb128 0x49
+ 812 0044 13       		.uleb128 0x13
+ 813 0045 8701     		.uleb128 0x87
+ 814 0047 19       		.uleb128 0x19
+ 815 0048 11       		.uleb128 0x11
+ 816 0049 01       		.uleb128 0x1
+ 817 004a 12       		.uleb128 0x12
+ 818 004b 06       		.uleb128 0x6
+ 819 004c 40       		.uleb128 0x40
+ 820 004d 18       		.uleb128 0x18
+ 821 004e 9742     		.uleb128 0x2117
+ 822 0050 19       		.uleb128 0x19
+ 823 0051 01       		.uleb128 0x1
+ 824 0052 13       		.uleb128 0x13
+ 825 0053 00       		.byte	0
+ 826 0054 00       		.byte	0
+ 827 0055 06       		.uleb128 0x6
+ 828 0056 898201   		.uleb128 0x4109
+ 829 0059 00       		.byte	0
+ 830 005a 11       		.uleb128 0x11
+ 831 005b 01       		.uleb128 0x1
+ 832 005c 31       		.uleb128 0x31
+ 833 005d 13       		.uleb128 0x13
+ 834 005e 00       		.byte	0
+ 835 005f 00       		.byte	0
+ 836 0060 07       		.uleb128 0x7
+ 837 0061 898201   		.uleb128 0x4109
+ 838 0064 01       		.byte	0x1
+ 839 0065 11       		.uleb128 0x11
+ 840 0066 01       		.uleb128 0x1
+ 841 0067 31       		.uleb128 0x31
+ 842 0068 13       		.uleb128 0x13
+ 843 0069 01       		.uleb128 0x1
+ 844 006a 13       		.uleb128 0x13
+ 845 006b 00       		.byte	0
+ 846 006c 00       		.byte	0
+ 847 006d 08       		.uleb128 0x8
+ 848 006e 8A8201   		.uleb128 0x410a
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 18
+
+
+ 849 0071 00       		.byte	0
+ 850 0072 02       		.uleb128 0x2
+ 851 0073 18       		.uleb128 0x18
+ 852 0074 9142     		.uleb128 0x2111
+ 853 0076 18       		.uleb128 0x18
+ 854 0077 00       		.byte	0
+ 855 0078 00       		.byte	0
+ 856 0079 09       		.uleb128 0x9
+ 857 007a 898201   		.uleb128 0x4109
+ 858 007d 01       		.byte	0x1
+ 859 007e 11       		.uleb128 0x11
+ 860 007f 01       		.uleb128 0x1
+ 861 0080 31       		.uleb128 0x31
+ 862 0081 13       		.uleb128 0x13
+ 863 0082 00       		.byte	0
+ 864 0083 00       		.byte	0
+ 865 0084 0A       		.uleb128 0xa
+ 866 0085 34       		.uleb128 0x34
+ 867 0086 00       		.byte	0
+ 868 0087 03       		.uleb128 0x3
+ 869 0088 0E       		.uleb128 0xe
+ 870 0089 3A       		.uleb128 0x3a
+ 871 008a 0B       		.uleb128 0xb
+ 872 008b 3B       		.uleb128 0x3b
+ 873 008c 05       		.uleb128 0x5
+ 874 008d 49       		.uleb128 0x49
+ 875 008e 13       		.uleb128 0x13
+ 876 008f 3F       		.uleb128 0x3f
+ 877 0090 19       		.uleb128 0x19
+ 878 0091 3C       		.uleb128 0x3c
+ 879 0092 19       		.uleb128 0x19
+ 880 0093 00       		.byte	0
+ 881 0094 00       		.byte	0
+ 882 0095 0B       		.uleb128 0xb
+ 883 0096 35       		.uleb128 0x35
+ 884 0097 00       		.byte	0
+ 885 0098 49       		.uleb128 0x49
+ 886 0099 13       		.uleb128 0x13
+ 887 009a 00       		.byte	0
+ 888 009b 00       		.byte	0
+ 889 009c 0C       		.uleb128 0xc
+ 890 009d 34       		.uleb128 0x34
+ 891 009e 00       		.byte	0
+ 892 009f 03       		.uleb128 0x3
+ 893 00a0 0E       		.uleb128 0xe
+ 894 00a1 3A       		.uleb128 0x3a
+ 895 00a2 0B       		.uleb128 0xb
+ 896 00a3 3B       		.uleb128 0x3b
+ 897 00a4 0B       		.uleb128 0xb
+ 898 00a5 49       		.uleb128 0x49
+ 899 00a6 13       		.uleb128 0x13
+ 900 00a7 3F       		.uleb128 0x3f
+ 901 00a8 19       		.uleb128 0x19
+ 902 00a9 02       		.uleb128 0x2
+ 903 00aa 18       		.uleb128 0x18
+ 904 00ab 00       		.byte	0
+ 905 00ac 00       		.byte	0
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 19
+
+
+ 906 00ad 0D       		.uleb128 0xd
+ 907 00ae 01       		.uleb128 0x1
+ 908 00af 01       		.byte	0x1
+ 909 00b0 49       		.uleb128 0x49
+ 910 00b1 13       		.uleb128 0x13
+ 911 00b2 01       		.uleb128 0x1
+ 912 00b3 13       		.uleb128 0x13
+ 913 00b4 00       		.byte	0
+ 914 00b5 00       		.byte	0
+ 915 00b6 0E       		.uleb128 0xe
+ 916 00b7 21       		.uleb128 0x21
+ 917 00b8 00       		.byte	0
+ 918 00b9 49       		.uleb128 0x49
+ 919 00ba 13       		.uleb128 0x13
+ 920 00bb 2F       		.uleb128 0x2f
+ 921 00bc 0B       		.uleb128 0xb
+ 922 00bd 00       		.byte	0
+ 923 00be 00       		.byte	0
+ 924 00bf 0F       		.uleb128 0xf
+ 925 00c0 2E       		.uleb128 0x2e
+ 926 00c1 00       		.byte	0
+ 927 00c2 3F       		.uleb128 0x3f
+ 928 00c3 19       		.uleb128 0x19
+ 929 00c4 3C       		.uleb128 0x3c
+ 930 00c5 19       		.uleb128 0x19
+ 931 00c6 6E       		.uleb128 0x6e
+ 932 00c7 0E       		.uleb128 0xe
+ 933 00c8 03       		.uleb128 0x3
+ 934 00c9 0E       		.uleb128 0xe
+ 935 00ca 3A       		.uleb128 0x3a
+ 936 00cb 0B       		.uleb128 0xb
+ 937 00cc 3B       		.uleb128 0x3b
+ 938 00cd 0B       		.uleb128 0xb
+ 939 00ce 00       		.byte	0
+ 940 00cf 00       		.byte	0
+ 941 00d0 00       		.byte	0
+ 942              		.section	.debug_aranges,"",%progbits
+ 943 0000 1C000000 		.4byte	0x1c
+ 944 0004 0200     		.2byte	0x2
+ 945 0006 00000000 		.4byte	.Ldebug_info0
+ 946 000a 04       		.byte	0x4
+ 947 000b 00       		.byte	0
+ 948 000c 0000     		.2byte	0
+ 949 000e 0000     		.2byte	0
+ 950 0010 00000000 		.4byte	.LFB64
+ 951 0014 C8000000 		.4byte	.LFE64-.LFB64
+ 952 0018 00000000 		.4byte	0
+ 953 001c 00000000 		.4byte	0
+ 954              		.section	.debug_ranges,"",%progbits
+ 955              	.Ldebug_ranges0:
+ 956 0000 00000000 		.4byte	.LFB64
+ 957 0004 C8000000 		.4byte	.LFE64
+ 958 0008 00000000 		.4byte	0
+ 959 000c 00000000 		.4byte	0
+ 960              		.section	.debug_line,"",%progbits
+ 961              	.Ldebug_line0:
+ 962 0000 25020000 		.section	.debug_str,"MS",%progbits,1
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 20
+
+
+ 962      0200F401 
+ 962      00000201 
+ 962      FB0E0D00 
+ 962      01010101 
+ 963              	.LASF17:
+ 964 0000 6C6F6F70 		.ascii	"loop_counter\000"
+ 964      5F636F75 
+ 964      6E746572 
+ 964      00
+ 965              	.LASF38:
+ 966 000d 51756164 		.ascii	"QuadDec_1_Start\000"
+ 966      4465635F 
+ 966      315F5374 
+ 966      61727400 
+ 967              	.LASF39:
+ 968 001d 54696D65 		.ascii	"Timer_1_Start\000"
+ 968      725F315F 
+ 968      53746172 
+ 968      7400
+ 969              	.LASF34:
+ 970 002b 4C43445F 		.ascii	"LCD_WriteControl\000"
+ 970      57726974 
+ 970      65436F6E 
+ 970      74726F6C 
+ 970      00
+ 971              	.LASF42:
+ 972 003c 53575F54 		.ascii	"SW_Tx_UART_1_PutCRLF\000"
+ 972      785F5541 
+ 972      52545F31 
+ 972      5F507574 
+ 972      43524C46 
+ 973              	.LASF28:
+ 974 0051 73616D70 		.ascii	"sample_m\000"
+ 974      6C655F6D 
+ 974      00
+ 975              	.LASF25:
+ 976 005a 73616D70 		.ascii	"sample_n\000"
+ 976      6C655F6E 
+ 976      00
+ 977              	.LASF47:
+ 978 0063 433A5C55 		.ascii	"C:\\Users\\duver\\OneDrive\\Documents\\Classes\\Cou"
+ 978      73657273 
+ 978      5C647576 
+ 978      65725C4F 
+ 978      6E654472 
+ 979 0090 72736572 		.ascii	"rsera\\Sensors\\Lab1 - Workspace01\\RotaryEncoder.c"
+ 979      615C5365 
+ 979      6E736F72 
+ 979      735C4C61 
+ 979      6231202D 
+ 980 00c0 7964736E 		.ascii	"ydsn\000"
+ 980      00
+ 981              	.LASF9:
+ 982 00c5 5F5F696E 		.ascii	"__int32_t\000"
+ 982      7433325F 
+ 982      7400
+ 983              	.LASF43:
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 21
+
+
+ 984 00cf 51756164 		.ascii	"QuadDec_1_GetCounter\000"
+ 984      4465635F 
+ 984      315F4765 
+ 984      74436F75 
+ 984      6E746572 
+ 985              	.LASF19:
+ 986 00e4 636F756E 		.ascii	"count_last\000"
+ 986      745F6C61 
+ 986      737400
+ 987              	.LASF24:
+ 988 00ef 64697370 		.ascii	"displayStr2\000"
+ 988      6C617953 
+ 988      74723200 
+ 989              	.LASF11:
+ 990 00fb 666C6F61 		.ascii	"float\000"
+ 990      7400
+ 991              	.LASF32:
+ 992 0101 4C43445F 		.ascii	"LCD_Start\000"
+ 992      53746172 
+ 992      7400
+ 993              	.LASF40:
+ 994 010b 53575F54 		.ascii	"SW_Tx_UART_1_Start\000"
+ 994      785F5541 
+ 994      52545F31 
+ 994      5F537461 
+ 994      727400
+ 995              	.LASF1:
+ 996 011e 756E7369 		.ascii	"unsigned char\000"
+ 996      676E6564 
+ 996      20636861 
+ 996      7200
+ 997              	.LASF45:
+ 998 012c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 998      43313120 
+ 998      352E342E 
+ 998      31203230 
+ 998      31363036 
+ 999 015f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 999      20726576 
+ 999      6973696F 
+ 999      6E203233 
+ 999      37373135 
+ 1000 0192 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1000      66756E63 
+ 1000      74696F6E 
+ 1000      2D736563 
+ 1000      74696F6E 
+ 1001              	.LASF5:
+ 1002 01ba 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1002      20756E73 
+ 1002      69676E65 
+ 1002      6420696E 
+ 1002      7400
+ 1003              	.LASF3:
+ 1004 01cc 73686F72 		.ascii	"short unsigned int\000"
+ 1004      7420756E 
+ 1004      7369676E 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 22
+
+
+ 1004      65642069 
+ 1004      6E7400
+ 1005              	.LASF16:
+ 1006 01df 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1006      52784275 
+ 1006      66666572 
+ 1006      00
+ 1007              	.LASF31:
+ 1008 01ec 73616D70 		.ascii	"sample_out\000"
+ 1008      6C655F6F 
+ 1008      757400
+ 1009              	.LASF29:
+ 1010 01f7 73616D70 		.ascii	"sample_m_minus_1\000"
+ 1010      6C655F6D 
+ 1010      5F6D696E 
+ 1010      75735F31 
+ 1010      00
+ 1011              	.LASF30:
+ 1012 0208 73616D70 		.ascii	"sample_m_minus_2\000"
+ 1012      6C655F6D 
+ 1012      5F6D696E 
+ 1012      75735F32 
+ 1012      00
+ 1013              	.LASF12:
+ 1014 0219 646F7562 		.ascii	"double\000"
+ 1014      6C6500
+ 1015              	.LASF48:
+ 1016 0220 6D61696E 		.ascii	"main\000"
+ 1016      00
+ 1017              	.LASF36:
+ 1018 0225 4C43445F 		.ascii	"LCD_PrintString\000"
+ 1018      5072696E 
+ 1018      74537472 
+ 1018      696E6700 
+ 1019              	.LASF33:
+ 1020 0235 4C43445F 		.ascii	"LCD_IsReady\000"
+ 1020      49735265 
+ 1020      61647900 
+ 1021              	.LASF8:
+ 1022 0241 756E7369 		.ascii	"unsigned int\000"
+ 1022      676E6564 
+ 1022      20696E74 
+ 1022      00
+ 1023              	.LASF41:
+ 1024 024e 53575F54 		.ascii	"SW_Tx_UART_1_PutString\000"
+ 1024      785F5541 
+ 1024      52545F31 
+ 1024      5F507574 
+ 1024      53747269 
+ 1025              	.LASF7:
+ 1026 0265 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1026      206C6F6E 
+ 1026      6720756E 
+ 1026      7369676E 
+ 1026      65642069 
+ 1027              	.LASF35:
+ 1028 027c 4C43445F 		.ascii	"LCD_Position\000"
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 23
+
+
+ 1028      506F7369 
+ 1028      74696F6E 
+ 1028      00
+ 1029              	.LASF10:
+ 1030 0289 696E7433 		.ascii	"int32_t\000"
+ 1030      325F7400 
+ 1031              	.LASF15:
+ 1032 0291 73697A65 		.ascii	"sizetype\000"
+ 1032      74797065 
+ 1032      00
+ 1033              	.LASF6:
+ 1034 029a 6C6F6E67 		.ascii	"long long int\000"
+ 1034      206C6F6E 
+ 1034      6720696E 
+ 1034      7400
+ 1035              	.LASF46:
+ 1036 02a8 6D61696E 		.ascii	"main.c\000"
+ 1036      2E6300
+ 1037              	.LASF13:
+ 1038 02af 63686172 		.ascii	"char\000"
+ 1038      00
+ 1039              	.LASF23:
+ 1040 02b4 64697370 		.ascii	"displayStr\000"
+ 1040      6C617953 
+ 1040      747200
+ 1041              	.LASF18:
+ 1042 02bf 636F756E 		.ascii	"count\000"
+ 1042      7400
+ 1043              	.LASF20:
+ 1044 02c5 636F756E 		.ascii	"count_manual\000"
+ 1044      745F6D61 
+ 1044      6E75616C 
+ 1044      00
+ 1045              	.LASF2:
+ 1046 02d2 73686F72 		.ascii	"short int\000"
+ 1046      7420696E 
+ 1046      7400
+ 1047              	.LASF26:
+ 1048 02dc 73616D70 		.ascii	"sample_n_minus_1\000"
+ 1048      6C655F6E 
+ 1048      5F6D696E 
+ 1048      75735F31 
+ 1048      00
+ 1049              	.LASF27:
+ 1050 02ed 73616D70 		.ascii	"sample_n_minus_2\000"
+ 1050      6C655F6E 
+ 1050      5F6D696E 
+ 1050      75735F32 
+ 1050      00
+ 1051              	.LASF4:
+ 1052 02fe 6C6F6E67 		.ascii	"long int\000"
+ 1052      20696E74 
+ 1052      00
+ 1053              	.LASF14:
+ 1054 0307 6C6F6E67 		.ascii	"long double\000"
+ 1054      20646F75 
+ 1054      626C6500 
+ARM GAS  C:\Users\duver\AppData\Local\Temp\ccbFZElO.s 			page 24
+
+
+ 1055              	.LASF21:
+ 1056 0313 726F7461 		.ascii	"rotary1\000"
+ 1056      72793100 
+ 1057              	.LASF0:
+ 1058 031b 7369676E 		.ascii	"signed char\000"
+ 1058      65642063 
+ 1058      68617200 
+ 1059              	.LASF22:
+ 1060 0327 5F426F6F 		.ascii	"_Bool\000"
+ 1060      6C00
+ 1061              	.LASF44:
+ 1062 032d 73707269 		.ascii	"sprintf\000"
+ 1062      6E746600 
+ 1063              	.LASF37:
+ 1064 0335 43794465 		.ascii	"CyDelay\000"
+ 1064      6C617900 
+ 1065              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

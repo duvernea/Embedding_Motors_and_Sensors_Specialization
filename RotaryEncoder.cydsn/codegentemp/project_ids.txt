@@ -1,0 +1,9 @@
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\DC_Motor.cydsn\DC_Motor.cyprj|b6083e18-c0e2-448a-95ab-3ef07a8b910d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|19b4c2e9-b66c-43be-b4c7-87595f55cd41
+C:\Users\duver\OneDrive\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|66eb5924-1331-4e35-8353-94e32b1fdf36
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|a6d0b7ff-e27c-453f-ae79-0537680ad5ac
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c86cfa38-9d25-48ca-a312-f605c85fc750
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|2e17582a-973b-4c8b-960f-0d6de8807eb5
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\dev\psoc3\AnalogDevice\PSoC35AnalogDevice.cylib\PSoC35AnalogDevice.cyprj|d8163ea4-89b4-45b5-9e4d-1700e8c02a17
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\RotaryEncoder.cydsn\RotaryEncoder.cyprj|025fa150-1b49-43a7-86d9-78605085ea93
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Design01.cydsn\Design01.cyprj|80836670-d465-41ba-9f54-9fb0ccd07d08

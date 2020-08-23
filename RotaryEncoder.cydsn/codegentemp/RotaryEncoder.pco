@@ -1,0 +1,55 @@
+# RotaryEncoder
+# 2020-08-18 22:46:33Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_location "ClockBlock" clockblockcell -1 -1 0
+set_io "P3_5(0)" iocell 3 5
+set_io "\LCD:LCDPort(0)\" iocell 12 0
+set_io "\LCD:LCDPort(1)\" iocell 12 1
+set_io "\LCD:LCDPort(2)\" iocell 12 2
+set_io "\LCD:LCDPort(3)\" iocell 12 3
+set_io "\LCD:LCDPort(4)\" iocell 12 4
+set_io "\LCD:LCDPort(5)\" iocell 12 5
+set_io "\LCD:LCDPort(6)\" iocell 12 6
+set_io "P3_7(0)" iocell 3 7
+set_io "\SW_Tx_UART_1:tx(0)\" iocell 12 7
+set_location "\QuadDec_1:Cnt16:CounterUDB:reload\" 2 0 0 0
+set_location "\QuadDec_1:Cnt16:CounterUDB:status_0\" 2 1 0 0
+set_location "\QuadDec_1:Cnt16:CounterUDB:status_2\" 2 1 0 2
+set_location "\QuadDec_1:Cnt16:CounterUDB:status_3\" 2 1 0 1
+set_location "\QuadDec_1:Cnt16:CounterUDB:count_enable\" 2 0 0 3
+set_location "\QuadDec_1:Net_530\" 2 0 1 2
+set_location "\QuadDec_1:Net_611\" 2 1 1 2
+set_location "__ONE__" 2 4 0 2
+set_location "\QuadDec_1:Cnt16:CounterUDB:sCTRLReg:ctrlreg\" 2 0 6
+set_location "\QuadDec_1:Cnt16:CounterUDB:sSTSReg:stsreg\" 2 1 4
+set_location "\QuadDec_1:Cnt16:CounterUDB:sC16:counterdp:u0\" 2 0 2
+set_location "\QuadDec_1:Cnt16:CounterUDB:sC16:counterdp:u1\" 3 0 2
+set_location "\QuadDec_1:bQuadDec:quad_A_delayed_0\" 3 1 1 0
+set_location "\QuadDec_1:bQuadDec:quad_A_delayed_1\" 3 2 0 3
+set_location "\QuadDec_1:bQuadDec:quad_A_delayed_2\" 3 2 0 2
+set_location "\QuadDec_1:bQuadDec:quad_B_delayed_0\" 3 0 0 0
+set_location "\QuadDec_1:bQuadDec:quad_B_delayed_1\" 3 0 0 1
+set_location "\QuadDec_1:bQuadDec:quad_B_delayed_2\" 3 1 1 2
+set_location "\QuadDec_1:bQuadDec:Stsreg\" 2 0 4
+set_location "\Timer_1:TimerHW\" timercell -1 -1 0
+set_location "sample_interrupt" interrupt -1 -1 17
+set_location "\QuadDec_1:Net_1251\" 3 2 0 0
+set_location "\QuadDec_1:Cnt16:CounterUDB:overflow_reg_i\" 2 1 1 3
+set_location "\QuadDec_1:Cnt16:CounterUDB:underflow_reg_i\" 2 1 1 1
+set_location "\QuadDec_1:Net_1275\" 2 2 1 3
+set_location "\QuadDec_1:Cnt16:CounterUDB:prevCompare\" 2 1 0 3
+set_location "\QuadDec_1:Net_1251_split\" 3 1 0 0
+set_location "\QuadDec_1:Cnt16:CounterUDB:count_stored_i\" 2 0 1 0
+set_location "\QuadDec_1:Net_1203\" 2 0 0 2
+set_location "\QuadDec_1:bQuadDec:quad_A_filt\" 3 2 1 0
+set_location "\QuadDec_1:bQuadDec:quad_B_filt\" 3 1 1 1
+set_location "\QuadDec_1:Net_1260\" 2 0 0 1
+set_location "\QuadDec_1:bQuadDec:error\" 2 2 0 1
+set_location "\QuadDec_1:bQuadDec:state_1\" 2 2 1 1
+set_location "\QuadDec_1:bQuadDec:state_0\" 3 2 1 1
