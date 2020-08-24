@@ -1,8 +1,7 @@
-C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell_Try2.cydsn\LoadCell_Try2.cyprj|c523c2ca-d071-44c3-8f34-5eaf15bdc390
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|715bcfe6-9194-4cd5-8012-5e510de1bb98
-C:\Users\duver\OneDrive\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|d9e6d307-4f31-4e64-b310-51d6c275cbb2
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|53cbf35c-c0cc-4ed4-9ef0-2cf9ff5d7a66
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b0de7c2f-a3c6-4d49-b362-842d6290d340
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|f5570e86-7ee3-496b-b7d9-d21508c247d5
-C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\LoadCell.cyprj|ed62c150-a18e-4fbf-84a3-9353d4537c37
-C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\LoadCell.cydsn\PID_Controller.cydsn\PID_Controller.cyprj|5d434215-931b-4d16-aaa7-5fdc1474b3d4
+C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\PID_Controller.cydsn\PID_Controller.cyprj|e8d180f3-2d86-42e2-ba59-6919b4b8dc8f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|42540db7-f0e3-4f88-8559-dff539aa1c76
+C:\Users\duver\OneDrive\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|e9fea645-3ed2-44ca-ba47-4a2b105c1e18
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|e3f5a9f6-200e-449b-94e7-b74335551286
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8a9fede9-a7b3-4d29-a183-5e73636db36c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|0b5f3a4d-e7dd-47ef-b007-03121f711b51
+C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\dev\psoc3\AnalogDevice\PSoC35AnalogDevice.cylib\PSoC35AnalogDevice.cyprj|fa6acdd0-d891-4729-ada9-4733a4ce3f07

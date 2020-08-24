@@ -16,12 +16,14 @@
 ##################################################################### 
                     1::Clock Frequency Summary
 ===================================================================== 
-Number of clocks: 5
-Clock: CyBUS_CLK     | N/A  | Target: 24.00 MHz  | 
-Clock: CyILO         | N/A  | Target: 0.00 MHz   | 
-Clock: CyIMO         | N/A  | Target: 3.00 MHz   | 
-Clock: CyMASTER_CLK  | N/A  | Target: 24.00 MHz  | 
-Clock: CyPLL_OUT     | N/A  | Target: 24.00 MHz  | 
+Number of clocks: 7
+Clock: ADC_SAR_1_theACLK                  | N/A  | Target: 12.00 MHz  | 
+Clock: ADC_SAR_1_theACLK(fixed-function)  | N/A  | Target: 12.00 MHz  | 
+Clock: CyBUS_CLK                          | N/A  | Target: 24.00 MHz  | 
+Clock: CyILO                              | N/A  | Target: 0.00 MHz   | 
+Clock: CyIMO                              | N/A  | Target: 3.00 MHz   | 
+Clock: CyMASTER_CLK                       | N/A  | Target: 24.00 MHz  | 
+Clock: CyPLL_OUT                          | N/A  | Target: 24.00 MHz  | 
 
  =====================================================================
                     End of Clock Frequency Summary
@@ -55,12 +57,13 @@ Port Name  Setup to Clk  Clock Name:Phase
 -----------------------3.2::Clock to Out
 ----------------------------------------
 
-Port Name  Clock to Out  Clock Name:Phase  
----------  ------------  ----------------  
+Port Name     Clock to Out  Clock Name:Phase                     
+------------  ------------  -----------------------------------  
+P12_0(0)_PAD  25634         ADC_SAR_1_theACLK(fixed-function):R  
 
 
--------------------------3.3::Pad to Pad
-----------------------------------------
+                         3.3::Pad to Pad
+                         ---------------
 
 Port Name (Source)  Port Name (Destination)  Delay  
 ------------------  -----------------------  -----  
