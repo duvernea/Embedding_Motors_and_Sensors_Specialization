@@ -120,9 +120,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_IRQ.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_theACLK.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_theACLK.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_Bypass_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_Bypass.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_SAR_1_Bypass.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_3.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_3.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_3_PM.c</File>
@@ -153,21 +150,21 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_0_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_0.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_0.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_0_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_0.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_0.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P1_6_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P1_6.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P1_6.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_1_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_1.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P2_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_3_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_3.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_3.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_4_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_4.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P12_4.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_5_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_5.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_5.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_3_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_3.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_3.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_4_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_4.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\P0_4.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\PID_Controller.cydsn\Export\ARM_GCC_Generic">

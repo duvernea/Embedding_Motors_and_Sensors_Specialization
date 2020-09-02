@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: P12_0.h  
+* File Name: P0_3.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_P12_0_ALIASES_H) /* Pins P12_0_ALIASES_H */
-#define CY_PINS_P12_0_ALIASES_H
+#if !defined(CY_PINS_P0_3_ALIASES_H) /* Pins P0_3_ALIASES_H */
+#define CY_PINS_P0_3_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define P12_0_0			(P12_0__0__PC)
-#define P12_0_0_INTR	((uint16)((uint16)0x0001u << P12_0__0__SHIFT))
+#define P0_3_0			(P0_3__0__PC)
+#define P0_3_0_INTR	((uint16)((uint16)0x0001u << P0_3__0__SHIFT))
 
-#define P12_0_INTR_ALL	 ((uint16)(P12_0_0_INTR))
+#define P0_3_INTR_ALL	 ((uint16)(P0_3_0_INTR))
 
-#endif /* End Pins P12_0_ALIASES_H */
+#endif /* End Pins P0_3_ALIASES_H */
 
 
 /* [] END OF FILE */

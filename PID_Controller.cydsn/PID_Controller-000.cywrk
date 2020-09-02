@@ -8,6 +8,7 @@
 <files />
 <projects>
 <v>.\PID_Controller.cyprj</v>
+<v>..\Closed_Loop_Motor_Control.cydsn\Closed_Loop_Motor_Control.cyprj</v>
 </projects>
 <workspace_id v="b39680f0-4d49-4a17-942f-c47cabc8d0f6" />
 <WriteAppVersionLastSavedWith v="4.3.0.1445" />

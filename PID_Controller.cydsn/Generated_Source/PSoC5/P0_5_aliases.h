@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: P12_4.h  
+* File Name: P0_5.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_P12_4_ALIASES_H) /* Pins P12_4_ALIASES_H */
-#define CY_PINS_P12_4_ALIASES_H
+#if !defined(CY_PINS_P0_5_ALIASES_H) /* Pins P0_5_ALIASES_H */
+#define CY_PINS_P0_5_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define P12_4_0			(P12_4__0__PC)
-#define P12_4_0_INTR	((uint16)((uint16)0x0001u << P12_4__0__SHIFT))
+#define P0_5_0			(P0_5__0__PC)
+#define P0_5_0_INTR	((uint16)((uint16)0x0001u << P0_5__0__SHIFT))
 
-#define P12_4_INTR_ALL	 ((uint16)(P12_4_0_INTR))
+#define P0_5_INTR_ALL	 ((uint16)(P0_5_0_INTR))
 
-#endif /* End Pins P12_4_ALIASES_H */
+#endif /* End Pins P0_5_ALIASES_H */
 
 
 /* [] END OF FILE */

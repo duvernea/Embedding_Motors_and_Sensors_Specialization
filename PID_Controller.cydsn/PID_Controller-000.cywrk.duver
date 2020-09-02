@@ -21,6 +21,7 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
 <v>PID_Controller-000\PID_Controller\TopDesign</v>
 <v>PID_Controller-000\PID_Controller\PID_Controller.cydwr</v>
@@ -42,6 +43,7 @@
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
 <v>PID_Controller-000\PID_Controller\TopDesign</v>
 <v>PID_Controller-000\PID_Controller\PID_Controller.cydwr</v>
@@ -61,7 +63,6 @@
 <v>PID_Controller-000\PID_Controller\Generated_Source</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\ADC_SAR_1</v>
-<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\ADC_SAR_1_Bypass</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\ADC_SAR_1_IRQ</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\ADC_SAR_1_theACLK</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\cy_boot</v>
@@ -74,20 +75,22 @@
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\Opamp_3</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P0_0</v>
 <v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P0_1</v>
-<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P1_6</v>
-<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P12_0</v>
-<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P12_3</v>
+<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P0_3</v>
+<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P0_4</v>
+<v>PID_Controller-000\PID_Controller\Generated_Source\PSoC5\P0_5</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
 <v>PID_Controller-000\PID_Controller\TopDesign</v>
 <v>PID_Controller-000\PID_Controller\TopDesign\TopDesign.cysch</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
 <v>PID_Controller-000\PID_Controller\TopDesign</v>
 <v>PID_Controller-000\PID_Controller\TopDesign\TopDesign.cysch</v>
@@ -96,13 +99,13 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
 <v>PID_Controller-000\PID_Controller\CortexM3</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
-<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_Bypass.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
@@ -132,10 +135,10 @@
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_3_PM.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_0.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_1.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_3.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_4.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_5.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P1_6.lst</v>
-<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P12_0.lst</v>
-<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P12_3.lst</v>
-<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P12_4.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P2_0.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P2_1.lst</v>
 <v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_0.lst</v>
@@ -158,7 +161,41 @@
 </ExpandedNodeIds>
 <VisibleNodeIds>
 <v>PID_Controller-000</v>
+<v>PID_Controller-000\Closed_Loop_Motor_Control</v>
 <v>PID_Controller-000\PID_Controller</v>
+<v>PID_Controller-000\PID_Controller\CortexM3</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_LCDPort.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_0.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_0_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_1_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_2.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_2_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_3.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\Opamp_3_PM.lst</v>
+<v>PID_Controller-000\PID_Controller\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_0.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -215,8 +252,21 @@
 </dataGuid>
 </userData>
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
-<Unloaded />
-<OpenDocs />
+<Unloaded>
+<project v="..\Closed_Loop_Motor_Control.cydsn\Closed_Loop_Motor_Control.cyprj" />
+</Unloaded>
+<OpenDocs>
+<name v=".\main.c" />
+<name v=".\PID_Controller.cydwr" />
+<name v=".\TopDesign\TopDesign.cysch" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1110, 507" SelectedTabbedMdiWindow="95f189a2-bf54-42f3-b0d8-99c0536e0feb"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="a800d1f1-656b-4357-8631-d71ede23acf9" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\PID_Controller.cydsn\main.c" Guid="95f189a2-bf54-42f3-b0d8-99c0536e0feb" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\PID_Controller.cydsn\PID_Controller.cydwr" Guid="67c832be-610c-4174-8fb6-e161688dac30" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\PID_Controller.cydsn\TopDesign\TopDesign.cysch" Guid="00e81b21-6445-4de6-a92a-14acc57efb9b" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

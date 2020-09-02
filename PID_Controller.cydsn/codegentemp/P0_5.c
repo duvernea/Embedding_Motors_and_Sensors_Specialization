@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: P12_3.c  
+* File Name: P0_5.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "P12_3.h"
+#include "P0_5.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 P12_3__PORT == 15 && ((P12_3__MASK & 0xC0) != 0))
+	 P0_5__PORT == 15 && ((P0_5__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: P12_3_Write
+* Function Name: P0_5_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet P12_3_SUT.c usage_P12_3_Write
+*  \snippet P0_5_SUT.c usage_P0_5_Write
 *******************************************************************************/
-void P12_3_Write(uint8 value)
+void P0_5_Write(uint8 value)
 {
-    uint8 staticBits = (P12_3_DR & (uint8)(~P12_3_MASK));
-    P12_3_DR = staticBits | ((uint8)(value << P12_3_SHIFT) & P12_3_MASK);
+    uint8 staticBits = (P0_5_DR & (uint8)(~P0_5_MASK));
+    P0_5_DR = staticBits | ((uint8)(value << P0_5_SHIFT) & P0_5_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: P12_3_SetDriveMode
+* Function Name: P0_5_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void P12_3_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet P12_3_SUT.c usage_P12_3_SetDriveMode
+*  \snippet P0_5_SUT.c usage_P0_5_SetDriveMode
 *******************************************************************************/
-void P12_3_SetDriveMode(uint8 mode)
+void P0_5_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(P12_3_0, mode);
+	CyPins_SetPinDriveMode(P0_5_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: P12_3_Read
+* Function Name: P0_5_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void P12_3_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet P12_3_SUT.c usage_P12_3_Read  
+*  \snippet P0_5_SUT.c usage_P0_5_Read  
 *******************************************************************************/
-uint8 P12_3_Read(void)
+uint8 P0_5_Read(void)
 {
-    return (P12_3_PS & P12_3_MASK) >> P12_3_SHIFT;
+    return (P0_5_PS & P0_5_MASK) >> P0_5_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: P12_3_ReadDataReg
+* Function Name: P0_5_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 P12_3_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred P12_3_Read() API because the 
-* P12_3_ReadDataReg() reads the data register instead of the status 
+* preferred P0_5_Read() API because the 
+* P0_5_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 P12_3_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet P12_3_SUT.c usage_P12_3_ReadDataReg 
+*  \snippet P0_5_SUT.c usage_P0_5_ReadDataReg 
 *******************************************************************************/
-uint8 P12_3_ReadDataReg(void)
+uint8 P0_5_ReadDataReg(void)
 {
-    return (P12_3_DR & P12_3_MASK) >> P12_3_SHIFT;
+    return (P0_5_DR & P0_5_MASK) >> P0_5_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(P12_3_INTSTAT) 
+#if defined(P0_5_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: P12_3_SetInterruptMode
+    * Function Name: P0_5_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 P12_3_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use P12_3_INTR_ALL to configure the
+    *  component. Or you may use P0_5_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - P12_3_0_INTR       (First pin in the list)
-    *  - P12_3_1_INTR       (Second pin in the list)
+    *  - P0_5_0_INTR       (First pin in the list)
+    *  - P0_5_1_INTR       (Second pin in the list)
     *  - ...
-    *  - P12_3_INTR_ALL     (All pins in Pins component)
+    *  - P0_5_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 P12_3_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet P12_3_SUT.c usage_P12_3_SetInterruptMode
+    *  \snippet P0_5_SUT.c usage_P0_5_SetInterruptMode
     *******************************************************************************/
-    void P12_3_SetInterruptMode(uint16 position, uint16 mode)
+    void P0_5_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & P12_3_0_INTR) != 0u) 
+		if((position & P0_5_0_INTR) != 0u) 
 		{ 
-			 P12_3_0_INTTYPE_REG = (uint8)mode; 
+			 P0_5_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: P12_3_ClearInterrupt
+    * Function Name: P0_5_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 P12_3_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet P12_3_SUT.c usage_P12_3_ClearInterrupt
+    *  \snippet P0_5_SUT.c usage_P0_5_ClearInterrupt
     *******************************************************************************/
-    uint8 P12_3_ClearInterrupt(void)
+    uint8 P0_5_ClearInterrupt(void)
     {
-        return (P12_3_INTSTAT & P12_3_MASK) >> P12_3_SHIFT;
+        return (P0_5_INTSTAT & P0_5_MASK) >> P0_5_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 

@@ -82,7 +82,7 @@ void VDAC_TP2_Wakeup(void)          ;
 ***************************************/
 
  /* Default DAC range */
-#define VDAC_TP2_DEFAULT_RANGE    0u
+#define VDAC_TP2_DEFAULT_RANGE    4u
  /* Default DAC speed */
 #define VDAC_TP2_DEFAULT_SPEED    0u
  /* Default Control */
