@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Source Files\main.c">
+<ExpandedNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Pins</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Analog</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Clocks</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Interrupts</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\DMA</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\System</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Directives</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Flash Security</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\EEPROM</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Header Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Header Files\cyapicallbacks.h</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Source Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Source Files\main.c</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Pins</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Analog</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Clocks</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Interrupts</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\DMA</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\System</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Directives</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\Flash Security</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.cydwr\EEPROM</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Header Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Header Files\cyapicallbacks.h</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Source Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Source Files\main.c</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\ADC_SAR_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\ADC_SAR_1_Bypass</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\ADC_SAR_1_IRQ</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\ADC_SAR_1_theACLK</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\Clock_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\cy_boot</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\LCD_Char_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\LCD_Char_1_LCDPort</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\P0_5</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\P1_5</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\P3_0</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\P3_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\PGA_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\PWM_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\SW_Tx_UART_1</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_Bypass.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_LCDPort.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_5.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P1_5.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_0.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\SW_Tx_UART_1_AsmGnu.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Closed_Loop_Motor_Control.elf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Closed_Loop_Motor_Control.hex</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Closed_Loop_Motor_Control.map</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.gpdsc</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control.rpt</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Closed_Loop_Motor_Control_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_Bypass.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_INT.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_IRQ.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_SAR_1_theACLK.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_LCDPort.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_Char_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P0_5.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P1_5.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_0.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\P3_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PGA_1_PM.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1.lst</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CortexM3\ARM_GCC_541\Debug\Listing Files\PWM_1_PM.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PSoC 5LP Architecture TRM</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CY8C58LP Family Datasheet</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\System Reference Guides</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\System Reference Guides\cy_boot_v5_90</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\ADC_SAR_v3_10.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CharLCD_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_clock_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_constant_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_pins_v2_20</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Diode_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Gnd_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Motor_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\NFET_En_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PGA_v2_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Power_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PWM_v3_30.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Resistor_v1_0</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\SW_Tx_UART_v1_50.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Closed_Loop_Motor_Control-000</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PSoC 5LP Architecture TRM</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CY8C58LP Family Datasheet</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\System Reference Guides</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\System Reference Guides\cy_boot_v5_90</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\ADC_SAR_v3_10.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\CharLCD_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_clock_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_constant_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_pins_v2_20</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Diode_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Gnd_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Motor_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\NFET_En_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PGA_v2_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Power_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\PWM_v3_30.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Resistor_v1_0</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\Resistor_v1_0\Resistor_v1_0.pdf</v>
+<v>Closed_Loop_Motor_Control-000\Closed_Loop_Motor_Control\SW_Tx_UART_v1_50.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\Closed_Loop_Motor_Control.cydwr" />
+<name v=".\main.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1110, 507" SelectedTabbedMdiWindow="03b351ca-dc77-4608-8f50-704d6d24fb96"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="a800d1f1-656b-4357-8631-d71ede23acf9" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Closed_Loop_Motor_Control.cydsn\TopDesign\TopDesign.cysch" Guid="74df61a1-d6a4-4899-833e-42e35703a43d" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Closed_Loop_Motor_Control.cydsn\Closed_Loop_Motor_Control.cydwr" Guid="1b7b4bdf-6faa-46b1-8d94-de4ade6b8db1" /><DocumentWindow Key="C:\Users\duver\OneDrive\Documents\Classes\Coursera\Sensors\Lab1 - Workspace01\Closed_Loop_Motor_Control.cydsn\main.c" Guid="03b351ca-dc77-4608-8f50-704d6d24fb96" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
